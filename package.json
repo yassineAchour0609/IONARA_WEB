@@ -1,0 +1,22 @@
+{
+  "name": "ionara-web-shop",
+  "version": "1.0.0",
+  "description": "Boutique officielle IONARA de vente de comptes de jeux vidéo et abonnements",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx serve -l 3000 .",
+    "dev": "npx serve -l 3000 .",
+    "serve:py": "python -m http.server 3000"
+  },
+  "keywords": [
+    "ionara",
+    "gaming",
+    "accounts",
+    "steam",
+    "playstation",
+    "xbox",
+    "game-pass"
+  ],
+  "author": "IONARA",
+  "license": "MIT"
+}

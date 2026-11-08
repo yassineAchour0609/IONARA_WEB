@@ -1,0 +1,969 @@
+<!DOCTYPE html>
+<html lang="fr" class="dark scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IONARA STORE — Vente de Comptes Jeux Vidéo & Abonnements Officiels</title>
+  <meta name="description" content="Boutique officielle IONARA : Achat de comptes Steam, PlayStation, Xbox, GTA 6, EA Sports FC, Pack 1000+ Jeux et abonnements Game Pass au meilleur prix avec livraison express 5-15 min.">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="assets/logo/ionara-logo.svg">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            ionara: {
+              magenta: '#d868d1',
+              dark: '#08090e',
+              surface: '#0f111a',
+              blue: '#3b82f6',
+              cyan: '#06b6d4',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-[#08090e] text-zinc-100 min-h-screen relative flex flex-col selection:bg-pink-500/30 selection:text-white">
+
+  <!-- Ambient Glowing Background Elements -->
+  <div class="ambient-glow-magenta top-0 -left-40"></div>
+  <div class="ambient-glow-blue top-40 -right-40"></div>
+  <div class="ambient-glow-cyan top-[1200px] left-1/3"></div>
+
+  <!-- Background Cyber Grid Pattern -->
+  <div class="fixed inset-0 bg-cyber-grid opacity-30 pointer-events-none z-0"></div>
+
+
+  <!-- ========================================== -->
+  <!-- FLOATING CAPSULE ISLAND NAVBAR (ARCETIS-STYLE ENHANCED) -->
+  <!-- ========================================== -->
+  <header class="sticky top-3 sm:top-4 z-50 w-full px-2 sm:px-6 transition-all duration-300">
+    <div class="max-w-7xl mx-auto">
+      
+      <!-- Main Floating Capsule Island -->
+      <div class="relative navbar-capsule bg-[#090b12]/95 backdrop-blur-2xl border border-white/[0.12] hover:border-pink-500/40 rounded-full px-3.5 sm:px-6 py-2.5 sm:py-3 shadow-2xl flex items-center justify-between gap-2.5 sm:gap-4 transition-all duration-300">
+        
+        <!-- ================= LEFT: GRAND VISIBLE LOGO & SHOP DROPDOWN ================= -->
+        <div class="flex items-center gap-3 sm:gap-5 shrink-0">
+          
+          <!-- Grand Logo Brand Typographique Officiel (Grand, Lumineux & Emblématique) -->
+          <a href="#" class="flex items-center gap-2.5 sm:gap-3 group cursor-pointer py-0.5" title="IONARA - Boutique Officielle">
+            <div class="relative flex items-center">
+              <!-- Glow backplate diffus -->
+              <div class="absolute -inset-2 bg-gradient-to-r from-blue-600/20 via-purple-600/25 to-pink-500/30 rounded-2xl blur-lg opacity-60 group-hover:opacity-100 group-hover:scale-110 transition duration-300 pointer-events-none"></div>
+              
+              <!-- Grand Logo Typographique Officiel -->
+              <img 
+                src="assets/logo/ionara-wordmark.png" 
+                alt="IONARA" 
+                class="relative h-10 sm:h-12 md:h-14 w-auto object-contain filter drop-shadow(0 0 16px rgba(216,104,209,0.55)) group-hover:drop-shadow(0 0 24px rgba(216,104,209,0.9)) group-hover:scale-[1.04] transition-all duration-300"
+              />
+            </div>
+            
+            <!-- Badge STORE VIP -->
+            <span class="hidden lg:inline-flex items-center px-2 py-0.5 text-[9px] font-black rounded-full bg-gradient-to-r from-pink-500/20 to-purple-600/20 text-pink-300 border border-pink-500/35 uppercase tracking-widest shadow-sm">
+              STORE
+            </span>
+          </a>
+
+          <!-- Navigation Links Multi-Pages -->
+          <nav class="hidden md:flex items-center gap-1.5 lg:gap-2">
+            <!-- Accueil (Actif) -->
+            <a href="index.html" class="px-3.5 py-1.5 rounded-full bg-white/10 text-white text-xs font-bold border border-white/15 transition">
+              Accueil
+            </a>
+
+            <!-- Catalogue Dédié -->
+            <a href="catalog.html" class="px-3.5 py-1.5 rounded-full bg-white/[0.04] hover:bg-pink-500/15 text-zinc-300 hover:text-pink-300 border border-white/10 hover:border-pink-500/40 text-xs font-bold flex items-center gap-1.5 transition group/cat">
+              <i data-lucide="grid" class="w-3.5 h-3.5 text-pink-400"></i>
+              <span>Catalogue</span>
+              <span class="px-1.5 py-0.2 rounded-full bg-pink-500/30 text-pink-200 text-[9px] font-extrabold uppercase">25+</span>
+            </a>
+
+            <!-- "Rayons ⌵" Capsule Dropdown Pill -->
+            <div class="relative group/shop">
+              <button class="px-3.5 py-1.5 rounded-full bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 hover:border-pink-500/40 text-xs font-semibold text-zinc-300 hover:text-white flex items-center gap-1.5 transition cursor-pointer">
+                <span>Rayons</span>
+                <i data-lucide="chevron-down" class="w-3 h-3 text-zinc-400 group-hover/shop:rotate-180 transition-transform duration-300"></i>
+              </button>
+
+              <!-- Dropdown Menu -->
+              <div class="absolute left-0 top-full mt-2 w-64 rounded-2xl bg-slate-950/95 border border-pink-500/30 backdrop-blur-2xl p-2 shadow-2xl opacity-0 translate-y-2 pointer-events-none group-hover/shop:opacity-100 group-hover/shop:translate-y-0 group-hover/shop:pointer-events-auto transition-all duration-300 z-50">
+                <a href="catalog.html?category=steam" class="flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-semibold text-zinc-200 hover:text-white hover:bg-pink-500/15 transition">
+                  <i data-lucide="flame" class="w-4 h-4 text-pink-400"></i>
+                  <div>
+                    <p class="font-bold">Pack Steam 1,170+ Jeux</p>
+                    <p class="text-[10px] text-zinc-400">Bibliothèque complète à vie</p>
+                  </div>
+                </a>
+                <a href="catalog.html?category=preorder" class="flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-semibold text-zinc-200 hover:text-white hover:bg-white/[0.06] transition">
+                  <i data-lucide="sparkles" class="w-4 h-4 text-amber-400"></i>
+                  <div>
+                    <p class="font-bold">Précommandes VIP</p>
+                    <p class="text-[10px] text-zinc-400">GTA VI, EA FC 27, COD BO7</p>
+                  </div>
+                </a>
+                <a href="catalog.html?category=passes" class="flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-semibold text-zinc-200 hover:text-white hover:bg-white/[0.06] transition">
+                  <i data-lucide="gamepad-2" class="w-4 h-4 text-emerald-400"></i>
+                  <div>
+                    <p class="font-bold">Xbox Game Pass Ultimate</p>
+                    <p class="text-[10px] text-zinc-400">12 mois PC & Xbox</p>
+                  </div>
+                </a>
+                <a href="catalog.html?category=currencies" class="flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-semibold text-zinc-200 hover:text-white hover:bg-white/[0.06] transition">
+                  <i data-lucide="coins" class="w-4 h-4 text-cyan-400"></i>
+                  <div>
+                    <p class="font-bold">Points & Monnaies</p>
+                    <p class="text-[10px] text-zinc-400">Valorant VP & Robux</p>
+                  </div>
+                </a>
+              </div>
+            </div>
+
+            <!-- "Pack 1000+ Jeux" Pill Link -->
+            <a href="#spotlight-banner" class="hidden xl:flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-pink-500/10 hover:bg-pink-500/20 text-pink-300 border border-pink-500/30 text-xs font-bold transition">
+              <i data-lucide="flame" class="w-3.5 h-3.5 text-pink-400"></i>
+              <span>Pack 1,000+</span>
+            </a>
+          </nav>
+
+        </div>
+
+        <!-- ================= CENTER: INTEGRATED SEARCH BAR (EXACT ARCETIS STYLE) ================= -->
+        <div class="flex-1 max-w-xl mx-2 hidden md:block relative group/search">
+          <div class="relative flex items-center w-full">
+            <i data-lucide="search" class="w-4 h-4 text-zinc-400 group-focus-within/search:text-pink-400 absolute left-4 pointer-events-none transition-colors"></i>
+            <input 
+              id="navbar-search-input"
+              type="text" 
+              placeholder="Rechercher un jeu (GTA 6, FC 27, Steam, Game Pass...)"
+              class="w-full bg-black/50 hover:bg-black/70 focus:bg-black/90 border border-white/10 hover:border-white/20 focus:border-pink-500/60 rounded-full pl-11 pr-14 py-2 text-xs text-white placeholder-zinc-400 transition-all focus:outline-none focus:ring-1 focus:ring-pink-500/40 shadow-inner"
+            />
+            <span class="absolute right-3 px-1.5 py-0.5 rounded-md bg-white/10 text-[9px] font-mono text-zinc-400 pointer-events-none border border-white/10 hidden lg:inline">Ctrl+K</span>
+          </div>
+        </div>
+
+        <!-- ================= RIGHT: CURRENCY PILL & CIRCULAR ACTION BUTTONS ================= -->
+        <div class="flex items-center gap-2 sm:gap-3 shrink-0">
+          
+          <!-- Currency Selector Pill -->
+          <div class="relative">
+            <select class="currency-selector appearance-none bg-white/[0.05] hover:bg-white/[0.1] border border-white/10 hover:border-pink-500/40 text-xs font-bold text-white rounded-full pl-3 sm:pl-4 pr-7 sm:pr-8 py-1.5 sm:py-2 cursor-pointer focus:outline-none transition shadow-sm">
+              <option value="DZD" class="bg-slate-900 text-white">🇩🇿 DZD (DA)</option>
+              <option value="EUR" class="bg-slate-900 text-white">🇪🇺 EUR (€)</option>
+              <option value="USD" class="bg-slate-900 text-white">🇺🇸 USD ($)</option>
+            </select>
+            <i data-lucide="chevron-down" class="w-3.5 h-3.5 text-zinc-400 absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none"></i>
+          </div>
+
+          <!-- Circular Cart Button with Badge -->
+          <button 
+            onclick="openCartDrawer()" 
+            class="relative w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white/[0.05] hover:bg-pink-500/20 border border-white/10 hover:border-pink-500/40 flex items-center justify-center text-zinc-200 hover:text-pink-300 transition cursor-pointer shadow-md group/cart"
+            title="Panier"
+          >
+            <i data-lucide="shopping-cart" class="w-4 h-4 sm:w-4.5 sm:h-4.5 group-hover/cart:scale-110 transition-transform"></i>
+            <span class="cart-count-badge hidden absolute -top-1 -right-1 w-5 h-5 rounded-full bg-pink-600 text-white text-[10px] font-extrabold flex items-center justify-center border-2 border-[#090b12] shadow-md animate-bounce">
+              0
+            </span>
+          </button>
+
+          <!-- Circular Notifications / Support Button (WhatsApp Direct) -->
+          <a 
+            href="https://wa.me/213550000000?text=Bonjour%20IONARA%2C%20j%27ai%20besoin%20d%27assistance" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            class="relative w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white/[0.05] hover:bg-emerald-500/20 border border-white/10 hover:border-emerald-500/40 hidden sm:flex items-center justify-center text-zinc-200 hover:text-emerald-400 transition cursor-pointer shadow-md group/notif"
+            title="Support Direct WhatsApp 24/7"
+          >
+            <i data-lucide="bell" class="w-4 h-4 sm:w-4.5 sm:h-4.5 group-hover/notif:scale-110 transition-transform"></i>
+            <span class="absolute top-1 right-1 w-2.5 h-2.5 rounded-full bg-emerald-400 border-2 border-[#090b12]"></span>
+          </a>
+
+          <!-- Circular User Profile Button (Espace Client) -->
+          <button 
+            onclick="openAccountModal()" 
+            class="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white/[0.05] hover:bg-purple-500/20 border border-white/10 hover:border-purple-500/40 flex items-center justify-center text-zinc-200 hover:text-purple-300 transition cursor-pointer shadow-md group/user"
+            title="Mon Espace Client"
+          >
+            <i data-lucide="user" class="w-4 h-4 sm:w-4.5 sm:h-4.5 group-hover/user:scale-110 transition-transform"></i>
+          </button>
+
+          <!-- Sound Toggle Mini Button -->
+          <button 
+            id="sound-toggle-btn" 
+            class="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white/[0.05] hover:bg-white/[0.1] border border-white/10 hover:border-white/20 hidden lg:flex items-center justify-center text-zinc-400 hover:text-white transition cursor-pointer"
+            title="Effets Sonores"
+          >
+            <i data-lucide="volume-2" class="w-4 h-4"></i>
+          </button>
+
+          <!-- Mobile Hamburger Toggle Button -->
+          <button 
+            onclick="toggleMobileMenu()" 
+            class="md:hidden w-9 h-9 rounded-full bg-white/[0.05] border border-white/10 flex items-center justify-center text-zinc-300 hover:text-white transition"
+          >
+            <i data-lucide="menu" id="mobile-menu-icon" class="w-4 h-4"></i>
+          </button>
+
+        </div>
+
+      </div>
+
+      <!-- Mobile Dropdown Slide Menu -->
+      <div id="mobile-menu" class="hidden md:hidden mt-2 rounded-3xl border border-white/10 bg-slate-950/98 backdrop-blur-2xl p-5 space-y-4 shadow-2xl">
+        <!-- Mobile Search Input -->
+        <div class="relative">
+          <i data-lucide="search" class="w-4 h-4 text-zinc-400 absolute left-3.5 top-1/2 -translate-y-1/2"></i>
+          <input 
+            id="mobile-search-input"
+            type="text" 
+            placeholder="Rechercher un jeu..."
+            class="w-full bg-black/60 border border-white/10 rounded-full pl-10 pr-4 py-2 text-xs text-white placeholder-zinc-400 focus:outline-none focus:border-pink-500/60"
+          />
+        </div>
+
+        <div class="flex flex-col gap-2.5 font-semibold text-xs">
+          <a href="#featured" onclick="toggleMobileMenu()" class="text-zinc-300 hover:text-pink-400 py-1.5 flex items-center gap-2">
+            <i data-lucide="sparkles" class="w-4 h-4 text-pink-400"></i> En Vedette
+          </a>
+          <a href="#catalog" onclick="toggleMobileMenu()" class="text-zinc-300 hover:text-pink-400 py-1.5 flex items-center gap-2">
+            <i data-lucide="gamepad-2" class="w-4 h-4 text-purple-400"></i> Catalogue Complet
+          </a>
+          <a href="#spotlight-banner" onclick="toggleMobileMenu()" class="text-pink-400 py-1.5 flex items-center gap-2">
+            <i data-lucide="flame" class="w-4 h-4 text-pink-500"></i> Pack 1000+ Jeux
+          </a>
+          <a href="#guide" onclick="toggleMobileMenu()" class="text-zinc-300 hover:text-pink-400 py-1.5 flex items-center gap-2">
+            <i data-lucide="shield-check" class="w-4 h-4 text-cyan-400"></i> Garantie & Activation
+          </a>
+          <a href="#reviews" onclick="toggleMobileMenu()" class="text-zinc-300 hover:text-pink-400 py-1.5 flex items-center gap-2">
+            <i data-lucide="star" class="w-4 h-4 text-amber-400"></i> Avis Clients
+          </a>
+        </div>
+
+        <div class="pt-3 border-t border-white/10 flex items-center justify-between">
+          <span class="text-xs text-zinc-400 font-semibold">Devise :</span>
+          <select class="currency-selector bg-white/[0.05] border border-white/10 text-xs font-bold text-white rounded-full px-3 py-1">
+            <option value="DZD">🇩🇿 DZD (DA)</option>
+            <option value="EUR">🇪🇺 EUR (€)</option>
+            <option value="USD">🇺🇸 USD ($)</option>
+          </select>
+        </div>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ========================================== -->
+  <!-- HERO SECTION -->
+  <!-- ========================================== -->
+  <section class="relative z-10 pt-12 pb-20 overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        
+        <!-- Left Column: Copy & Live Search -->
+        <div class="lg:col-span-7 space-y-8 text-center lg:text-left">
+          
+          <!-- Trust Pill -->
+          <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-pink-500/30 bg-pink-500/10 backdrop-blur-md shadow-inner">
+            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+            <span class="text-xs font-bold text-pink-300 uppercase tracking-widest">BOUTIQUE OFFICIELLE DE JEUX VIDÉO</span>
+            <span class="text-zinc-500">•</span>
+            <span class="text-xs font-semibold text-zinc-300">Livraison 5-15 min</span>
+          </div>
+
+          <!-- Main Heading -->
+          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-[1.1] font-headline">
+            L'UNIVERS DU GAMING <br>
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-pink-400 via-purple-300 to-cyan-400">
+              AU MEILLEUR PRIX.
+            </span>
+          </h1>
+
+          <p class="text-base sm:text-lg text-zinc-300 max-w-2xl leading-relaxed mx-auto lg:mx-0">
+            Achetez vos <strong>comptes de jeux vidéo</strong> vérifiés en toute sécurité. Accès complet avec email et mot de passe personnalisables, garantie anti-bannissement et support client 24/7.
+          </p>
+
+          <!-- Interactive Live Search Bar -->
+          <div class="max-w-xl mx-auto lg:mx-0 relative group">
+            <div class="absolute -inset-1 rounded-2xl bg-gradient-to-r from-pink-500/30 to-blue-500/30 opacity-75 blur-md group-focus-within:opacity-100 transition duration-300"></div>
+            <div class="relative flex items-center bg-slate-900/90 border border-white/10 rounded-2xl px-4 py-3 shadow-2xl backdrop-blur-xl">
+              <i data-lucide="search" class="w-5 h-5 text-pink-400 shrink-0 mr-3"></i>
+              <input 
+                type="text" 
+                id="main-search-input"
+                placeholder="Rechercher un jeu (GTA 6, FC 27, Elden Ring, Call of Duty...)" 
+                class="w-full bg-transparent text-sm text-white placeholder-zinc-500 focus:outline-none"
+              />
+              <span class="hidden sm:inline-flex items-center px-2 py-1 rounded bg-white/10 border border-white/10 text-[10px] font-mono text-zinc-400 uppercase tracking-wider ml-2">
+                Ctrl + K
+              </span>
+            </div>
+          </div>
+
+          <!-- CTA Buttons -->
+          <div class="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-2">
+            <a 
+              href="catalog.html"
+              class="btn-neon-magenta px-8 py-4 rounded-xl font-bold text-white text-sm sm:text-base flex items-center gap-2 cursor-pointer transition shadow-xl"
+            >
+              <i data-lucide="compass" class="w-5 h-5"></i>
+              Explorer le Catalogue Complet
+            </a>
+            <button 
+              onclick="openGamesListModal()"
+              class="btn-neon-outline px-7 py-4 rounded-xl font-bold text-zinc-200 text-sm sm:text-base hover:text-white transition cursor-pointer flex items-center gap-2"
+            >
+              <i data-lucide="list-music" class="w-5 h-5 text-pink-400"></i>
+              <span id="catalog-total-badge">+1,170 Jeux Listés</span>
+            </button>
+          </div>
+
+          <!-- Live Numbers & Statistics -->
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-6 border-t border-white/[0.08]">
+            <div class="text-left">
+              <div class="text-2xl sm:text-3xl font-extrabold text-white font-headline">+1,170</div>
+              <div class="text-xs text-zinc-400 font-medium">Jeux en Stock</div>
+            </div>
+            <div class="text-left">
+              <div class="text-2xl sm:text-3xl font-extrabold text-pink-400 font-headline">+15,400</div>
+              <div class="text-xs text-zinc-400 font-medium">Comptes Livrés</div>
+            </div>
+            <div class="text-left">
+              <div class="text-2xl sm:text-3xl font-extrabold text-amber-400 font-headline">4.9 / 5</div>
+              <div class="text-xs text-zinc-400 font-medium">Note Clients (⭐)</div>
+            </div>
+            <div class="text-left">
+              <div class="text-2xl sm:text-3xl font-extrabold text-cyan-400 font-headline">5-15m</div>
+              <div class="text-xs text-zinc-400 font-medium">Livraison Express</div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Right Column: Hero Showcase Card (GTA 6 / FC 27 Floating Showcase) -->
+        <div class="lg:col-span-5 relative flex justify-center">
+          <div class="relative w-full max-w-md">
+            <!-- Glow background -->
+            <div class="absolute -inset-2 rounded-3xl bg-gradient-to-r from-pink-600 via-purple-600 to-cyan-500 opacity-50 blur-2xl animate-pulse-glow"></div>
+            
+            <div class="relative rounded-3xl border border-white/20 bg-slate-900/90 p-5 shadow-2xl backdrop-blur-2xl">
+              <!-- Top bar preview -->
+              <div class="flex items-center justify-between pb-3 border-b border-white/10 text-xs">
+                <span class="flex items-center gap-1.5 font-bold text-pink-400">
+                  <i data-lucide="zap" class="w-4 h-4 fill-pink-400"></i> OFFRE VEDETTE DU JOUR
+                </span>
+                <span class="px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 font-semibold text-[10px]">
+                  GARANTIE À VIE
+                </span>
+              </div>
+
+              <!-- Main Card Image -->
+              <div class="relative mt-3 rounded-2xl overflow-hidden aspect-[4/5] bg-black/50 group cursor-pointer" onclick="openQuickView('gta-6')">
+                <img 
+                  src="assets/games/gta-6.png" 
+                  alt="GTA 6 VIP Edition"
+                  onerror="this.src='public/assets/games/gta-6.png'"
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+                <div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/95 via-black/50 to-transparent p-5">
+                  <span class="px-2.5 py-0.5 rounded bg-pink-600 text-white font-bold text-[10px] uppercase tracking-wider">
+                    PRÉCOMMANDE EXCLUSIVE
+                  </span>
+                  <h3 class="text-xl font-black text-white mt-1">Grand Theft Auto VI — VIP Edition</h3>
+                  <p class="text-xs text-zinc-300 mt-0.5">Accès Prioritaire Jour J & Bonus Exclusifs</p>
+                  <div class="mt-3 flex items-center justify-between">
+                    <span class="text-xl font-extrabold text-white">7,900 DA</span>
+                    <button class="px-4 py-2 rounded-xl bg-pink-500 text-white font-bold text-xs hover:bg-pink-400 transition shadow-lg">
+                      Voir l'offre →
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Mini ticker underneath -->
+              <div class="mt-4 flex items-center justify-between text-xs text-zinc-400 px-1">
+                <span class="flex items-center gap-1 text-emerald-400">
+                  <i data-lucide="check" class="w-3.5 h-3.5"></i> Email modifiable
+                </span>
+                <span class="flex items-center gap-1 text-cyan-400">
+                  <i data-lucide="check" class="w-3.5 h-3.5"></i> Pas de VPN requis
+                </span>
+                <span class="flex items-center gap-1 text-purple-400">
+                  <i data-lucide="check" class="w-3.5 h-3.5"></i> Support 24/7
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========================================== -->
+  <!-- PLATFORMS LOGOS MARQUEE -->
+  <!-- ========================================== -->
+  <section class="relative z-10 py-8 border-y border-white/[0.06] bg-black/30 backdrop-blur-md">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center text-xs font-bold uppercase tracking-widest text-zinc-500 mb-6">
+        PLATEFORMES & ÉDITEURS OFFICIELLEMENT SUPPORTÉS
+      </div>
+      <div id="platforms-list" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+        <!-- Rendered via JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================== -->
+  <!-- FEATURED SPOTLIGHT BANNER (PACK 1000 GAMES) -->
+  <!-- ========================================== -->
+  <section id="featured" class="relative z-10 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div id="spotlight-banner">
+        <!-- Injected via renderFeaturedSpotlight() -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================== -->
+  <!-- BESTSELLERS & TENDANCES (HOMEPAGE SHOWCASE) -->
+  <!-- ========================================== -->
+  <section id="bestsellers" class="relative z-10 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Section Header -->
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
+        <div>
+          <div class="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-pink-400 mb-2">
+            <i data-lucide="flame" class="w-4 h-4 fill-pink-400"></i> BESTSELLERS & SÉLECTIONS DU MOMENT
+          </div>
+          <h2 class="text-3xl sm:text-4xl font-black text-white tracking-tight font-headline">
+            Les Comptes les Plus Populaires
+          </h2>
+          <p class="text-sm text-zinc-400 mt-1">Les jeux les plus demandés par la communauté, prêts à jouer immédiatement.</p>
+        </div>
+
+        <a 
+          href="catalog.html" 
+          class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-white/[0.05] hover:bg-pink-500/20 text-xs font-bold text-pink-300 border border-white/10 hover:border-pink-500/40 transition group"
+        >
+          <span>Accéder au Catalogue Complet</span>
+          <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
+        </a>
+      </div>
+
+      <!-- Bestsellers Grid (Top 4 games) -->
+      <div id="bestsellers-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- Rendered dynamically by renderBestsellers() -->
+      </div>
+
+      <!-- Giant Cyber Catalog Invitation Banner -->
+      <div class="mt-12 p-8 sm:p-10 rounded-3xl bg-gradient-to-r from-pink-950/40 via-purple-950/50 to-indigo-950/40 border border-pink-500/30 flex flex-col md:flex-row items-center justify-between gap-6 shadow-2xl backdrop-blur-xl">
+        <div class="space-y-2">
+          <div class="flex items-center gap-2">
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-pink-500/20 text-pink-300 border border-pink-500/30 uppercase tracking-wider">
+              🎮 +25 Titres & Abonnements Disponibles
+            </span>
+            <span class="text-xs text-zinc-400">• Mis à jour quotidiennement</span>
+          </div>
+          <h3 class="text-2xl sm:text-3xl font-black text-white font-headline">
+            Vous cherchez un autre jeu ou abonnement ?
+          </h3>
+          <p class="text-sm text-zinc-300 max-w-xl leading-relaxed">
+            Parcourez notre catalogue complet avec filtres par plateforme (Steam, PlayStation, Xbox), catégories (Précommandes, Abonnements, VP Valorant, Robux) et recherche en temps réel.
+          </p>
+        </div>
+        <a 
+          href="catalog.html" 
+          class="btn-neon-magenta px-8 py-4 rounded-2xl font-bold text-white text-base flex items-center gap-3 shrink-0 shadow-xl group cursor-pointer"
+        >
+          <span>Ouvrir la Page Catalogue</span>
+          <i data-lucide="arrow-right" class="w-5 h-5 group-hover:translate-x-1 transition-transform"></i>
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========================================== -->
+  <!-- HOW IT WORKS (GUIDE D'ACTIVATION) -->
+  <!-- ========================================== -->
+  <section id="guide" class="relative z-10 py-20 bg-slate-950/60 border-t border-white/[0.06]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <span class="text-xs font-bold text-pink-400 uppercase tracking-widest">RAPIDE & SÉCURISÉ</span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-2 font-headline">
+          Comment fonctionne l'achat chez IONARA ?
+        </h2>
+        <p class="text-sm text-zinc-400 mt-2">
+          Un processus simplifié en 3 étapes pour recevoir et sécuriser votre compte en toute tranquillité.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        
+        <!-- Step 1 -->
+        <div class="p-8 rounded-3xl border border-white/10 bg-slate-900/60 backdrop-blur-xl relative group hover:border-pink-500/40 transition duration-300">
+          <div class="w-14 h-14 rounded-2xl bg-pink-500/10 border border-pink-500/30 text-pink-400 flex items-center justify-center font-bold text-xl mb-6 shadow-lg shadow-pink-500/10 group-hover:scale-110 transition-transform">
+            1
+          </div>
+          <h3 class="text-xl font-bold text-white mb-2">Choisissez & Commandez</h3>
+          <p class="text-sm text-zinc-300 leading-relaxed">
+            Ajoutez votre compte au panier et réglez en toute simplicité (BaridiMob, CCP, Carte Bancaire, PayPal ou commande directe WhatsApp).
+          </p>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="p-8 rounded-3xl border border-white/10 bg-slate-900/60 backdrop-blur-xl relative group hover:border-purple-500/40 transition duration-300">
+          <div class="w-14 h-14 rounded-2xl bg-purple-500/10 border border-purple-500/30 text-purple-400 flex items-center justify-center font-bold text-xl mb-6 shadow-lg shadow-purple-500/10 group-hover:scale-110 transition-transform">
+            2
+          </div>
+          <h3 class="text-xl font-bold text-white mb-2">Réception en 5-15 min</h3>
+          <p class="text-sm text-zinc-300 leading-relaxed">
+            Notre équipe vous transmet vos identifiants sécurisés (identifiant, mot de passe et email d'origine) par email et WhatsApp.
+          </p>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="p-8 rounded-3xl border border-white/10 bg-slate-900/60 backdrop-blur-xl relative group hover:border-cyan-500/40 transition duration-300">
+          <div class="w-14 h-14 rounded-2xl bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 flex items-center justify-center font-bold text-xl mb-6 shadow-lg shadow-cyan-500/10 group-hover:scale-110 transition-transform">
+            3
+          </div>
+          <h3 class="text-xl font-bold text-white mb-2">Personnalisez & Jouez</h3>
+          <p class="text-sm text-zinc-300 leading-relaxed">
+            Connectez-vous, changez l'adresse email et le mot de passe pour mettre le compte 100% à votre nom, et profitez de vos jeux !
+          </p>
+        </div>
+
+      </div>
+
+      <!-- Trust Badges Bar -->
+      <div class="mt-14 p-6 rounded-2xl border border-white/10 bg-white/[0.02] flex flex-wrap items-center justify-around gap-6 text-center sm:text-left">
+        <div class="flex items-center gap-3">
+          <i data-lucide="shield-check" class="w-8 h-8 text-emerald-400 shrink-0"></i>
+          <div>
+            <h4 class="text-sm font-bold text-white">Garantie Anti-Bannissement</h4>
+            <p class="text-xs text-zinc-400">Tous nos comptes sont 100% vérifiés et conformes.</p>
+          </div>
+        </div>
+        <div class="flex items-center gap-3">
+          <i data-lucide="headset" class="w-8 h-8 text-pink-400 shrink-0"></i>
+          <div>
+            <h4 class="text-sm font-bold text-white">Support Dédié 24/7</h4>
+            <p class="text-xs text-zinc-400">Assistance humaine immédiate par WhatsApp et Telegram.</p>
+          </div>
+        </div>
+        <div class="flex items-center gap-3">
+          <i data-lucide="lock" class="w-8 h-8 text-cyan-400 shrink-0"></i>
+          <div>
+            <h4 class="text-sm font-bold text-white">Accès Total Propriétaire</h4>
+            <p class="text-xs text-zinc-400">Email & mot de passe modifiables immédiatement.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========================================== -->
+  <!-- REVIEWS SECTION -->
+  <!-- ========================================== -->
+  <section id="reviews" class="relative z-10 py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-12">
+        <div>
+          <span class="text-xs font-bold text-amber-400 uppercase tracking-widest flex items-center gap-1.5">
+            <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i> AVIS CLIENTS VÉRIFIÉS
+          </span>
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-1 font-headline">
+            Ce que pensent nos gamers
+          </h2>
+        </div>
+        <div class="text-left sm:text-right">
+          <div class="text-2xl font-black text-white">4.9 / 5.0</div>
+          <div class="text-xs text-zinc-400">Basé sur plus de 1,450 commandes vérifiées</div>
+        </div>
+      </div>
+
+      <div id="reviews-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- Rendered via JS -->
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========================================== -->
+  <!-- FAQ ACCORDION -->
+  <!-- ========================================== -->
+  <section class="relative z-10 py-16 bg-slate-950/40 border-t border-white/[0.06]">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center mb-12">
+        <span class="text-xs font-bold text-pink-400 uppercase tracking-widest">QUESTIONS FRÉQUENTES</span>
+        <h2 class="text-3xl font-extrabold text-white mt-1 font-headline">
+          Foire Aux Questions (FAQ)
+        </h2>
+      </div>
+
+      <div id="faq-accordion" class="space-y-4">
+        <!-- Rendered via JS -->
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========================================== -->
+  <!-- FOOTER -->
+  <!-- ========================================== -->
+  <footer class="relative z-10 border-t border-white/10 bg-[#06070a] pt-16 pb-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-10 pb-12 border-b border-white/10">
+        
+        <!-- Brand Info -->
+        <div class="md:col-span-5 space-y-4">
+          <div class="flex items-center gap-3">
+            <img src="assets/logo/ionara-wordmark.png" alt="IONARA" class="h-10 sm:h-12 w-auto object-contain filter drop-shadow(0 0 14px rgba(216,104,209,0.5))">
+          </div>
+          <p class="text-xs text-zinc-400 max-w-sm leading-relaxed">
+            La destination numéro 1 pour l'achat de comptes de jeux vidéo, abonnements Steam, Game Pass, et monnaies en Algérie et à l'international.
+          </p>
+          <div class="flex items-center gap-3 pt-2">
+            <a href="https://instagram.com" target="_blank" class="w-9 h-9 rounded-xl bg-white/5 hover:bg-pink-600/30 border border-white/10 hover:border-pink-500 flex items-center justify-center text-zinc-300 hover:text-white transition">
+              <i data-lucide="instagram" class="w-4 h-4"></i>
+            </a>
+            <a href="https://wa.me/213555000000" target="_blank" class="w-9 h-9 rounded-xl bg-white/5 hover:bg-emerald-600/30 border border-white/10 hover:border-emerald-500 flex items-center justify-center text-zinc-300 hover:text-white transition">
+              <i data-lucide="phone" class="w-4 h-4"></i>
+            </a>
+            <a href="mailto:contact@ionara.shop" class="w-9 h-9 rounded-xl bg-white/5 hover:bg-cyan-600/30 border border-white/10 hover:border-cyan-500 flex items-center justify-center text-zinc-300 hover:text-white transition">
+              <i data-lucide="mail" class="w-4 h-4"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Links 1: Rayons -->
+        <div class="md:col-span-2 space-y-3">
+          <h4 class="text-xs font-bold uppercase tracking-wider text-white">Nos Rayons</h4>
+          <ul class="space-y-2 text-xs text-zinc-400">
+            <li><a href="#catalog" class="hover:text-pink-400 transition">Comptes Steam</a></li>
+            <li><a href="#catalog" class="hover:text-pink-400 transition">Pack 1000 Jeux</a></li>
+            <li><a href="#catalog" class="hover:text-pink-400 transition">Xbox Game Pass</a></li>
+            <li><a href="#catalog" class="hover:text-pink-400 transition">PlayStation (PSN)</a></li>
+            <li><a href="#catalog" class="hover:text-pink-400 transition">Valorant Points</a></li>
+          </ul>
+        </div>
+
+        <!-- Links 2: Services -->
+        <div class="md:col-span-2 space-y-3">
+          <h4 class="text-xs font-bold uppercase tracking-wider text-white">Garantie & Support</h4>
+          <ul class="space-y-2 text-xs text-zinc-400">
+            <li><a href="#guide" class="hover:text-pink-400 transition">Guide d'activation</a></li>
+            <li><a href="#guide" class="hover:text-pink-400 transition">Garantie à vie</a></li>
+            <li><a href="#reviews" class="hover:text-pink-400 transition">Avis clients</a></li>
+            <li><a href="#faq-accordion" class="hover:text-pink-400 transition">FAQ</a></li>
+            <li><a href="https://wa.me/213555000000" class="hover:text-emerald-400 transition">Contact WhatsApp</a></li>
+          </ul>
+        </div>
+
+        <!-- Payment Badges -->
+        <div class="md:col-span-3 space-y-3">
+          <h4 class="text-xs font-bold uppercase tracking-wider text-white">Paiements Sécurisés</h4>
+          <p class="text-xs text-zinc-400">Réglez simplement selon votre préférence :</p>
+          <div class="flex flex-wrap gap-2 pt-1 text-xs font-semibold text-zinc-300">
+            <span class="px-2.5 py-1 rounded bg-white/5 border border-white/10">BaridiMob 🇩🇿</span>
+            <span class="px-2.5 py-1 rounded bg-white/5 border border-white/10">CCP</span>
+            <span class="px-2.5 py-1 rounded bg-white/5 border border-white/10">Visa / Mastercard</span>
+            <span class="px-2.5 py-1 rounded bg-white/5 border border-white/10">PayPal</span>
+            <span class="px-2.5 py-1 rounded bg-white/5 border border-white/10">USDT / Binance</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Copyright -->
+      <div class="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-zinc-500 gap-4">
+        <div>
+          © 2026 IONARA Store. Tous droits réservés. Designé pour les gamers exigeants.
+        </div>
+        <div class="flex gap-4">
+          <a href="#" class="hover:text-zinc-400">Conditions Générales</a>
+          <span>•</span>
+          <a href="#" class="hover:text-zinc-400">Politique de Confidentialité</a>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- ========================================== -->
+  <!-- CART SLIDE-OVER DRAWER -->
+  <!-- ========================================== -->
+  <div id="cart-backdrop" onclick="closeCartDrawer()" class="hidden fixed inset-0 bg-black/70 backdrop-blur-sm z-50 transition-opacity"></div>
+  
+  <div id="cart-drawer" class="fixed top-0 right-0 h-full w-full max-w-md bg-slate-950 border-l border-white/10 z-50 transform translate-x-full transition-transform duration-300 flex flex-col shadow-2xl">
+    
+    <!-- Drawer Header -->
+    <div class="p-6 border-b border-white/10 flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <i data-lucide="shopping-bag" class="w-5 h-5 text-pink-400"></i>
+        <h3 class="text-lg font-bold text-white">Votre Panier</h3>
+      </div>
+      <button onclick="closeCartDrawer()" class="p-2 rounded-xl text-zinc-400 hover:text-white hover:bg-white/5 transition">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+    </div>
+
+    <!-- Items List -->
+    <div id="cart-items-list" class="flex-1 overflow-y-auto p-6 space-y-3.5">
+      <!-- Rendered dynamically -->
+    </div>
+
+    <!-- Promo code input -->
+    <div class="p-4 mx-6 rounded-2xl bg-white/[0.02] border border-white/5">
+      <div class="flex gap-2">
+        <input 
+          type="text" 
+          id="promo-input" 
+          placeholder="Code promo (ex: IONARA10)" 
+          class="flex-1 bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-xs text-white uppercase placeholder-zinc-500 focus:outline-none focus:border-pink-500"
+        />
+        <button 
+          onclick="applyPromoCode()"
+          class="px-4 py-2 rounded-xl bg-pink-500/20 hover:bg-pink-500/30 text-pink-300 font-bold text-xs border border-pink-500/30 transition cursor-pointer"
+        >
+          Appliquer
+        </button>
+      </div>
+    </div>
+
+    <!-- Drawer Footer & Totals -->
+    <div class="p-6 border-t border-white/10 bg-black/40 space-y-3">
+      <div class="flex justify-between text-xs text-zinc-400">
+        <span>Sous-total</span>
+        <span id="cart-subtotal" class="font-semibold text-white">0 DA</span>
+      </div>
+      <div class="flex justify-between text-xs text-emerald-400">
+        <span>Réduction</span>
+        <span id="cart-discount" class="font-semibold">0 DA</span>
+      </div>
+      <div class="flex justify-between text-base font-extrabold text-white pt-2 border-t border-white/5">
+        <span>Total</span>
+        <span id="cart-total" class="text-pink-400 font-headline">0 DA</span>
+      </div>
+
+      <button 
+        onclick="openCheckoutModal()"
+        class="w-full btn-neon-magenta py-3.5 rounded-xl font-bold text-white text-sm flex items-center justify-center gap-2 cursor-pointer shadow-lg mt-2"
+      >
+        <i data-lucide="check-circle" class="w-4 h-4"></i>
+        Passer la Commande
+      </button>
+
+      <p class="text-[11px] text-center text-zinc-500 pt-1">
+        🔒 Paiement sécurisé & livraison express en 5-15 min
+      </p>
+    </div>
+
+  </div>
+
+  <!-- ========================================== -->
+  <!-- QUICK VIEW PRODUCT MODAL -->
+  <!-- ========================================== -->
+  <div id="quickview-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/80 backdrop-blur-md">
+    <div class="relative w-full max-w-3xl rounded-3xl border border-white/10 bg-slate-950 p-6 sm:p-8 shadow-2xl max-h-[90vh] overflow-y-auto">
+      <button onclick="closeQuickView()" class="absolute top-5 right-5 p-2 rounded-xl text-zinc-400 hover:text-white hover:bg-white/5 transition">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+      <div id="quickview-body">
+        <!-- Injected via openQuickView() -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- 1,170+ GAMES LIST MODAL -->
+  <!-- ========================================== -->
+  <div id="games-list-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/80 backdrop-blur-md">
+    <div class="relative w-full max-w-4xl rounded-3xl border border-white/10 bg-slate-950 p-6 sm:p-8 shadow-2xl max-h-[90vh] flex flex-col">
+      
+      <div class="flex items-center justify-between pb-4 border-b border-white/10">
+        <div>
+          <h3 class="text-2xl font-black text-white font-headline">Catalogue des 1,170+ Jeux Inclus</h3>
+          <p class="text-xs text-zinc-400 mt-0.5">Tous disponibles sur le compte Steam Ultime IONARA</p>
+        </div>
+        <button onclick="closeGamesListModal()" class="p-2 rounded-xl text-zinc-400 hover:text-white hover:bg-white/5 transition">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <!-- Live Search in Modal -->
+      <div class="py-4">
+        <div class="relative">
+          <i data-lucide="search" class="w-4 h-4 text-zinc-500 absolute left-3.5 top-1/2 -translate-y-1/2"></i>
+          <input 
+            type="text" 
+            id="games-catalog-search"
+            placeholder="Rechercher parmi les 1,170 jeux (ex: Red Dead, Batman, Dark Souls, Cyberpunk...)" 
+            class="w-full bg-slate-900 border border-white/10 rounded-xl pl-10 pr-4 py-2.5 text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-pink-500"
+          />
+        </div>
+      </div>
+
+      <!-- Scrollable List -->
+      <div id="games-catalog-list" class="flex-1 overflow-y-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2.5 pr-2">
+        <!-- Injected via openGamesListModal() -->
+      </div>
+
+      <div class="pt-4 mt-2 border-t border-white/10 flex items-center justify-between text-xs text-zinc-400">
+        <span>💡 Tous les jeux sont complets avec mode solo & hors-ligne illimité.</span>
+        <button onclick="addToCart('pack-1000-games'); closeGamesListModal();" class="px-5 py-2 rounded-xl bg-pink-600 text-white font-bold hover:bg-pink-500 transition">
+          Acheter le Pack Ultime
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- CHECKOUT MODAL -->
+  <!-- ========================================== -->
+  <div id="checkout-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/80 backdrop-blur-md">
+    <div class="relative w-full max-w-lg rounded-3xl border border-white/10 bg-slate-950 p-6 sm:p-8 shadow-2xl">
+      <button onclick="closeCheckoutModal()" class="absolute top-5 right-5 p-2 rounded-xl text-zinc-400 hover:text-white hover:bg-white/5 transition">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+
+      <div class="mb-6">
+        <span class="text-xs font-bold text-pink-400 uppercase tracking-wider">COMMANDE EXPRESS</span>
+        <h3 class="text-2xl font-black text-white font-headline mt-1">Finaliser votre commande</h3>
+        <p class="text-xs text-zinc-400 mt-1">Vos identifiants seront transmis immédiatement après validation.</p>
+      </div>
+
+      <form onsubmit="submitOrder(event)" class="space-y-4">
+        <div>
+          <label class="block text-xs font-semibold text-zinc-300 mb-1">Votre Nom & Prénom</label>
+          <input required type="text" id="order-name" placeholder="Ex: Yassine Achour" class="w-full bg-slate-900 border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-pink-500">
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-zinc-300 mb-1">Numéro WhatsApp / Téléphone (pour la livraison)</label>
+          <input required type="tel" id="order-phone" placeholder="Ex: 05 55 12 34 56" class="w-full bg-slate-900 border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-pink-500">
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-zinc-300 mb-1">Adresse Email</label>
+          <input required type="email" id="order-email" placeholder="Ex: contact@email.com" class="w-full bg-slate-900 border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-pink-500">
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-zinc-300 mb-2">Moyen de paiement souhaité :</label>
+          <div class="grid grid-cols-2 gap-2 text-xs">
+            <label class="flex items-center gap-2 p-2.5 rounded-xl border border-white/10 bg-slate-900 cursor-pointer hover:border-pink-500/50">
+              <input type="radio" name="payment_method" value="BaridiMob" checked class="accent-pink-500">
+              <span class="font-bold text-white">BaridiMob 🇩🇿</span>
+            </label>
+            <label class="flex items-center gap-2 p-2.5 rounded-xl border border-white/10 bg-slate-900 cursor-pointer hover:border-pink-500/50">
+              <input type="radio" name="payment_method" value="CCP" class="accent-pink-500">
+              <span class="font-bold text-white">Virement CCP</span>
+            </label>
+            <label class="flex items-center gap-2 p-2.5 rounded-xl border border-white/10 bg-slate-900 cursor-pointer hover:border-pink-500/50">
+              <input type="radio" name="payment_method" value="Carte Bancaire / PayPal" class="accent-pink-500">
+              <span class="font-bold text-white">Carte / PayPal</span>
+            </label>
+            <label class="flex items-center gap-2 p-2.5 rounded-xl border border-white/10 bg-slate-900 cursor-pointer hover:border-pink-500/50">
+              <input type="radio" name="payment_method" value="Binance / USDT" class="accent-pink-500">
+              <span class="font-bold text-white">USDT (Crypto)</span>
+            </label>
+          </div>
+        </div>
+
+        <button type="submit" class="w-full btn-neon-magenta py-3.5 rounded-xl font-bold text-white text-sm flex items-center justify-center gap-2 cursor-pointer shadow-lg mt-4">
+          <i data-lucide="send" class="w-4 h-4"></i>
+          Confirmer et Envoyer sur WhatsApp
+        </button>
+      </form>
+
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- ESPACE CLIENT / LOGIN MODAL (PRÊT POUR LA SUITE) -->
+  <!-- ========================================== -->
+  <div id="account-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/80 backdrop-blur-md">
+    <div class="relative w-full max-w-md rounded-3xl border border-white/10 bg-slate-950 p-6 sm:p-8 shadow-2xl">
+      <button onclick="closeAccountModal()" class="absolute top-5 right-5 p-2 rounded-xl text-zinc-400 hover:text-white hover:bg-white/5 transition">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+
+      <div class="text-center mb-6">
+        <div class="w-12 h-12 mx-auto mb-3 rounded-2xl bg-pink-500/20 border border-pink-500/30 flex items-center justify-center text-pink-400">
+          <i data-lucide="user-check" class="w-6 h-6"></i>
+        </div>
+        <h3 class="text-2xl font-black text-white font-headline">Espace Client IONARA</h3>
+        <p class="text-xs text-zinc-400 mt-1">Connectez-vous pour retrouver vos commandes et clés de jeux.</p>
+      </div>
+
+      <div class="space-y-4">
+        <div>
+          <label class="block text-xs font-semibold text-zinc-300 mb-1">Email ou Nom d'utilisateur</label>
+          <input type="text" placeholder="votre@email.com" class="w-full bg-slate-900 border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-pink-500">
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-zinc-300 mb-1">Mot de passe</label>
+          <input type="password" placeholder="••••••••" class="w-full bg-slate-900 border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-pink-500">
+        </div>
+        <button onclick="showToast('Connexion prête pour l\'étape suivante !', 'info')" class="w-full btn-neon-magenta py-3 rounded-xl font-bold text-white text-xs cursor-pointer shadow-lg">
+          Se Connecter
+        </button>
+        <p class="text-[11px] text-center text-zinc-500">
+          Pas encore de compte ? <a href="#" onclick="showToast('Module d\'inscription prêt pour l\'étape suivante', 'info')" class="text-pink-400 hover:underline">Créer un compte</a>
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobile-menu');
+      if (menu) menu.classList.toggle('hidden');
+    }
+    function openAccountModal() {
+      const modal = document.getElementById('account-modal');
+      if (modal) {
+        modal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+      }
+    }
+    function closeAccountModal() {
+      const modal = document.getElementById('account-modal');
+      if (modal) {
+        modal.classList.add('hidden');
+        document.body.style.overflow = '';
+      }
+    }
+  </script>
+
+  <!-- Application Logic Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

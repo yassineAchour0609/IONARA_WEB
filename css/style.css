@@ -1,0 +1,218 @@
+/* 
+ * IONARA WEB SHOP - Cyberpunk / Neo-Gaming Custom Styling
+ * Couleurs phares: Noir Absolu (#090A0F, #0E1017), Magenta IONARA (#d868d1), Cyan Électrique (#06b6d4), Bleu (#3b82f6)
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@500;600;700;800;900&display=swap');
+
+:root {
+  --ionara-magenta: #d868d1;
+  --ionara-blue: #3b82f6;
+  --ionara-cyan: #06b6d4;
+  --bg-deep: #08090e;
+  --bg-card: rgba(18, 21, 31, 0.7);
+  --border-glow: rgba(216, 104, 209, 0.25);
+}
+
+body {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  background-color: var(--bg-deep);
+  color: #f3f4f6;
+  overflow-x: hidden;
+  selection-background-color: #d868d1;
+  selection-color: #ffffff;
+}
+
+::selection {
+  background: rgba(216, 104, 209, 0.35);
+  color: #ffffff;
+}
+
+.font-gaming {
+  font-family: 'Orbitron', 'Outfit', sans-serif;
+}
+
+.font-headline {
+  font-family: 'Outfit', sans-serif;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #090a0f;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #d868d1, #3b82f6);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #d868d1;
+}
+
+/* Ambient Glowing Backgrounds */
+.ambient-glow-magenta {
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(216, 104, 209, 0.15) 0%, rgba(216, 104, 209, 0) 70%);
+  filter: blur(80px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.ambient-glow-blue {
+  position: absolute;
+  width: 550px;
+  height: 550px;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.14) 0%, rgba(59, 130, 246, 0) 70%);
+  filter: blur(80px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.ambient-glow-cyan {
+  position: absolute;
+  width: 450px;
+  height: 450px;
+  background: radial-gradient(circle, rgba(6, 182, 212, 0.12) 0%, rgba(6, 182, 212, 0) 70%);
+  filter: blur(70px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Glassmorphism Classes */
+.glass-panel {
+  background: rgba(14, 17, 26, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-panel-hover {
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.glass-panel-hover:hover {
+  border-color: rgba(216, 104, 209, 0.4);
+  box-shadow: 0 10px 30px -10px rgba(216, 104, 209, 0.25), 0 0 20px rgba(59, 130, 246, 0.1);
+  transform: translateY(-4px);
+}
+
+/* Neon Glow Buttons */
+.btn-neon-magenta {
+  background: linear-gradient(135deg, #d868d1 0%, #b83ec4 50%, #9333ea 100%);
+  box-shadow: 0 0 25px rgba(216, 104, 209, 0.45);
+  transition: all 0.25s ease;
+}
+.btn-neon-magenta:hover {
+  box-shadow: 0 0 35px rgba(216, 104, 209, 0.7);
+  transform: translateY(-2px) scale(1.02);
+}
+
+.btn-neon-outline {
+  border: 1px solid rgba(216, 104, 209, 0.5);
+  background: rgba(216, 104, 209, 0.08);
+  backdrop-filter: blur(8px);
+  transition: all 0.25s ease;
+}
+.btn-neon-outline:hover {
+  border-color: #d868d1;
+  background: rgba(216, 104, 209, 0.2);
+  box-shadow: 0 0 20px rgba(216, 104, 209, 0.35);
+  transform: translateY(-2px);
+}
+
+/* Subtle Shimmer & Pulse */
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(200%); }
+}
+
+.animate-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+.animate-shimmer::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+  transform: translateX(-100%);
+  animation: shimmer 3s infinite;
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.05); }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 3s infinite ease-in-out;
+}
+
+/* Game Card Poster Zoom */
+.poster-container {
+  overflow: hidden;
+  position: relative;
+}
+.poster-img {
+  transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.game-card:hover .poster-img {
+  transform: scale(1.08);
+}
+
+/* Grid Background */
+.bg-cyber-grid {
+  background-size: 40px 40px;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+}
+
+/* Badge styles */
+.badge-glow {
+  box-shadow: 0 0 12px currentColor;
+}
+
+/* Badge platform */
+.platform-pill {
+  backdrop-filter: blur(8px);
+  background: rgba(0, 0, 0, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+/* Notification Toast */
+#toast-container {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  pointer-events: none;
+}
+.toast {
+  pointer-events: auto;
+  animation: toastIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+@keyframes toastIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Island Floating Capsule Navbar */
+.navbar-capsule {
+  box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.8), 0 0 25px -5px rgba(216, 104, 209, 0.2);
+}
+.navbar-capsule:hover {
+  box-shadow: 0 15px 50px -10px rgba(0, 0, 0, 0.9), 0 0 35px -5px rgba(216, 104, 209, 0.35);
+}
