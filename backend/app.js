@@ -1,0 +1,30 @@
+const express = require('express');
+const cors = require('cors');
+const mongoose = require('mongoose');
+const { rateLimit } = require('express-rate-limit');
+const app = express();
+const origin = process.env.CLIENT_URL || 'http://localhost:3000';
+app.disable('x-powered-by');
+app.use(cors({ origin, credentials: true }));
+app.use(express.json({ limit: '32kb' }));
+app.use('/api', (req, res, next) => {
+  res.setHeader('Cache-Control', 'no-store');
+  res.setHeader('X-Content-Type-Options', 'nosniff');
+  if (!['GET', 'HEAD', 'OPTIONS'].includes(req.method) && req.headers.origin && req.headers.origin !== origin) return res.status(403).json({ code: 'FORBIDDEN' });
+  next();
+});
+app.get('/api/health', (req, res) => res.status(mongoose.connection.readyState === 1 ? 200 : 503).json({ status: mongoose.connection.readyState === 1 ? 'online' : 'unavailable', database: mongoose.connection.readyState === 1 ? 'connected' : 'disconnected' }));
+app.get('/api/config', (req, res) => res.json({ contactEmail: process.env.CONTACT_EMAIL || 'IonaraShop@outlook.fr', whatsapp: /^216[2459]\d{7}$/.test(process.env.WHATSAPP_NUMBER || '') ? process.env.WHATSAPP_NUMBER : '21627031500', instagram: /^https:\/\/(www\.)?instagram\.com\/[A-Za-z0-9._-]+\/?$/.test(process.env.INSTAGRAM_URL || '') ? process.env.INSTAGRAM_URL : 'https://www.instagram.com/ionara_shop/' }));
+app.use('/api/products', require('./routes/products'));
+app.use('/api', rateLimit({ windowMs: 60 * 1000, limit: 120, standardHeaders: 'draft-7', legacyHeaders: false, message: { code: 'RATE_LIMITED' } }));
+app.use('/api', (req, res, next) => mongoose.connection.readyState === 1 ? next() : res.status(503).json({ code: 'SERVICE_UNAVAILABLE' }));
+app.use('/api/auth', require('./routes/auth'));
+app.use('/api/orders', require('./routes/orders'));
+app.use((req, res) => res.status(404).json({ code: 'NOT_FOUND' }));
+app.use((err, req, res, next) => {
+  if (err.code === 11000) return res.status(409).json({ code: 'EMAIL_EXISTS' });
+  if (err.type === 'entity.parse.failed') return res.status(400).json({ code: 'INVALID_ORDER' });
+  if (err.type === 'entity.too.large') return res.status(413).json({ code: 'INVALID_ORDER' });
+  res.status(err.status || 500).json({ code: err.status ? err.code : 'SERVICE_UNAVAILABLE' });
+});
+module.exports = app;

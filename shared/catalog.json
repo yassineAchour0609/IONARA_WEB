@@ -1,0 +1,404 @@
+[
+  {
+    "slug": "pack-1000-games",
+    "title": "Steam Library Bundle",
+    "image": "/assets/games/1000-games-pack.png",
+    "platform": "Steam",
+    "category": "steam",
+    "featured": true,
+    "soldCount": 342,
+    "rating": 4.9,
+    "reviewCount": 48,
+    "accountField": "steamOffline",
+    "trailerUrl": "https://www.youtube.com/results?search_query=Steam+Top+AAA+Games+Showcase",
+    "specs": {
+      "min": { "os": "Windows 10 64-bit", "cpu": "Intel Core i5-8400 / Ryzen 5 2600", "ram": "8 GB RAM", "gpu": "GTX 1060 / RX 580", "storage": "50 GB SSD" },
+      "rec": { "os": "Windows 11 64-bit", "cpu": "Intel Core i7-12700K / Ryzen 7 5800X", "ram": "16 GB RAM", "gpu": "RTX 3060 Ti / RX 6700 XT", "storage": "100 GB NVMe SSD" }
+    },
+    "prices": {
+      "TND": 30,
+      "EUR": 25,
+      "USD": 28
+    },
+    "inStock": true,
+    "keyGames": [
+      "Grand Theft Auto V",
+      "Red Dead Redemption 2",
+      "Elden Ring",
+      "Baldur's Gate 3",
+      "Cyberpunk 2077",
+      "God of War",
+      "The Witcher 3: Wild Hunt",
+      "Hogwarts Legacy",
+      "Hades I & II",
+      "Batman: Arkham Collection",
+      "S.T.A.L.K.E.R. 2",
+      "Half-Life: Alyx",
+      "Metro Exodus Complete",
+      "BioShock Trilogy",
+      "Fallout 4",
+      "Dead by Daylight"
+    ]
+  },
+  {
+    "slug": "gta-6",
+    "title": "Grand Theft Auto VI",
+    "image": "/assets/games/gta-6.png",
+    "platform": "Rockstar / Console",
+    "category": "preorder",
+    "featured": true,
+    "soldCount": 128,
+    "rating": 5.0,
+    "reviewCount": 29,
+    "accountField": "consoleId",
+    "trailerUrl": "https://www.youtube.com/watch?v=QdBZY2fkU-0",
+    "specs": {
+      "min": { "os": "PS5 / Xbox Series X|S", "cpu": "AMD Zen 2 8-Core", "ram": "16 GB GDDR6", "gpu": "RDNA 2 Custom GPU", "storage": "150 GB NVMe SSD" },
+      "rec": { "os": "PS5 Pro / Xbox Series X", "cpu": "AMD Zen 2 High Frequency", "ram": "16 GB GDDR6", "gpu": "Ray-Tracing 60 FPS Mode", "storage": "150 GB NVMe SSD" }
+    },
+    "prices": {
+      "TND": 200,
+      "EUR": 45,
+      "USD": 49
+    },
+    "plans": [
+      {
+        "id": "xbox",
+        "label": "Xbox Series X|S",
+        "prices": { "TND": 200, "EUR": 45, "USD": 49 }
+      },
+      {
+        "id": "ps5",
+        "label": "PlayStation 5",
+        "prices": { "TND": 250, "EUR": 55, "USD": 59 }
+      }
+    ],
+    "inStock": true,
+    "keyGames": [
+      "Xbox Series X|S — 200 DT",
+      "PlayStation 5 — 250 DT"
+    ]
+  },
+  {
+    "slug": "ea-fc-27",
+    "title": "EA SPORTS FC 27",
+    "image": "/assets/games/ea-fc-27.png",
+    "platform": "Steam / EA App",
+    "category": "nouveautes",
+    "featured": true,
+    "soldCount": 94,
+    "rating": 4.8,
+    "reviewCount": 19,
+    "accountField": "eaId",
+    "trailerUrl": "https://www.youtube.com/results?search_query=EA+SPORTS+FC+Official+Gameplay+Trailer",
+    "specs": {
+      "min": { "os": "Windows 10 64-bit", "cpu": "Intel Core i5-6600k / Ryzen 5 1600", "ram": "8 GB RAM", "gpu": "GTX 1050 Ti / RX 570", "storage": "100 GB" },
+      "rec": { "os": "Windows 11 64-bit", "cpu": "Intel Core i7-6700 / Ryzen 7 2700X", "ram": "12 GB RAM", "gpu": "GTX 1660 / RX 5600 XT", "storage": "100 GB SSD" }
+    },
+    "prices": {
+      "TND": 140,
+      "EUR": 39,
+      "USD": 42
+    },
+    "inStock": true,
+    "keyGames": []
+  },
+  {
+    "slug": "xbox-game-pass-ultimate-1year",
+    "title": "Xbox Game Pass Essential",
+    "image": "/assets/games/xbox-game-pass-1year.png",
+    "platform": "Xbox / PC",
+    "category": "passes",
+    "featured": true,
+    "soldCount": 215,
+    "rating": 4.9,
+    "reviewCount": 37,
+    "accountField": "microsoftEmail",
+    "prices": {
+      "TND": 180,
+      "EUR": 36,
+      "USD": 39
+    },
+    "inStock": true,
+    "keyGames": []
+  },
+  {
+    "slug": "cod-black-ops-7",
+    "title": "Call of Duty: Black Ops 7",
+    "image": "/assets/games/cod-black-ops-7.png",
+    "platform": "Steam",
+    "category": "preorder",
+    "featured": false,
+    "soldCount": 76,
+    "rating": 4.8,
+    "reviewCount": 14,
+    "accountField": "steamOffline",
+    "trailerUrl": "https://www.youtube.com/results?search_query=Call+of+Duty+Black+Ops+Official+Trailer",
+    "specs": {
+      "min": { "os": "Windows 10 64-bit", "cpu": "Intel Core i5-6600 / Ryzen 5 1400", "ram": "8 GB RAM", "gpu": "GTX 960 / RX 470", "storage": "120 GB SSD" },
+      "rec": { "os": "Windows 11 64-bit", "cpu": "Intel Core i7-8700K / Ryzen 7 2700X", "ram": "16 GB RAM", "gpu": "RTX 3060 / RX 6600 XT", "storage": "120 GB NVMe SSD" }
+    },
+    "prices": {
+      "TND": 140,
+      "EUR": 42,
+      "USD": 45
+    },
+    "inStock": true,
+    "keyGames": []
+  },
+  {
+    "slug": "forza-horizon-6",
+    "title": "Forza Horizon 6",
+    "image": "/assets/games/forza-horizon-6.png",
+    "platform": "Xbox / PC",
+    "category": "nouveautes",
+    "featured": false,
+    "soldCount": 88,
+    "rating": 4.9,
+    "reviewCount": 16,
+    "accountField": "microsoftEmail",
+    "trailerUrl": "https://www.youtube.com/results?search_query=Forza+Horizon+Official+4K+Trailer",
+    "specs": {
+      "min": { "os": "Windows 10 64-bit", "cpu": "Intel i5-8400 / Ryzen 5 1500X", "ram": "8 GB RAM", "gpu": "GTX 1070 / RX 590", "storage": "110 GB SSD" },
+      "rec": { "os": "Windows 11 64-bit", "cpu": "Intel i7-10700K / Ryzen 7 3800X", "ram": "16 GB RAM", "gpu": "RTX 3070 / RX 6800 XT", "storage": "110 GB NVMe SSD" }
+    },
+    "prices": {
+      "TND": 170,
+      "EUR": 32,
+      "USD": 35
+    },
+    "inStock": true,
+    "keyGames": []
+  },
+  {
+    "slug": "valorant-points",
+    "title": "Valorant Points",
+    "image": "/assets/games/valorant-points.png",
+    "platform": "Riot Games",
+    "category": "currencies",
+    "featured": false,
+    "soldCount": 412,
+    "rating": 5.0,
+    "reviewCount": 64,
+    "accountField": "riotId",
+    "prices": {
+      "TND": 20,
+      "EUR": 19,
+      "USD": 21
+    },
+    "plans": [
+      { "id": "vp-475", "label": "475 VP", "prices": { "TND": 20, "EUR": 19, "USD": 21 } },
+      { "id": "vp-1000", "label": "1000 VP", "prices": { "TND": 40, "EUR": 35, "USD": 38 } },
+      { "id": "vp-2050", "label": "2050 VP", "prices": { "TND": 80, "EUR": 65, "USD": 70 } },
+      { "id": "vp-2575", "label": "2575 VP", "prices": { "TND": 100, "EUR": 80, "USD": 86 } },
+      { "id": "vp-3650", "label": "3650 VP", "prices": { "TND": 135, "EUR": 105, "USD": 114 } },
+      { "id": "vp-5350", "label": "5350 VP", "prices": { "TND": 190, "EUR": 145, "USD": 158 } },
+      { "id": "vp-8700", "label": "8700 VP", "prices": { "TND": 330, "EUR": 240, "USD": 260 } },
+      { "id": "vp-11000", "label": "11000 VP", "prices": { "TND": 385, "EUR": 285, "USD": 310 } }
+    ],
+    "inStock": true,
+    "keyGames": [
+      "475 VP — 20 DT",
+      "1000 VP — 40 DT",
+      "2050 VP — 80 DT",
+      "2575 VP — 100 DT",
+      "3650 VP — 135 DT",
+      "5350 VP — 190 DT",
+      "8700 VP — 330 DT",
+      "11000 VP — 385 DT"
+    ]
+  },
+  {
+    "slug": "xbox-game-pass-ultimate-6months",
+    "title": "Xbox Game Pass Ultimate",
+    "image": "/assets/games/xbox-game-pass-ultimate-6months.png",
+    "platform": "Xbox / PC",
+    "category": "passes",
+    "featured": false,
+    "soldCount": 164,
+    "rating": 4.9,
+    "reviewCount": 27,
+    "accountField": "microsoftEmail",
+    "prices": {
+      "TND": 190,
+      "EUR": 20,
+      "USD": 22
+    },
+    "inStock": true,
+    "keyGames": []
+  },
+  {
+    "slug": "resident-evil-requiem",
+    "title": "Resident Evil: Requiem",
+    "image": "/assets/games/resident-evil-requiem.png",
+    "platform": "Steam",
+    "category": "nouveautes",
+    "featured": false,
+    "soldCount": 63,
+    "rating": 4.9,
+    "reviewCount": 11,
+    "accountField": "steamOffline",
+    "trailerUrl": "https://www.youtube.com/results?search_query=Resident+Evil+Requiem+Official+Trailer",
+    "specs": {
+      "min": { "os": "Windows 10 64-bit", "cpu": "AMD Ryzen 5 3600 / Intel Core i5 10400", "ram": "8 GB RAM", "gpu": "GTX 1070 / RX 5700", "storage": "65 GB SSD" },
+      "rec": { "os": "Windows 11 64-bit", "cpu": "AMD Ryzen 7 5800X / Intel Core i7 11700", "ram": "16 GB RAM", "gpu": "RTX 3070 / RX 6800", "storage": "65 GB NVMe SSD" }
+    },
+    "prices": {
+      "TND": 140,
+      "EUR": 34,
+      "USD": 37
+    },
+    "inStock": true,
+    "keyGames": []
+  },
+  {
+    "slug": "eafc-26",
+    "title": "EA SPORTS FC 26",
+    "image": "/assets/games/eafc-26.png",
+    "platform": "Steam / EA",
+    "category": "steam",
+    "featured": false,
+    "soldCount": 289,
+    "rating": 4.9,
+    "reviewCount": 42,
+    "accountField": "eaId",
+    "trailerUrl": "https://www.youtube.com/results?search_query=EA+SPORTS+FC+26+Trailer",
+    "specs": {
+      "min": { "os": "Windows 10 64-bit", "cpu": "Intel Core i5-6600k / Ryzen 5 1600", "ram": "8 GB RAM", "gpu": "GTX 1050 Ti / RX 570", "storage": "100 GB" },
+      "rec": { "os": "Windows 11 64-bit", "cpu": "Intel Core i7-6700 / Ryzen 7 2700X", "ram": "12 GB RAM", "gpu": "GTX 1660 / RX 5600 XT", "storage": "100 GB SSD" }
+    },
+    "prices": {
+      "TND": 20,
+      "EUR": 24,
+      "USD": 26
+    },
+    "inStock": true,
+    "keyGames": []
+  },
+  {
+    "slug": "cod-mw4",
+    "title": "Call of Duty: Modern Warfare IV",
+    "image": "/assets/games/COD-MW4.png",
+    "platform": "Steam",
+    "category": "steam",
+    "featured": false,
+    "soldCount": 112,
+    "rating": 4.8,
+    "reviewCount": 18,
+    "accountField": "steamOffline",
+    "trailerUrl": "https://www.youtube.com/results?search_query=Call+of+Duty+Modern+Warfare+Official+Trailer",
+    "specs": {
+      "min": { "os": "Windows 10 64-bit", "cpu": "Intel Core i5-6600 / Ryzen 5 1600", "ram": "8 GB RAM", "gpu": "GTX 1060 / RX 580", "storage": "125 GB SSD" },
+      "rec": { "os": "Windows 11 64-bit", "cpu": "Intel Core i7-9700K / Ryzen 7 3700X", "ram": "16 GB RAM", "gpu": "RTX 3060 Ti / RX 6700 XT", "storage": "125 GB NVMe SSD" }
+    },
+    "prices": {
+      "TND": 180,
+      "EUR": 28,
+      "USD": 30
+    },
+    "inStock": true,
+    "keyGames": []
+  },
+  {
+    "slug": "assassins-creed-black-flag",
+    "title": "Assassin's Creed: Black Flag Resynced",
+    "image": "/assets/games/assassins-creed-black-flag.png",
+    "platform": "Steam",
+    "category": "steam",
+    "featured": false,
+    "soldCount": 79,
+    "rating": 4.9,
+    "reviewCount": 15,
+    "accountField": "steamOffline",
+    "trailerUrl": "https://www.youtube.com/results?search_query=Assassins+Creed+Black+Flag+Trailer",
+    "specs": {
+      "min": { "os": "Windows 10 64-bit", "cpu": "Intel Core i5-8400 / Ryzen 5 2600", "ram": "8 GB RAM", "gpu": "GTX 1060 6GB / RX 580", "storage": "75 GB SSD" },
+      "rec": { "os": "Windows 11 64-bit", "cpu": "Intel Core i7-10700K / Ryzen 7 3700X", "ram": "16 GB RAM", "gpu": "RTX 3060 Ti / RX 6700 XT", "storage": "75 GB NVMe SSD" }
+    },
+    "prices": {
+      "TND": 150,
+      "EUR": 17,
+      "USD": 19
+    },
+    "inStock": true,
+    "keyGames": []
+  },
+  {
+    "slug": "nba-2k26",
+    "title": "NBA 2K26",
+    "image": "/assets/games/nba-2k26.png",
+    "platform": "Steam / Console",
+    "category": "steam",
+    "featured": false,
+    "soldCount": 143,
+    "rating": 4.8,
+    "reviewCount": 22,
+    "accountField": "steamOffline",
+    "trailerUrl": "https://www.youtube.com/results?search_query=NBA+2K26+Official+Gameplay+Trailer",
+    "specs": {
+      "min": { "os": "Windows 10 64-bit", "cpu": "Intel Core i3-8100 / Ryzen 3 1200", "ram": "8 GB RAM", "gpu": "GTX 1060 / RX 580", "storage": "110 GB" },
+      "rec": { "os": "Windows 11 64-bit", "cpu": "Intel Core i5-10600 / Ryzen 5 3600X", "ram": "16 GB RAM", "gpu": "RTX 2070 / RX 5700 XT", "storage": "110 GB SSD" }
+    },
+    "prices": {
+      "TND": 50,
+      "EUR": 27,
+      "USD": 29
+    },
+    "inStock": true,
+    "keyGames": []
+  },
+  {
+    "slug": "007-first-light",
+    "title": "007: First Light",
+    "image": "/assets/games/007-first-light.png",
+    "platform": "Steam",
+    "category": "nouveautes",
+    "featured": false,
+    "soldCount": 57,
+    "rating": 4.9,
+    "reviewCount": 9,
+    "accountField": "steamOffline",
+    "trailerUrl": "https://www.youtube.com/results?search_query=Project+007+IO+Interactive+Trailer",
+    "specs": {
+      "min": { "os": "Windows 10 64-bit", "cpu": "Intel Core i5-9600K / Ryzen 5 3600", "ram": "8 GB RAM", "gpu": "GTX 1660 Super / RX 5600 XT", "storage": "80 GB SSD" },
+      "rec": { "os": "Windows 11 64-bit", "cpu": "Intel Core i7-11700K / Ryzen 7 5800X", "ram": "16 GB RAM", "gpu": "RTX 3070 / RX 6800", "storage": "80 GB NVMe SSD" }
+    },
+    "prices": {
+      "TND": 160,
+      "EUR": 29,
+      "USD": 31
+    },
+    "inStock": true,
+    "keyGames": []
+  },
+  {
+    "slug": "ionara-gift-card",
+    "title": "Carte Cadeau IONARA",
+    "image": "/assets/games/1000-games-pack.png",
+    "platform": "IONARA Store",
+    "category": "currencies",
+    "featured": false,
+    "soldCount": 195,
+    "rating": 5.0,
+    "reviewCount": 31,
+    "accountField": "giftRecipient",
+    "prices": {
+      "TND": 20,
+      "EUR": 10,
+      "USD": 10
+    },
+    "plans": [
+      { "id": "gift-20", "label": "20 DT", "prices": { "TND": 20, "EUR": 10, "USD": 10 } },
+      { "id": "gift-50", "label": "50 DT", "prices": { "TND": 50, "EUR": 20, "USD": 22 } },
+      { "id": "gift-100", "label": "100 DT", "prices": { "TND": 100, "EUR": 35, "USD": 38 } },
+      { "id": "gift-200", "label": "200 DT", "prices": { "TND": 200, "EUR": 65, "USD": 70 } }
+    ],
+    "inStock": true,
+    "keyGames": [
+      "Carte Cadeau 20 DT",
+      "Carte Cadeau 50 DT",
+      "Carte Cadeau 100 DT",
+      "Carte Cadeau 200 DT"
+    ]
+  }
+]

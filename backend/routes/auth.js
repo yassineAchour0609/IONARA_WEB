@@ -1,142 +1,48 @@
-const express = require('express');
-const router = express.Router();
-const jwt = require('jsonwebtoken');
+const router = require('express').Router();
+const { rateLimit } = require('express-rate-limit');
 const User = require('../models/User');
-
-// Helper to generate token
-const generateToken = (userId) => {
-  return jwt.sign({ id: userId }, process.env.JWT_SECRET || 'ionara_secret', {
-    expiresIn: '30d',
-  });
-};
-
-// Middleware to protect routes
-const protect = async (req, res, next) => {
-  let token;
-  if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
-    try {
-      token = req.headers.authorization.split(' ')[1];
-      const decoded = jwt.verify(token, process.env.JWT_SECRET || 'ionara_secret');
-      req.user = await User.findById(decoded.id).select('-password');
-      return next();
-    } catch (error) {
-      return res.status(401).json({ message: 'Non autorisé, token invalide' });
-    }
-  }
-  if (!token) {
-    return res.status(401).json({ message: 'Non autorisé, aucun token fourni' });
-  }
-};
-
-// @route   POST /api/auth/register
-// @desc    Register a new customer account
-router.post('/register', async (req, res) => {
-  try {
-    const { username, email, password, phone } = req.body;
-
-    if (!username || !email || !password) {
-      return res.status(400).json({ message: 'Veuillez remplir tous les champs obligatoires' });
-    }
-
-    let user;
-    try {
-      const userExists = await User.findOne({ email: email.toLowerCase() });
-      if (userExists) {
-        return res.status(400).json({ message: 'Un compte existe déjà avec cette adresse email' });
-      }
-
-      user = await User.create({
-        username,
-        email: email.toLowerCase(),
-        password,
-        phone: phone || '',
-      });
-    } catch (dbErr) {
-      // In-memory fallback if MongoDB server is offline
-      user = {
-        _id: 'local_' + Date.now(),
-        username,
-        email: email.toLowerCase(),
-        phone: phone || '',
-        role: 'customer'
-      };
-    }
-
-    res.status(201).json({
-      success: true,
-      user: {
-        id: user._id,
-        username: user.username,
-        email: user.email,
-        phone: user.phone,
-        role: user.role,
-      },
-      token: generateToken(user._id),
-      message: 'Compte créé avec succès !',
-    });
-  } catch (error) {
-    console.error('Erreur inscription:', error);
-    res.status(500).json({ message: 'Erreur serveur lors de la création du compte', error: error.message });
-  }
+const { ApiError, asyncRoute } = require('../lib/errors');
+const { protect, setSession, cookieOptions } = require('../middleware/auth');
+const publicUser = user => ({
+  id: user._id.toString(),
+  username: user.username,
+  email: user.email,
+  phone: user.phone,
+  role: user.role,
+  loyaltyPoints: user.loyaltyPoints ?? 25,
+  referralCode: user.referralCode || '',
+  referredBy: user.referredBy || '',
 });
-
-// @route   POST /api/auth/login
-// @desc    Authenticate customer & get token
-router.post('/login', async (req, res) => {
-  try {
-    const { email, password } = req.body;
-
-    if (!email || !password) {
-      return res.status(400).json({ message: 'Email et mot de passe requis' });
+const limiter = rateLimit({ windowMs: 15 * 60 * 1000, limit: 30, standardHeaders: 'draft-7', legacyHeaders: false, message: { code: 'RATE_LIMITED' } });
+function credentials(body) {
+  if (typeof body.email !== 'string' || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(body.email.trim()) || body.email.length > 254 || typeof body.password !== 'string' || body.password.length < 8 || Buffer.byteLength(body.password) > 72) throw new ApiError(400, 'INVALID_CREDENTIALS');
+  return { email: body.email.trim().toLowerCase(), password: body.password };
+}
+router.post('/register', limiter, asyncRoute(async (req, res) => {
+  const { email, password } = credentials(req.body);
+  const username = typeof req.body.username === 'string' ? req.body.username.trim() : '';
+  if (username.length < 3 || username.length > 60) throw new ApiError(400, 'INVALID_NAME');
+  if (await User.exists({ email })) throw new ApiError(409, 'EMAIL_EXISTS');
+  const referredBy = typeof req.body.referredBy === 'string' ? req.body.referredBy.trim().toUpperCase().slice(0, 24) : '';
+  let startPoints = 25;
+  if (referredBy) {
+    const referrer = await User.findOne({ referralCode: referredBy });
+    if (referrer) {
+      startPoints = 50;
+      await User.updateOne({ _id: referrer._id }, { $inc: { loyaltyPoints: 30 } });
     }
-
-    let user;
-    try {
-      user = await User.findOne({ email: email.toLowerCase() });
-      if (user) {
-        const isMatch = await user.matchPassword(password);
-        if (!isMatch) {
-          return res.status(401).json({ message: 'Identifiants incorrects' });
-        }
-      }
-    } catch (dbErr) {
-      // Fallback
-      user = null;
-    }
-
-    if (!user) {
-      // Offline fallback: allow guest login
-      user = {
-        _id: 'local_' + Date.now(),
-        username: email.split('@')[0],
-        email: email.toLowerCase(),
-        phone: '',
-        role: 'customer'
-      };
-    }
-
-    res.json({
-      success: true,
-      user: {
-        id: user._id,
-        username: user.username,
-        email: user.email,
-        phone: user.phone,
-        role: user.role,
-      },
-      token: generateToken(user._id),
-      message: 'Connexion réussie !',
-    });
-  } catch (error) {
-    console.error('Erreur connexion:', error);
-    res.status(500).json({ message: 'Erreur lors de la connexion', error: error.message });
   }
-});
-
-// @route   GET /api/auth/me
-// @desc    Get current user profile
-router.get('/me', protect, async (req, res) => {
-  res.json({ success: true, user: req.user });
-});
-
+  const user = await User.create({ username, email, password, referredBy, loyaltyPoints: startPoints });
+  setSession(res, user._id.toString());
+  res.status(201).json({ user: publicUser(user) });
+}));
+router.post('/login', limiter, asyncRoute(async (req, res) => {
+  const { email, password } = credentials(req.body);
+  const user = await User.findOne({ email });
+  if (!user || !await user.matchPassword(password)) throw new ApiError(401, 'INVALID_CREDENTIALS');
+  setSession(res, user._id.toString());
+  res.json({ user: publicUser(user) });
+}));
+router.post('/logout', (req, res) => { res.clearCookie('ionara_session', { ...cookieOptions, maxAge: undefined }); res.json({ success: true }); });
+router.get('/me', protect, (req, res) => res.json({ user: publicUser(req.user) }));
 module.exports = router;

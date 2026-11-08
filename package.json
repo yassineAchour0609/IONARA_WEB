@@ -1,22 +1,21 @@
 {
   "name": "ionara-web-shop",
-  "version": "1.0.0",
-  "description": "Boutique officielle IONARA de vente de comptes de jeux vidéo et abonnements",
-  "main": "index.html",
+  "version": "2.0.0",
+  "private": true,
+  "description": "IONARA Tunisia — French, English and Arabic gaming storefront",
   "scripts": {
-    "start": "npx serve -l 3000 .",
-    "dev": "npx serve -l 3000 .",
-    "serve:py": "python -m http.server 3000"
+    "setup": "node scripts/setup.cjs",
+    "dev": "node scripts/start.cjs",
+    "build": "npm --prefix frontend run build",
+    "start": "node scripts/start.cjs --production",
+    "test": "npm --prefix backend test",
+    "test:browser": "playwright test",
+    "test:i18n": "node --test tests/i18n.test.cjs"
   },
-  "keywords": [
-    "ionara",
-    "gaming",
-    "accounts",
-    "steam",
-    "playstation",
-    "xbox",
-    "game-pass"
-  ],
-  "author": "IONARA",
-  "license": "MIT"
+  "engines": {
+    "node": ">=20.19.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.58.0"
+  }
 }

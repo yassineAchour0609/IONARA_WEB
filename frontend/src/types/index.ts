@@ -1,53 +1,39 @@
-export type CurrencyCode = 'DZD' | 'EUR' | 'USD';
-
+export type CurrencyCode = 'TND' | 'EUR' | 'USD';
+export interface ProductPlan {
+  id: string; label: string; prices: Record<CurrencyCode, number | null>;
+}
+export interface ProductSpecs {
+  os: string; cpu: string; ram: string; gpu: string; storage: string;
+}
 export interface Product {
-  id?: string;
-  slug: string;
-  title: string;
-  subtitle: string;
-  image: string;
-  platform: string;
-  platformIcon?: string;
-  category: 'steam' | 'preorder' | 'nouveautes' | 'passes' | 'currencies' | 'all';
-  isFeatured?: boolean;
-  badge: string;
-  tag: string;
-  priceDZD: number;
-  oldPriceDZD: number;
-  priceEUR: number;
-  oldPriceEUR: number;
-  priceUSD: number;
-  oldPriceUSD: number;
-  rating: number;
-  reviewsCount: number;
-  delivery: string;
-  guarantee: string;
-  description: string;
-  features: string[];
-  keyGames?: string[];
-  inStock?: boolean;
+  slug: string; title: string; image: string; platform: string;
+  category: string; featured: boolean; inStock: boolean; keyGames: string[];
+  prices: Record<CurrencyCode, number | null>;
+  plans?: ProductPlan[];
+  soldCount?: number;
+  confirmedSold?: number;
+  rating?: number;
+  reviewCount?: number;
+  accountField?: string;
+  trailerUrl?: string;
+  specs?: { min: ProductSpecs; rec: ProductSpecs };
 }
-
-export interface CartItem {
-  slug: string;
-  title: string;
-  priceDZD: number;
-  priceEUR: number;
-  priceUSD: number;
-  image: string;
-  platform: string;
-  quantity: number;
+export interface ProductReview {
+  id: string; authorName: string; rating: number; comment: string;
+  verifiedPurchase?: boolean; createdAt?: string;
 }
-
+export interface CartItem { slug: string; planId?: string; quantity: number; playerAccount?: string; }
 export interface User {
-  id: string;
-  username: string;
-  email: string;
-  phone?: string;
-  role: string;
+  id: string; username: string; email: string; role: string;
+  loyaltyPoints?: number; referralCode?: string; referredBy?: string;
 }
-
-export interface GameCatalogItem {
-  id: number;
-  title: string;
+export interface Order {
+  orderNumber: string; currency: CurrencyCode; total: number; status: string; paymentStatus: string;
+  paymentMethod?: string; confirmationChannel?: 'whatsapp' | 'instagram'; notes?: string;
+  playerAccount?: string; paymentProof?: string;
+  isGift?: boolean; giftRecipientName?: string; giftMessage?: string;
+  pointsAwarded?: number;
+  customer?: { name: string; email: string; phone: string };
+  createdAt?: string;
+  items: { productId: string; title: string; quantity: number; price: number }[];
 }
