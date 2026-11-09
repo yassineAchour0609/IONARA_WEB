@@ -292,7 +292,7 @@
       <!-- ========================================== -->
       <!-- INTERACTIVE FILTER & SEARCH TOOLBAR -->
       <!-- ========================================== -->
-      <div id="catalog" class="sticky top-20 z-30 mb-8 p-3 sm:p-4 rounded-2xl bg-slate-950/90 border border-white/10 backdrop-blur-2xl shadow-xl space-y-3">
+      <div id="catalog" class="sticky top-28 sm:top-32 z-40 mb-8 p-3.5 sm:p-4 rounded-2xl bg-[#090b12]/95 border border-white/10 backdrop-blur-2xl shadow-xl space-y-3 transition-all duration-300">
         
         <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
           
@@ -715,6 +715,57 @@
   </div>
 
   <script>
+    
+    // Dynamic fluid sticky collision prevention & docking handler
+    function initStickyBarsHandler() {
+      const header = document.querySelector('header');
+      const catalogToolbar = document.getElementById('catalog');
+      if (!header || !catalogToolbar) return;
+
+      const navbarCapsule = header.querySelector('.navbar-capsule');
+
+      function updatePositions() {
+        const scrollY = window.scrollY || window.pageYOffset;
+        
+        // Compact navbar on scroll for ultra sleek gaming HUD look
+        if (scrollY > 30) {
+          if (navbarCapsule) {
+            navbarCapsule.classList.remove('py-2.5', 'sm:py-3');
+            navbarCapsule.classList.add('py-2', 'sm:py-2.5', 'border-pink-500/35', 'shadow-pink-500/10');
+          }
+        } else {
+          if (navbarCapsule) {
+            navbarCapsule.classList.remove('py-2', 'sm:py-2.5', 'border-pink-500/35', 'shadow-pink-500/10');
+            navbarCapsule.classList.add('py-2.5', 'sm:py-3');
+          }
+        }
+
+        // Measure exact header height & top position
+        const headerHeight = header.offsetHeight || 72;
+        const computedHeaderStyle = window.getComputedStyle(header);
+        const headerTop = parseFloat(computedHeaderStyle.top) || 16;
+
+        // Guaranteed 14px breathing room so the bars NEVER collide or overlap
+        const safeTop = Math.round(headerTop + headerHeight + 14);
+        catalogToolbar.style.top = safeTop + 'px';
+
+        // Stylish HUD glow effect when the filter toolbar docks
+        const toolbarRect = catalogToolbar.getBoundingClientRect();
+        if (toolbarRect.top <= safeTop + 2) {
+          catalogToolbar.classList.add('border-pink-500/40', 'shadow-pink-500/20', 'shadow-2xl');
+          catalogToolbar.classList.remove('border-white/10');
+        } else {
+          catalogToolbar.classList.remove('border-pink-500/40', 'shadow-pink-500/20');
+          catalogToolbar.classList.add('border-white/10');
+        }
+      }
+
+      window.addEventListener('scroll', updatePositions, { passive: true });
+      window.addEventListener('resize', updatePositions, { passive: true });
+      updatePositions();
+    }
+    document.addEventListener('DOMContentLoaded', initStickyBarsHandler);
+
     function toggleMobileMenu() {
       const menu = document.getElementById('mobile-menu');
       if (menu) menu.classList.toggle('hidden');
