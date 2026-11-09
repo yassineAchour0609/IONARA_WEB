@@ -12,8 +12,20 @@
     "accountField": "steamOffline",
     "trailerUrl": "https://www.youtube.com/results?search_query=Steam+Top+AAA+Games+Showcase",
     "specs": {
-      "min": { "os": "Windows 10 64-bit", "cpu": "Intel Core i5-8400 / Ryzen 5 2600", "ram": "8 GB RAM", "gpu": "GTX 1060 / RX 580", "storage": "50 GB SSD" },
-      "rec": { "os": "Windows 11 64-bit", "cpu": "Intel Core i7-12700K / Ryzen 7 5800X", "ram": "16 GB RAM", "gpu": "RTX 3060 Ti / RX 6700 XT", "storage": "100 GB NVMe SSD" }
+      "min": {
+        "os": "Windows 10 64-bit",
+        "cpu": "Intel Core i5-8400 / Ryzen 5 2600",
+        "ram": "8 GB RAM",
+        "gpu": "GTX 1060 / RX 580",
+        "storage": "50 GB SSD"
+      },
+      "rec": {
+        "os": "Windows 11 64-bit",
+        "cpu": "Intel Core i7-12700K / Ryzen 7 5800X",
+        "ram": "16 GB RAM",
+        "gpu": "RTX 3060 Ti / RX 6700 XT",
+        "storage": "100 GB NVMe SSD"
+      }
     },
     "prices": {
       "TND": 30,
@@ -41,6 +53,46 @@
     ]
   },
   {
+    "slug": "black-myth-wukong",
+    "title": "Black Myth: Wukong",
+    "image": "/assets/games/black-myth-wukong.png",
+    "platform": "Steam",
+    "category": "steam",
+    "featured": true,
+    "soldCount": 194,
+    "rating": 5,
+    "reviewCount": 42,
+    "accountField": "steamOffline",
+    "trailerUrl": "https://www.youtube.com/results?search_query=Black+Myth+Wukong+Official+Trailer",
+    "specs": {
+      "min": {
+        "os": "Windows 10 64-bit",
+        "cpu": "Intel Core i5-8400 / AMD Ryzen 5 1600",
+        "ram": "16 GB RAM",
+        "gpu": "NVIDIA GeForce GTX 1060 6GB / AMD Radeon RX 580 8GB",
+        "storage": "130 GB SSD"
+      },
+      "rec": {
+        "os": "Windows 10/11 64-bit",
+        "cpu": "Intel Core i7-9700 / AMD Ryzen 5 5500",
+        "ram": "16 GB RAM",
+        "gpu": "NVIDIA GeForce RTX 2060 / AMD Radeon RX 5700 XT",
+        "storage": "130 GB NVMe SSD"
+      }
+    },
+    "prices": {
+      "TND": 25,
+      "EUR": 18,
+      "USD": 20
+    },
+    "inStock": true,
+    "keyGames": [
+      "Black Myth: Wukong (Édition Complète)",
+      "Armure Mythique du Roi Singe",
+      "Bâton d'or Ruyi Jingu Bang"
+    ]
+  },
+  {
     "slug": "gta-6",
     "title": "Grand Theft Auto VI",
     "image": "/assets/games/gta-6.png",
@@ -48,13 +100,25 @@
     "category": "preorder",
     "featured": true,
     "soldCount": 128,
-    "rating": 5.0,
+    "rating": 5,
     "reviewCount": 29,
     "accountField": "consoleId",
     "trailerUrl": "https://www.youtube.com/watch?v=QdBZY2fkU-0",
     "specs": {
-      "min": { "os": "PS5 / Xbox Series X|S", "cpu": "AMD Zen 2 8-Core", "ram": "16 GB GDDR6", "gpu": "RDNA 2 Custom GPU", "storage": "150 GB NVMe SSD" },
-      "rec": { "os": "PS5 Pro / Xbox Series X", "cpu": "AMD Zen 2 High Frequency", "ram": "16 GB GDDR6", "gpu": "Ray-Tracing 60 FPS Mode", "storage": "150 GB NVMe SSD" }
+      "min": {
+        "os": "PS5 / Xbox Series X|S",
+        "cpu": "AMD Zen 2 8-Core",
+        "ram": "16 GB GDDR6",
+        "gpu": "RDNA 2 Custom GPU",
+        "storage": "150 GB NVMe SSD"
+      },
+      "rec": {
+        "os": "PS5 Pro / Xbox Series X",
+        "cpu": "AMD Zen 2 High Frequency",
+        "ram": "16 GB GDDR6",
+        "gpu": "Ray-Tracing 60 FPS Mode",
+        "storage": "150 GB NVMe SSD"
+      }
     },
     "prices": {
       "TND": 200,
@@ -65,12 +129,20 @@
       {
         "id": "xbox",
         "label": "Xbox Series X|S",
-        "prices": { "TND": 200, "EUR": 45, "USD": 49 }
+        "prices": {
+          "TND": 200,
+          "EUR": 45,
+          "USD": 49
+        }
       },
       {
         "id": "ps5",
         "label": "PlayStation 5",
-        "prices": { "TND": 250, "EUR": 55, "USD": 59 }
+        "prices": {
+          "TND": 250,
+          "EUR": 55,
+          "USD": 59
+        }
       }
     ],
     "inStock": true,
@@ -92,8 +164,20 @@
     "accountField": "eaId",
     "trailerUrl": "https://www.youtube.com/results?search_query=EA+SPORTS+FC+Official+Gameplay+Trailer",
     "specs": {
-      "min": { "os": "Windows 10 64-bit", "cpu": "Intel Core i5-6600k / Ryzen 5 1600", "ram": "8 GB RAM", "gpu": "GTX 1050 Ti / RX 570", "storage": "100 GB" },
-      "rec": { "os": "Windows 11 64-bit", "cpu": "Intel Core i7-6700 / Ryzen 7 2700X", "ram": "12 GB RAM", "gpu": "GTX 1660 / RX 5600 XT", "storage": "100 GB SSD" }
+      "min": {
+        "os": "Windows 10 64-bit",
+        "cpu": "Intel Core i5-6600k / Ryzen 5 1600",
+        "ram": "8 GB RAM",
+        "gpu": "GTX 1050 Ti / RX 570",
+        "storage": "100 GB"
+      },
+      "rec": {
+        "os": "Windows 11 64-bit",
+        "cpu": "Intel Core i7-6700 / Ryzen 7 2700X",
+        "ram": "12 GB RAM",
+        "gpu": "GTX 1660 / RX 5600 XT",
+        "storage": "100 GB SSD"
+      }
     },
     "prices": {
       "TND": 140,
@@ -135,8 +219,20 @@
     "accountField": "steamOffline",
     "trailerUrl": "https://www.youtube.com/results?search_query=Call+of+Duty+Black+Ops+Official+Trailer",
     "specs": {
-      "min": { "os": "Windows 10 64-bit", "cpu": "Intel Core i5-6600 / Ryzen 5 1400", "ram": "8 GB RAM", "gpu": "GTX 960 / RX 470", "storage": "120 GB SSD" },
-      "rec": { "os": "Windows 11 64-bit", "cpu": "Intel Core i7-8700K / Ryzen 7 2700X", "ram": "16 GB RAM", "gpu": "RTX 3060 / RX 6600 XT", "storage": "120 GB NVMe SSD" }
+      "min": {
+        "os": "Windows 10 64-bit",
+        "cpu": "Intel Core i5-6600 / Ryzen 5 1400",
+        "ram": "8 GB RAM",
+        "gpu": "GTX 960 / RX 470",
+        "storage": "120 GB SSD"
+      },
+      "rec": {
+        "os": "Windows 11 64-bit",
+        "cpu": "Intel Core i7-8700K / Ryzen 7 2700X",
+        "ram": "16 GB RAM",
+        "gpu": "RTX 3060 / RX 6600 XT",
+        "storage": "120 GB NVMe SSD"
+      }
     },
     "prices": {
       "TND": 140,
@@ -159,8 +255,20 @@
     "accountField": "microsoftEmail",
     "trailerUrl": "https://www.youtube.com/results?search_query=Forza+Horizon+Official+4K+Trailer",
     "specs": {
-      "min": { "os": "Windows 10 64-bit", "cpu": "Intel i5-8400 / Ryzen 5 1500X", "ram": "8 GB RAM", "gpu": "GTX 1070 / RX 590", "storage": "110 GB SSD" },
-      "rec": { "os": "Windows 11 64-bit", "cpu": "Intel i7-10700K / Ryzen 7 3800X", "ram": "16 GB RAM", "gpu": "RTX 3070 / RX 6800 XT", "storage": "110 GB NVMe SSD" }
+      "min": {
+        "os": "Windows 10 64-bit",
+        "cpu": "Intel i5-8400 / Ryzen 5 1500X",
+        "ram": "8 GB RAM",
+        "gpu": "GTX 1070 / RX 590",
+        "storage": "110 GB SSD"
+      },
+      "rec": {
+        "os": "Windows 11 64-bit",
+        "cpu": "Intel i7-10700K / Ryzen 7 3800X",
+        "ram": "16 GB RAM",
+        "gpu": "RTX 3070 / RX 6800 XT",
+        "storage": "110 GB NVMe SSD"
+      }
     },
     "prices": {
       "TND": 170,
@@ -178,7 +286,7 @@
     "category": "currencies",
     "featured": false,
     "soldCount": 412,
-    "rating": 5.0,
+    "rating": 5,
     "reviewCount": 64,
     "accountField": "riotId",
     "prices": {
@@ -187,14 +295,78 @@
       "USD": 21
     },
     "plans": [
-      { "id": "vp-475", "label": "475 VP", "prices": { "TND": 20, "EUR": 19, "USD": 21 } },
-      { "id": "vp-1000", "label": "1000 VP", "prices": { "TND": 40, "EUR": 35, "USD": 38 } },
-      { "id": "vp-2050", "label": "2050 VP", "prices": { "TND": 80, "EUR": 65, "USD": 70 } },
-      { "id": "vp-2575", "label": "2575 VP", "prices": { "TND": 100, "EUR": 80, "USD": 86 } },
-      { "id": "vp-3650", "label": "3650 VP", "prices": { "TND": 135, "EUR": 105, "USD": 114 } },
-      { "id": "vp-5350", "label": "5350 VP", "prices": { "TND": 190, "EUR": 145, "USD": 158 } },
-      { "id": "vp-8700", "label": "8700 VP", "prices": { "TND": 330, "EUR": 240, "USD": 260 } },
-      { "id": "vp-11000", "label": "11000 VP", "prices": { "TND": 385, "EUR": 285, "USD": 310 } }
+      {
+        "id": "vp-475",
+        "label": "475 VP",
+        "prices": {
+          "TND": 20,
+          "EUR": 19,
+          "USD": 21
+        }
+      },
+      {
+        "id": "vp-1000",
+        "label": "1000 VP",
+        "prices": {
+          "TND": 40,
+          "EUR": 35,
+          "USD": 38
+        }
+      },
+      {
+        "id": "vp-2050",
+        "label": "2050 VP",
+        "prices": {
+          "TND": 80,
+          "EUR": 65,
+          "USD": 70
+        }
+      },
+      {
+        "id": "vp-2575",
+        "label": "2575 VP",
+        "prices": {
+          "TND": 100,
+          "EUR": 80,
+          "USD": 86
+        }
+      },
+      {
+        "id": "vp-3650",
+        "label": "3650 VP",
+        "prices": {
+          "TND": 135,
+          "EUR": 105,
+          "USD": 114
+        }
+      },
+      {
+        "id": "vp-5350",
+        "label": "5350 VP",
+        "prices": {
+          "TND": 190,
+          "EUR": 145,
+          "USD": 158
+        }
+      },
+      {
+        "id": "vp-8700",
+        "label": "8700 VP",
+        "prices": {
+          "TND": 330,
+          "EUR": 240,
+          "USD": 260
+        }
+      },
+      {
+        "id": "vp-11000",
+        "label": "11000 VP",
+        "prices": {
+          "TND": 385,
+          "EUR": 285,
+          "USD": 310
+        }
+      }
     ],
     "inStock": true,
     "keyGames": [
@@ -240,8 +412,20 @@
     "accountField": "steamOffline",
     "trailerUrl": "https://www.youtube.com/results?search_query=Resident+Evil+Requiem+Official+Trailer",
     "specs": {
-      "min": { "os": "Windows 10 64-bit", "cpu": "AMD Ryzen 5 3600 / Intel Core i5 10400", "ram": "8 GB RAM", "gpu": "GTX 1070 / RX 5700", "storage": "65 GB SSD" },
-      "rec": { "os": "Windows 11 64-bit", "cpu": "AMD Ryzen 7 5800X / Intel Core i7 11700", "ram": "16 GB RAM", "gpu": "RTX 3070 / RX 6800", "storage": "65 GB NVMe SSD" }
+      "min": {
+        "os": "Windows 10 64-bit",
+        "cpu": "AMD Ryzen 5 3600 / Intel Core i5 10400",
+        "ram": "8 GB RAM",
+        "gpu": "GTX 1070 / RX 5700",
+        "storage": "65 GB SSD"
+      },
+      "rec": {
+        "os": "Windows 11 64-bit",
+        "cpu": "AMD Ryzen 7 5800X / Intel Core i7 11700",
+        "ram": "16 GB RAM",
+        "gpu": "RTX 3070 / RX 6800",
+        "storage": "65 GB NVMe SSD"
+      }
     },
     "prices": {
       "TND": 140,
@@ -264,8 +448,20 @@
     "accountField": "eaId",
     "trailerUrl": "https://www.youtube.com/results?search_query=EA+SPORTS+FC+26+Trailer",
     "specs": {
-      "min": { "os": "Windows 10 64-bit", "cpu": "Intel Core i5-6600k / Ryzen 5 1600", "ram": "8 GB RAM", "gpu": "GTX 1050 Ti / RX 570", "storage": "100 GB" },
-      "rec": { "os": "Windows 11 64-bit", "cpu": "Intel Core i7-6700 / Ryzen 7 2700X", "ram": "12 GB RAM", "gpu": "GTX 1660 / RX 5600 XT", "storage": "100 GB SSD" }
+      "min": {
+        "os": "Windows 10 64-bit",
+        "cpu": "Intel Core i5-6600k / Ryzen 5 1600",
+        "ram": "8 GB RAM",
+        "gpu": "GTX 1050 Ti / RX 570",
+        "storage": "100 GB"
+      },
+      "rec": {
+        "os": "Windows 11 64-bit",
+        "cpu": "Intel Core i7-6700 / Ryzen 7 2700X",
+        "ram": "12 GB RAM",
+        "gpu": "GTX 1660 / RX 5600 XT",
+        "storage": "100 GB SSD"
+      }
     },
     "prices": {
       "TND": 20,
@@ -288,8 +484,20 @@
     "accountField": "steamOffline",
     "trailerUrl": "https://www.youtube.com/results?search_query=Call+of+Duty+Modern+Warfare+Official+Trailer",
     "specs": {
-      "min": { "os": "Windows 10 64-bit", "cpu": "Intel Core i5-6600 / Ryzen 5 1600", "ram": "8 GB RAM", "gpu": "GTX 1060 / RX 580", "storage": "125 GB SSD" },
-      "rec": { "os": "Windows 11 64-bit", "cpu": "Intel Core i7-9700K / Ryzen 7 3700X", "ram": "16 GB RAM", "gpu": "RTX 3060 Ti / RX 6700 XT", "storage": "125 GB NVMe SSD" }
+      "min": {
+        "os": "Windows 10 64-bit",
+        "cpu": "Intel Core i5-6600 / Ryzen 5 1600",
+        "ram": "8 GB RAM",
+        "gpu": "GTX 1060 / RX 580",
+        "storage": "125 GB SSD"
+      },
+      "rec": {
+        "os": "Windows 11 64-bit",
+        "cpu": "Intel Core i7-9700K / Ryzen 7 3700X",
+        "ram": "16 GB RAM",
+        "gpu": "RTX 3060 Ti / RX 6700 XT",
+        "storage": "125 GB NVMe SSD"
+      }
     },
     "prices": {
       "TND": 180,
@@ -312,8 +520,20 @@
     "accountField": "steamOffline",
     "trailerUrl": "https://www.youtube.com/results?search_query=Assassins+Creed+Black+Flag+Trailer",
     "specs": {
-      "min": { "os": "Windows 10 64-bit", "cpu": "Intel Core i5-8400 / Ryzen 5 2600", "ram": "8 GB RAM", "gpu": "GTX 1060 6GB / RX 580", "storage": "75 GB SSD" },
-      "rec": { "os": "Windows 11 64-bit", "cpu": "Intel Core i7-10700K / Ryzen 7 3700X", "ram": "16 GB RAM", "gpu": "RTX 3060 Ti / RX 6700 XT", "storage": "75 GB NVMe SSD" }
+      "min": {
+        "os": "Windows 10 64-bit",
+        "cpu": "Intel Core i5-8400 / Ryzen 5 2600",
+        "ram": "8 GB RAM",
+        "gpu": "GTX 1060 6GB / RX 580",
+        "storage": "75 GB SSD"
+      },
+      "rec": {
+        "os": "Windows 11 64-bit",
+        "cpu": "Intel Core i7-10700K / Ryzen 7 3700X",
+        "ram": "16 GB RAM",
+        "gpu": "RTX 3060 Ti / RX 6700 XT",
+        "storage": "75 GB NVMe SSD"
+      }
     },
     "prices": {
       "TND": 150,
@@ -336,8 +556,20 @@
     "accountField": "steamOffline",
     "trailerUrl": "https://www.youtube.com/results?search_query=NBA+2K26+Official+Gameplay+Trailer",
     "specs": {
-      "min": { "os": "Windows 10 64-bit", "cpu": "Intel Core i3-8100 / Ryzen 3 1200", "ram": "8 GB RAM", "gpu": "GTX 1060 / RX 580", "storage": "110 GB" },
-      "rec": { "os": "Windows 11 64-bit", "cpu": "Intel Core i5-10600 / Ryzen 5 3600X", "ram": "16 GB RAM", "gpu": "RTX 2070 / RX 5700 XT", "storage": "110 GB SSD" }
+      "min": {
+        "os": "Windows 10 64-bit",
+        "cpu": "Intel Core i3-8100 / Ryzen 3 1200",
+        "ram": "8 GB RAM",
+        "gpu": "GTX 1060 / RX 580",
+        "storage": "110 GB"
+      },
+      "rec": {
+        "os": "Windows 11 64-bit",
+        "cpu": "Intel Core i5-10600 / Ryzen 5 3600X",
+        "ram": "16 GB RAM",
+        "gpu": "RTX 2070 / RX 5700 XT",
+        "storage": "110 GB SSD"
+      }
     },
     "prices": {
       "TND": 50,
@@ -360,8 +592,20 @@
     "accountField": "steamOffline",
     "trailerUrl": "https://www.youtube.com/results?search_query=Project+007+IO+Interactive+Trailer",
     "specs": {
-      "min": { "os": "Windows 10 64-bit", "cpu": "Intel Core i5-9600K / Ryzen 5 3600", "ram": "8 GB RAM", "gpu": "GTX 1660 Super / RX 5600 XT", "storage": "80 GB SSD" },
-      "rec": { "os": "Windows 11 64-bit", "cpu": "Intel Core i7-11700K / Ryzen 7 5800X", "ram": "16 GB RAM", "gpu": "RTX 3070 / RX 6800", "storage": "80 GB NVMe SSD" }
+      "min": {
+        "os": "Windows 10 64-bit",
+        "cpu": "Intel Core i5-9600K / Ryzen 5 3600",
+        "ram": "8 GB RAM",
+        "gpu": "GTX 1660 Super / RX 5600 XT",
+        "storage": "80 GB SSD"
+      },
+      "rec": {
+        "os": "Windows 11 64-bit",
+        "cpu": "Intel Core i7-11700K / Ryzen 7 5800X",
+        "ram": "16 GB RAM",
+        "gpu": "RTX 3070 / RX 6800",
+        "storage": "80 GB NVMe SSD"
+      }
     },
     "prices": {
       "TND": 160,
@@ -379,7 +623,7 @@
     "category": "currencies",
     "featured": false,
     "soldCount": 195,
-    "rating": 5.0,
+    "rating": 5,
     "reviewCount": 31,
     "accountField": "giftRecipient",
     "prices": {
@@ -388,10 +632,42 @@
       "USD": 10
     },
     "plans": [
-      { "id": "gift-20", "label": "20 DT", "prices": { "TND": 20, "EUR": 10, "USD": 10 } },
-      { "id": "gift-50", "label": "50 DT", "prices": { "TND": 50, "EUR": 20, "USD": 22 } },
-      { "id": "gift-100", "label": "100 DT", "prices": { "TND": 100, "EUR": 35, "USD": 38 } },
-      { "id": "gift-200", "label": "200 DT", "prices": { "TND": 200, "EUR": 65, "USD": 70 } }
+      {
+        "id": "gift-20",
+        "label": "20 DT",
+        "prices": {
+          "TND": 20,
+          "EUR": 10,
+          "USD": 10
+        }
+      },
+      {
+        "id": "gift-50",
+        "label": "50 DT",
+        "prices": {
+          "TND": 50,
+          "EUR": 20,
+          "USD": 22
+        }
+      },
+      {
+        "id": "gift-100",
+        "label": "100 DT",
+        "prices": {
+          "TND": 100,
+          "EUR": 35,
+          "USD": 38
+        }
+      },
+      {
+        "id": "gift-200",
+        "label": "200 DT",
+        "prices": {
+          "TND": 200,
+          "EUR": 65,
+          "USD": 70
+        }
+      }
     ],
     "inStock": true,
     "keyGames": [
