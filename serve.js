@@ -2,7 +2,8 @@ const http = require('http');
 const fs = require('fs');
 const path = require('path');
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
+const BACKEND_PORT = 5000;
 const ROOT = __dirname;
 
 const MIME_TYPES = {
@@ -19,8 +20,38 @@ const MIME_TYPES = {
 };
 
 const server = http.createServer((req, res) => {
-  // CORS
+  // CORS Headers
   res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+
+  if (req.method === 'OPTIONS') {
+    res.writeHead(204);
+    res.end();
+    return;
+  }
+
+  // Proxy /api/* requests to backend
+  if (req.url.startsWith('/api/') || req.url === '/api') {
+    const proxyReq = http.request({
+      hostname: '127.0.0.1',
+      port: BACKEND_PORT,
+      path: req.url,
+      method: req.method,
+      headers: { ...req.headers, host: `127.0.0.1:${BACKEND_PORT}` }
+    }, (proxyRes) => {
+      res.writeHead(proxyRes.statusCode, proxyRes.headers);
+      proxyRes.pipe(res);
+    });
+
+    proxyReq.on('error', () => {
+      res.writeHead(503, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ code: 'SERVICE_UNAVAILABLE', message: 'Backend API temporairement indisponible' }));
+    });
+
+    req.pipe(proxyReq);
+    return;
+  }
 
   let reqPath = decodeURI(req.url.split('?')[0]);
   if (reqPath === '/' || reqPath === '') {
@@ -53,7 +84,7 @@ const server = http.createServer((req, res) => {
 
 server.listen(PORT, () => {
   console.log(`\n===================================================`);
-  console.log(`  🎮 IONARA STORE EST EN LIGNE SUR PORT ${PORT}`);
+  console.log(`  🎮 IONARA STORE EN LIGNE SUR PORT ${PORT}`);
   console.log(`  👉 Ouvrez : http://localhost:${PORT}`);
   console.log(`===================================================\n`);
 });
