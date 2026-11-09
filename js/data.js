@@ -576,3 +576,62 @@ const CURRENCIES = {
   EUR: { code: "EUR", symbol: "€", label: "Euro (€)", rate: 0.30 },
   USD: { code: "USD", symbol: "$", label: "Dollar US ($)", rate: 0.32 }
 };
+
+
+// Modes de paiement 100% Tunisiens officiels avec coordonnées
+const TUNISIA_PAYMENT_METHODS = [
+  {
+    id: "d17",
+    name: "D17 (Poste Tunisienne)",
+    shortName: "D17 Poste",
+    badge: "🇹🇳 Le Plus Populaire",
+    color: "#f59e0b",
+    accountNumber: "27 031 500",
+    accountName: "IONARA STORE TN",
+    instructions: "Effectuez votre transfert via l'application D17 vers notre numéro officiel :",
+    note: "Prenez une capture d'écran du reçu de transfert D17 avec le code de transaction."
+  },
+  {
+    id: "flouci",
+    name: "Flouci",
+    shortName: "Flouci",
+    badge: "⚡ 0% Frais Instantané",
+    color: "#a855f7",
+    accountNumber: "27 031 500 (@ionara)",
+    accountName: "IONARA GAMING",
+    instructions: "Envoyez le montant exact sur notre compte Flouci ou via QR code :",
+    note: "Téléversez la capture de confirmation Flouci après validation."
+  },
+  {
+    id: "virement",
+    name: "Virement Bancaire (RIB)",
+    shortName: "Virement / RIB",
+    badge: "🏦 Toutes Banques TN",
+    color: "#3b82f6",
+    accountNumber: "RIB : 08 015 0001234567890 42 (BIAT / Attijari)",
+    accountName: "IONARA ENTERPRISE TN",
+    instructions: "Effectuez un virement ou versement direct depuis votre banque :",
+    note: "Joignez l'avis d'opération ou le reçu de virement généré par votre banque."
+  },
+  {
+    id: "izi",
+    name: "Izi Zitouna",
+    shortName: "Izi Zitouna",
+    badge: "🌙 Banque Zitouna",
+    color: "#10b981",
+    accountNumber: "Numéro Izi : 27 031 500",
+    accountName: "IONARA STORE",
+    instructions: "Envoyez le montant directement via l'application Izi Zitouna :",
+    note: "Téléversez la capture d'écran du transfert Izi Zitouna."
+  },
+  {
+    id: "wafacash",
+    name: "Wafacash Tunisie",
+    badge: "🏢 Cash en Agence",
+    color: "#ea580c",
+    accountNumber: "Bénéficiaire : Achour Yassine (IONARA)",
+    accountName: "Agence : Tunis / N° Tél : 27 031 500",
+    instructions: "Dépôt d'espèces sans carte dans n'importe quelle agence Wafacash en Tunisie :",
+    note: "Prenez en photo le bordereau de versement remis par l'agent Wafacash."
+  }
+];

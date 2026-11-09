@@ -1112,3 +1112,537 @@ function showToast(message, type = 'info') {
     setTimeout(() => toast.remove(), 300);
   }, 3200);
 }
+
+
+// ==========================================
+// AUTHENTICATION & CLIENT ACCOUNT MANAGEMENT
+// ==========================================
+
+function initUserAuth() {
+  state.user = JSON.parse(localStorage.getItem('ionara_user') || 'null');
+  updateUserNavbarUI();
+}
+
+function updateUserNavbarUI() {
+  const userButtons = document.querySelectorAll('.group\\/user, #navbar-user-btn, [title*="Espace Client"]');
+  userButtons.forEach(btn => {
+    if (state.user) {
+      const name = state.user.name || state.user.username || 'Client';
+      const initial = name.charAt(0).toUpperCase();
+      btn.innerHTML = `
+        <div class="relative w-full h-full flex items-center justify-center">
+          <div class="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-gradient-to-tr from-pink-500 via-purple-600 to-cyan-400 p-[1.5px] shadow-sm">
+            <div class="w-full h-full rounded-full bg-black flex items-center justify-center font-black text-white text-xs">
+              ${initial}
+            </div>
+          </div>
+          <span class="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-emerald-400 border-2 border-[#090b12] animate-pulse"></span>
+        </div>
+      `;
+      btn.title = `Mon Compte (${name})`;
+    } else {
+      btn.innerHTML = `<i data-lucide="user" class="w-4 h-4 sm:w-4.5 sm:h-4.5 group-hover/user:scale-110 transition-transform"></i>`;
+      btn.title = "Mon Espace Client";
+    }
+  });
+  if (window.lucide) lucide.createIcons();
+
+  // Pre-fill checkout form if user is logged in
+  if (state.user) {
+    const nameInput = document.getElementById('order-name');
+    const emailInput = document.getElementById('order-email');
+    const phoneInput = document.getElementById('order-phone');
+    if (nameInput && !nameInput.value) nameInput.value = state.user.name || state.user.username || '';
+    if (emailInput && !emailInput.value) emailInput.value = state.user.email || '';
+    if (phoneInput && !phoneInput.value && state.user.phone) phoneInput.value = state.user.phone;
+  }
+}
+
+function openAccountModal(tab = 'login') {
+  const modal = document.getElementById('account-modal');
+  if (!modal) return;
+  modal.classList.remove('hidden');
+  document.body.style.overflow = 'hidden';
+
+  const authView = document.getElementById('account-auth-view');
+  const dashView = document.getElementById('account-dashboard-view');
+
+  if (state.user) {
+    if (authView) authView.classList.add('hidden');
+    if (dashView) {
+      dashView.classList.remove('hidden');
+      renderAccountDashboard();
+    }
+  } else {
+    if (dashView) dashView.classList.add('hidden');
+    if (authView) {
+      authView.classList.remove('hidden');
+      switchAuthTab(tab);
+    }
+  }
+  if (window.lucide) lucide.createIcons();
+}
+
+function closeAccountModal() {
+  const modal = document.getElementById('account-modal');
+  if (modal) {
+    modal.classList.add('hidden');
+    document.body.style.overflow = '';
+  }
+}
+
+function switchAuthTab(tab) {
+  const loginForm = document.getElementById('auth-login-form');
+  const regForm = document.getElementById('auth-register-form');
+  const tabLogin = document.getElementById('tab-btn-login');
+  const tabReg = document.getElementById('tab-btn-register');
+
+  if (tab === 'register') {
+    if (loginForm) loginForm.classList.add('hidden');
+    if (regForm) regForm.classList.remove('hidden');
+    if (tabLogin) {
+      tabLogin.classList.remove('bg-pink-600', 'text-white', 'shadow-sm');
+      tabLogin.classList.add('text-zinc-400');
+    }
+    if (tabReg) {
+      tabReg.classList.add('bg-pink-600', 'text-white', 'shadow-sm');
+      tabReg.classList.remove('text-zinc-400');
+    }
+  } else {
+    if (regForm) regForm.classList.add('hidden');
+    if (loginForm) loginForm.classList.remove('hidden');
+    if (tabReg) {
+      tabReg.classList.remove('bg-pink-600', 'text-white', 'shadow-sm');
+      tabReg.classList.add('text-zinc-400');
+    }
+    if (tabLogin) {
+      tabLogin.classList.add('bg-pink-600', 'text-white', 'shadow-sm');
+      tabLogin.classList.remove('text-zinc-400');
+    }
+  }
+  if (window.lucide) lucide.createIcons();
+}
+
+// Google Sign-In Simulator
+function handleGoogleSignIn() {
+  const defaultGoogleUser = {
+    id: 'google_' + Date.now(),
+    name: 'Yassine Achour',
+    email: 'achour.yassine@gmail.com',
+    phone: '+216 27 031 500',
+    provider: 'google',
+    coins: 50,
+    orders: state.user?.orders || []
+  };
+
+  state.user = defaultGoogleUser;
+  localStorage.setItem('ionara_user', JSON.stringify(state.user));
+  updateUserNavbarUI();
+  showToast('🎉 Connecté avec succès via Google ! Bienvenue, ' + state.user.name, 'success');
+  openAccountModal();
+  playSound('click');
+}
+
+function handleLogin(e) {
+  e.preventDefault();
+  const emailOrUser = document.getElementById('login-email').value.trim();
+  const password = document.getElementById('login-password').value;
+
+  if (!emailOrUser || !password) {
+    showToast('Veuillez remplir tous les champs.', 'error');
+    return;
+  }
+
+  // Find existing or create session
+  const storedUser = JSON.parse(localStorage.getItem('ionara_user') || 'null');
+  const user = {
+    id: storedUser?.id || 'usr_' + Date.now(),
+    name: storedUser?.name || emailOrUser.split('@')[0],
+    email: emailOrUser.includes('@') ? emailOrUser : (storedUser?.email || emailOrUser + '@ionara.tn'),
+    phone: storedUser?.phone || '+216 27 031 500',
+    provider: 'local',
+    coins: storedUser?.coins ?? 50,
+    orders: storedUser?.orders || []
+  };
+
+  state.user = user;
+  localStorage.setItem('ionara_user', JSON.stringify(state.user));
+  updateUserNavbarUI();
+  showToast('🎉 Bon retour parmi nous, ' + state.user.name + ' !', 'success');
+  openAccountModal();
+  playSound('click');
+}
+
+function handleRegister(e) {
+  e.preventDefault();
+  const username = document.getElementById('reg-username').value.trim();
+  const email = document.getElementById('reg-email').value.trim();
+  const phone = document.getElementById('reg-phone').value.trim();
+  const password = document.getElementById('reg-password').value;
+  const confirm = document.getElementById('reg-confirm').value;
+
+  if (password !== confirm) {
+    showToast('Les mots de passe ne correspondent pas.', 'error');
+    return;
+  }
+
+  if (password.length < 6) {
+    showToast('Le mot de passe doit comporter au moins 6 caractères.', 'error');
+    return;
+  }
+
+  const newUser = {
+    id: 'usr_' + Date.now(),
+    name: username,
+    username: username,
+    email: email,
+    phone: phone,
+    provider: 'local',
+    coins: 50, // Welcome gift
+    orders: []
+  };
+
+  state.user = newUser;
+  localStorage.setItem('ionara_user', JSON.stringify(state.user));
+  updateUserNavbarUI();
+  showToast('🎉 Compte IONARA créé avec succès ! 50 Coins de bienvenue offerts !', 'success');
+  openAccountModal();
+  playSound('click');
+}
+
+function handleLogout() {
+  state.user = null;
+  localStorage.removeItem('ionara_user');
+  updateUserNavbarUI();
+  showToast('Vous êtes déconnecté.', 'info');
+  closeAccountModal();
+  playSound('click');
+}
+
+function renderAccountDashboard() {
+  const dashView = document.getElementById('account-dashboard-view');
+  if (!dashView || !state.user) return;
+
+  const initial = (state.user.name || 'C').charAt(0).toUpperCase();
+  const orders = state.user.orders || [];
+
+  dashView.innerHTML = `
+    <div class="text-center pb-4 border-b border-white/10">
+      <div class="relative w-16 h-16 mx-auto mb-3">
+        <div class="w-full h-full rounded-2xl bg-gradient-to-tr from-pink-500 via-purple-600 to-cyan-400 p-0.5 shadow-lg shadow-pink-500/30">
+          <div class="w-full h-full rounded-2xl bg-black flex items-center justify-center font-black text-2xl text-white">
+            ${initial}
+          </div>
+        </div>
+        <span class="absolute -bottom-1 -right-1 px-2 py-0.5 rounded-full bg-emerald-500 text-white text-[9px] font-black uppercase">
+          VIP
+        </span>
+      </div>
+      <h3 class="text-xl font-black text-white font-headline">${state.user.name}</h3>
+      <p class="text-xs text-zinc-400">${state.user.email}</p>
+      ${state.user.phone ? `<p class="text-[11px] text-pink-300 font-mono mt-0.5">${state.user.phone}</p>` : ''}
+
+      <div class="mt-3 flex items-center justify-center gap-2">
+        <span class="px-3 py-1 rounded-full bg-pink-500/20 text-pink-300 border border-pink-500/35 text-xs font-bold flex items-center gap-1.5">
+          <span>🪙</span>
+          <span>${state.user.coins ?? 50} Coins IONARA</span>
+        </span>
+        <span class="px-2.5 py-1 rounded-full bg-emerald-500/15 text-emerald-400 border border-emerald-500/30 text-xs font-semibold">
+          Compte Vérifié
+        </span>
+      </div>
+    </div>
+
+    <!-- Orders Section -->
+    <div class="space-y-3">
+      <div class="flex items-center justify-between">
+        <h4 class="text-xs font-bold text-white uppercase tracking-wider font-headline">Mes Commandes Récentes</h4>
+        <span class="text-[11px] text-zinc-400">${orders.length} commande(s)</span>
+      </div>
+
+      ${orders.length === 0 ? `
+        <div class="p-5 rounded-2xl bg-white/[0.02] border border-white/5 text-center space-y-1.5">
+          <p class="text-xs text-zinc-300 font-semibold">Aucune commande enregistrée pour le moment.</p>
+          <p class="text-[11px] text-zinc-500">Explorez le catalogue et validez votre première commande par D17 ou Flouci !</p>
+        </div>
+      ` : `
+        <div class="space-y-2 max-h-44 overflow-y-auto pr-1">
+          ${orders.map(o => `
+            <div class="p-3 rounded-2xl bg-white/[0.03] border border-white/10 flex items-center justify-between text-xs">
+              <div>
+                <span class="font-mono font-bold text-pink-400">${o.reference}</span>
+                <p class="text-[11px] text-zinc-300 mt-0.5 truncate max-w-[180px]">${o.itemsSummary || 'Jeux IONARA'}</p>
+                <span class="text-[10px] text-zinc-500">${o.date}</span>
+              </div>
+              <div class="text-right">
+                <span class="font-black text-white font-headline">${o.total} TND</span>
+                <span class="block text-[10px] text-emerald-400 font-semibold">Vérification WhatsApp</span>
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      `}
+    </div>
+
+    <!-- Action buttons -->
+    <div class="space-y-2 pt-2 border-t border-white/10">
+      <a 
+        href="https://wa.me/21627031500?text=Bonjour%20IONARA%20!%20Je%20suis%20client%20(${encodeURIComponent(state.user.name)})%20et%20j%27ai%20une%20question%20concernant%20mon%20compte." 
+        target="_blank"
+        class="w-full py-2.5 rounded-xl bg-emerald-500/15 hover:bg-emerald-500/25 border border-emerald-500/30 text-emerald-300 hover:text-white font-bold text-xs flex items-center justify-center gap-2 transition"
+      >
+        <i data-lucide="message-circle" class="w-4 h-4 text-emerald-400"></i>
+        <span>Contacter mon conseiller WhatsApp 7j/7</span>
+      </a>
+
+      <button 
+        onclick="handleLogout()" 
+        class="w-full py-2.5 rounded-xl bg-white/5 hover:bg-red-500/20 hover:text-red-300 hover:border-red-500/30 border border-white/10 text-zinc-400 text-xs font-semibold transition cursor-pointer"
+      >
+        Se Déconnecter
+      </button>
+    </div>
+  `;
+  if (window.lucide) lucide.createIcons();
+}
+
+// ==========================================
+// 100% TUNISIAN CHECKOUT & RECEIPT UPLOAD
+// ==========================================
+
+function selectPaymentMethod(methodId) {
+  state.selectedPayment = methodId;
+  const methods = typeof TUNISIA_PAYMENT_METHODS !== 'undefined' ? TUNISIA_PAYMENT_METHODS : [];
+  const found = methods.find(m => m.id === methodId) || methods[0] || {
+    id: 'd17',
+    name: 'D17 (Poste Tunisienne)',
+    accountNumber: '27 031 500',
+    accountName: 'IONARA STORE TN',
+    instructions: 'Effectuez votre transfert via l application D17 vers notre numero officiel :'
+  };
+
+  // Update card visual borders
+  const cards = document.querySelectorAll('.payment-method-card');
+  cards.forEach(card => {
+    const radio = card.querySelector('input[type="radio"]');
+    if (radio && radio.value.toLowerCase().includes(methodId)) {
+      card.classList.add('border-pink-500/50', 'bg-pink-500/10');
+      card.classList.remove('bg-slate-900', 'border-white/10');
+      radio.checked = true;
+    } else {
+      card.classList.remove('border-pink-500/50', 'bg-pink-500/10');
+      card.classList.add('bg-slate-900', 'border-white/10');
+    }
+  });
+
+  // Calculate current total
+  const { total } = getCartTotals();
+  const totalTND = Math.round(total);
+
+  // Render instructions box
+  const box = document.getElementById('payment-instructions-box');
+  if (box) {
+    box.innerHTML = `
+      <div class="flex items-center justify-between pb-2 border-b border-white/10">
+        <span class="text-xs font-bold text-white flex items-center gap-1.5">
+          <span class="w-2 h-2 rounded-full bg-pink-400 animate-ping"></span>
+          ${found.name}
+        </span>
+        <span class="text-xs font-black text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-cyan-300 font-headline">
+          Montant : ${totalTND} TND
+        </span>
+      </div>
+
+      <p class="text-[11px] text-zinc-300 leading-relaxed">${found.instructions}</p>
+
+      <div class="p-2.5 rounded-xl bg-slate-950/90 border border-white/10 flex items-center justify-between">
+        <div>
+          <span class="text-[9px] text-zinc-500 font-bold uppercase tracking-wider block">Numéro / Coordonnées officielles</span>
+          <span class="text-sm font-black text-amber-300 font-mono tracking-wider">${found.accountNumber}</span>
+          <span class="text-[10px] text-zinc-400 block mt-0.5">${found.accountName}</span>
+        </div>
+        <button 
+          type="button" 
+          onclick="copyToClipboard('${found.accountNumber}')" 
+          class="px-2.5 py-1.5 rounded-lg bg-white/10 hover:bg-pink-600 text-white text-[10px] font-bold transition flex items-center gap-1 shrink-0"
+        >
+          <i data-lucide="copy" class="w-3 h-3"></i>
+          <span>Copier</span>
+        </button>
+      </div>
+
+      <p class="text-[10px] text-emerald-400 flex items-center gap-1">
+        <i data-lucide="info" class="w-3 h-3 shrink-0"></i>
+        <span>${found.note}</span>
+      </p>
+    `;
+    if (window.lucide) lucide.createIcons();
+  }
+}
+
+function copyToClipboard(text) {
+  navigator.clipboard.writeText(text).then(() => {
+    showToast('Coordonnées copiées dans le presse-papier !', 'success');
+  }).catch(() => {
+    showToast('Numéro : ' + text, 'info');
+  });
+}
+
+function handleReceiptFileChange(input) {
+  const file = input.files && input.files[0];
+  const promptEl = document.getElementById('receipt-upload-prompt');
+  const previewEl = document.getElementById('receipt-file-preview');
+  const filenameEl = document.getElementById('receipt-filename');
+  const filesizeEl = document.getElementById('receipt-filesize');
+
+  if (file) {
+    state.uploadedReceiptName = file.name;
+    if (promptEl) promptEl.classList.add('hidden');
+    if (previewEl) previewEl.classList.remove('hidden');
+    if (filenameEl) filenameEl.textContent = file.name;
+    if (filesizeEl) filesizeEl.textContent = '(' + (file.size / 1024).toFixed(0) + ' Ko)';
+    showToast('Reçu "' + file.name + '" prêt à être transmis !', 'success');
+    if (window.lucide) lucide.createIcons();
+  }
+}
+
+function clearReceiptFile() {
+  const input = document.getElementById('order-receipt-file');
+  if (input) input.value = '';
+  state.uploadedReceiptName = null;
+  const promptEl = document.getElementById('receipt-upload-prompt');
+  const previewEl = document.getElementById('receipt-file-preview');
+  if (promptEl) promptEl.classList.remove('hidden');
+  if (previewEl) previewEl.classList.add('hidden');
+}
+
+// Redefine openCheckoutModal to initialize the 5 Tunisian payment methods
+const origOpenCheckoutModal = window.openCheckoutModal;
+window.openCheckoutModal = function() {
+  if (state.cart.length === 0) {
+    showToast('Votre panier est vide !', 'error');
+    return;
+  }
+  closeCartDrawer();
+  const modal = document.getElementById('checkout-modal');
+  if (modal) {
+    modal.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+    selectPaymentMethod(state.selectedPayment || 'd17');
+    updateUserNavbarUI();
+  }
+};
+
+// Aliases for compatibility
+window.handleCheckoutSubmit = function(e) {
+  submitOrder(e);
+};
+
+// Override submitOrder with Receipt check & WhatsApp redirection
+window.submitOrder = function(e) {
+  e.preventDefault();
+
+  const name = document.getElementById('order-name')?.value.trim();
+  const phone = document.getElementById('order-phone')?.value.trim();
+  const email = document.getElementById('order-email')?.value.trim();
+  const refCode = document.getElementById('order-reference-code')?.value.trim();
+  const fileInput = document.getElementById('order-receipt-file');
+  const hasFile = (fileInput && fileInput.files && fileInput.files.length > 0) || state.uploadedReceiptName;
+
+  if (!name || !phone || !email) {
+    showToast('Veuillez renseigner votre nom, téléphone et adresse email.', 'error');
+    return;
+  }
+
+  // Verify receipt or reference is provided
+  if (!hasFile && !refCode) {
+    showToast('⚠️ Veuillez téléverser votre reçu ou indiquer la référence de transaction.', 'error');
+    const dropzone = document.getElementById('receipt-upload-prompt');
+    if (dropzone) {
+      dropzone.parentElement.classList.add('border-pink-500', 'animate-pulse');
+      setTimeout(() => dropzone.parentElement.classList.remove('border-pink-500', 'animate-pulse'), 2000);
+    }
+    return;
+  }
+
+  const { total } = getCartTotals();
+  const totalTND = Math.round(total);
+
+  const methods = typeof TUNISIA_PAYMENT_METHODS !== 'undefined' ? TUNISIA_PAYMENT_METHODS : [];
+  const currentMethod = methods.find(m => m.id === state.selectedPayment) || { name: 'D17 (Poste Tunisienne)' };
+
+  const orderRef = '#ION-TN-' + Math.floor(10000 + Math.random() * 90000);
+  const receiptMention = hasFile 
+    ? `Reçu joint dans la discussion (${state.uploadedReceiptName || 'capture-recu.jpg'})`
+    : `Réf. Transaction : ${refCode}`;
+
+  // Build items list
+  let itemsText = '';
+  let itemsSummary = [];
+  state.cart.forEach(item => {
+    itemsText += `• ${item.title} (x${item.quantity}) - ${item.priceTND * item.quantity} TND\n`;
+    itemsSummary.push(item.title);
+  });
+
+  // Construct comprehensive WhatsApp message
+  let message = `🎮 *COMMANDE IONARA STORE TUNISIE* 🇹🇳\n`;
+  message += `📦 *Référence :* ${orderRef}\n\n`;
+  message += `👤 *Client :* ${name}\n`;
+  message += `📱 *Tél / WhatsApp :* ${phone}\n`;
+  message += `📧 *Email :* ${email}\n\n`;
+  message += `🛒 *Articles commandés :*\n${itemsText}\n`;
+  message += `💰 *Total réglé :* ${totalTND} TND\n`;
+  message += `💳 *Mode de paiement :* ${currentMethod.name}\n`;
+  message += `📎 *Preuve de paiement :* ${receiptMention}\n\n`;
+  message += `⚡ *Bonjour l'équipe IONARA, voici ma commande avec le reçu ci-joint, merci de vérifier et de m'envoyer mes identifiants de jeu garantis !*`;
+
+  // Save order to user profile if logged in
+  if (state.user) {
+    if (!state.user.orders) state.user.orders = [];
+    state.user.orders.unshift({
+      reference: orderRef,
+      date: new Date().toLocaleDateString('fr-TN'),
+      total: totalTND,
+      paymentMethod: currentMethod.name,
+      itemsSummary: itemsSummary.join(', ')
+    });
+    localStorage.setItem('ionara_user', JSON.stringify(state.user));
+  }
+
+  // Clear cart and UI
+  state.cart = [];
+  saveCart();
+  updateCartUI();
+  closeCheckoutModal();
+
+  showToast('✅ Commande validée ! Redirection vers WhatsApp...', 'success');
+
+  const encoded = encodeURIComponent(message);
+  const whatsappUrl = `https://wa.me/21627031500?text=${encoded}`;
+  
+  setTimeout(() => {
+    window.open(whatsappUrl, '_blank');
+  }, 400);
+};
+
+// Auto initialize on DOM ready
+document.addEventListener('DOMContentLoaded', () => {
+  initUserAuth();
+});
+
+
+// Explicit global exposure for UI callbacks
+window.initUserAuth = initUserAuth;
+window.updateUserNavbarUI = updateUserNavbarUI;
+window.openAccountModal = openAccountModal;
+window.closeAccountModal = closeAccountModal;
+window.switchAuthTab = switchAuthTab;
+window.handleGoogleSignIn = handleGoogleSignIn;
+window.handleLogin = handleLogin;
+window.handleRegister = handleRegister;
+window.handleLogout = handleLogout;
+window.renderAccountDashboard = renderAccountDashboard;
+window.selectPaymentMethod = selectPaymentMethod;
+window.copyToClipboard = copyToClipboard;
+window.handleReceiptFileChange = handleReceiptFileChange;
+window.clearReceiptFile = clearReceiptFile;

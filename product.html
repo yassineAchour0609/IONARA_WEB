@@ -103,6 +103,17 @@
         </div>
 
         <!-- Cart Button -->
+        
+        <!-- User Account Pill Button -->
+        <button 
+          onclick="openAccountModal()" 
+          id="navbar-user-btn"
+          class="group/user relative w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white/[0.05] hover:bg-pink-500/20 border border-white/10 hover:border-pink-500/40 flex items-center justify-center text-zinc-200 hover:text-pink-300 transition cursor-pointer shadow-md"
+          title="Mon Espace Client"
+        >
+          <i data-lucide="user" class="w-4 h-4 sm:w-4.5 sm:h-4.5 group-hover/user:scale-110 transition-transform"></i>
+        </button>
+    
         <button 
           onclick="openCartDrawer()" 
           class="relative w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white/[0.05] hover:bg-pink-500/20 border border-white/10 hover:border-pink-500/40 flex items-center justify-center text-zinc-200 hover:text-pink-300 transition cursor-pointer shadow-md group/cart"
@@ -426,7 +437,7 @@
             </div>
             <div class="flex items-center gap-2.5">
               <i data-lucide="shield-check" class="w-4 h-4 text-emerald-400 shrink-0"></i>
-              <span>Paiement sécurisé : D17 Poste, Konnect, Flouci, PayPal & Crypto</span>
+              <span>Paiement 100% Tunisien : D17 Poste, Flouci, Virement, Izi Zitouna & Wafacash</span>
             </div>
           </div>
 
@@ -634,7 +645,7 @@
 
       <p class="text-[10px] text-center text-zinc-500 pt-1 flex items-center justify-center gap-1.5">
         <i data-lucide="shield-check" class="w-3.5 h-3.5 text-cyan-400"></i>
-        <span>Paiement sécurisé · D17 · Konnect · Flouci · PayPal · USDT</span>
+        <span>Paiement 100% Tunisien · D17 · Flouci · Virement · Izi · Wafacash</span>
       </p>
     </div>
 
@@ -643,57 +654,177 @@
   <!-- ========================================== -->
   <!-- CHECKOUT MODAL -->
   <!-- ========================================== -->
-  <div id="checkout-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
-    <div class="glass-panel w-full max-w-lg rounded-3xl p-6 sm:p-8 border border-white/10 shadow-2xl relative">
-      <button onclick="closeCheckoutModal()" class="absolute top-5 right-5 p-2 text-zinc-400 hover:text-white rounded-xl">
+  <!-- ========================================== -->
+  <!-- CHECKOUT MODAL (100% PAIEMENT TUNISIEN + REÇU) -->
+  <!-- ========================================== -->
+  <div id="checkout-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/85 backdrop-blur-md overflow-y-auto">
+    <div class="relative w-full max-w-xl max-h-[92vh] overflow-y-auto rounded-3xl border border-white/10 bg-[#090b14] p-5 sm:p-7 shadow-2xl space-y-4">
+      <button onclick="closeCheckoutModal()" class="absolute top-4 right-4 p-2 rounded-xl text-zinc-400 hover:text-white hover:bg-white/5 transition cursor-pointer">
         <i data-lucide="x" class="w-5 h-5"></i>
       </button>
 
-      <h3 class="text-xl font-black text-white font-headline">Finaliser la Commande</h3>
-      <p class="text-xs text-zinc-400 mt-1">Vos identifiants vous seront expédiés sous 5 à 15 minutes.</p>
-
-      <form id="checkout-form" onsubmit="handleCheckoutSubmit(event)" class="mt-6 space-y-4">
-        <div>
-          <label class="block text-xs font-semibold text-zinc-300 mb-1">Votre Nom & Prénom</label>
-          <input required type="text" id="order-name" placeholder="Ex: Yassine Achour" class="w-full bg-slate-900 border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-pink-500">
+      <div>
+        <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-pink-500/15 border border-pink-500/30 text-pink-300 text-[11px] font-extrabold uppercase tracking-wider mb-2">
+          <span>🇹🇳</span>
+          <span>Paiement 100% Tunisien Sécurisé</span>
         </div>
+        <h3 class="text-xl sm:text-2xl font-black text-white font-headline">Finaliser votre commande</h3>
+        <p class="text-xs text-zinc-400 mt-1">Réglez via l'une de nos méthodes tunisiennes, joignez votre reçu et recevez vos accès garantis sur WhatsApp.</p>
+      </div>
 
-        <div>
-          <label class="block text-xs font-semibold text-zinc-300 mb-1">Numéro WhatsApp / Téléphone (pour la livraison)</label>
-          <input required type="tel" id="order-phone" placeholder="Ex: +216 27 031 500" class="w-full bg-slate-900 border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-pink-500">
-        </div>
-
-        <div>
-          <label class="block text-xs font-semibold text-zinc-300 mb-1">Adresse Email</label>
-          <input required type="email" id="order-email" placeholder="Ex: contact@email.com" class="w-full bg-slate-900 border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-pink-500">
-        </div>
-
-        <div>
-          <label class="block text-xs font-semibold text-zinc-300 mb-2">Moyen de paiement souhaité :</label>
-          <div class="grid grid-cols-2 gap-2 text-xs">
-            <label class="flex items-center gap-2 p-2.5 rounded-xl border border-white/10 bg-slate-900 cursor-pointer hover:border-pink-500/50">
-              <input type="radio" name="payment_method" value="D17 (Tunisie)" checked class="accent-pink-500">
-              <span class="font-bold text-white">D17 (Poste TN) 🇹🇳</span>
-            </label>
-            <label class="flex items-center gap-2 p-2.5 rounded-xl border border-white/10 bg-slate-900 cursor-pointer hover:border-pink-500/50">
-              <input type="radio" name="payment_method" value="Konnect / Flouci / Virement" class="accent-pink-500">
-              <span class="font-bold text-white">Konnect / Virement</span>
-            </label>
-            <label class="flex items-center gap-2 p-2.5 rounded-xl border border-white/10 bg-slate-900 cursor-pointer hover:border-pink-500/50">
-              <input type="radio" name="payment_method" value="Carte Bancaire / PayPal" class="accent-pink-500">
-              <span class="font-bold text-white">Carte / PayPal</span>
-            </label>
-            <label class="flex items-center gap-2 p-2.5 rounded-xl border border-white/10 bg-slate-900 cursor-pointer hover:border-pink-500/50">
-              <input type="radio" name="payment_method" value="Binance / USDT" class="accent-pink-500">
-              <span class="font-bold text-white">USDT (Crypto)</span>
-            </label>
+      <form id="checkout-form" onsubmit="submitOrder(event)" class="space-y-4">
+        <!-- Client Coordinates -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-semibold text-zinc-300 mb-1">Nom & Prénom *</label>
+            <input required type="text" id="order-name" placeholder="Ex: Yassine Achour" class="w-full bg-slate-900 border border-white/10 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-pink-500">
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-zinc-300 mb-1">Numéro WhatsApp / Tél *</label>
+            <input required type="tel" id="order-phone" placeholder="Ex: +216 27 031 500" class="w-full bg-slate-900 border border-white/10 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-pink-500">
           </div>
         </div>
 
-        <button type="submit" class="w-full btn-neon-magenta py-3.5 rounded-xl font-bold text-white text-sm flex items-center justify-center gap-2 cursor-pointer shadow-lg mt-4">
-          <i data-lucide="send" class="w-4 h-4"></i>
-          Confirmer et Envoyer sur WhatsApp
+        <div>
+          <label class="block text-xs font-semibold text-zinc-300 mb-1">Adresse Email * (pour sauvegarde du compte)</label>
+          <input required type="email" id="order-email" placeholder="contact@email.com" class="w-full bg-slate-900 border border-white/10 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-pink-500">
+        </div>
+
+        <!-- 5 Tunisian Payment Options -->
+        <div>
+          <label class="block text-xs font-semibold text-zinc-300 mb-2 flex items-center justify-between">
+            <span>Choisissez votre mode de paiement :</span>
+            <span class="text-[10px] text-pink-400 font-bold">100% Local • 0 Frais</span>
+          </label>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+            
+            <!-- D17 -->
+            <label onclick="selectPaymentMethod('d17')" class="payment-method-card flex items-center justify-between p-3 rounded-2xl border border-pink-500/50 bg-pink-500/10 cursor-pointer transition hover:border-pink-500">
+              <div class="flex items-center gap-2.5">
+                <input type="radio" name="payment_method" value="d17" checked class="accent-pink-500">
+                <div>
+                  <span class="font-extrabold text-white block text-xs">D17 (Poste TN)</span>
+                  <span class="text-[10px] text-amber-300 font-semibold">Transfert Mobile / Carte</span>
+                </div>
+              </div>
+              <span class="text-[9px] font-black uppercase px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30">Top</span>
+            </label>
+
+            <!-- Flouci -->
+            <label onclick="selectPaymentMethod('flouci')" class="payment-method-card flex items-center justify-between p-3 rounded-2xl border border-white/10 bg-slate-900 cursor-pointer transition hover:border-purple-500/50">
+              <div class="flex items-center gap-2.5">
+                <input type="radio" name="payment_method" value="flouci" class="accent-purple-500">
+                <div>
+                  <span class="font-extrabold text-white block text-xs">Flouci</span>
+                  <span class="text-[10px] text-purple-300 font-semibold">0% Frais • Instantané</span>
+                </div>
+              </div>
+              <span class="text-[9px] font-black uppercase px-2 py-0.5 rounded-full bg-purple-500/20 text-purple-300 border border-purple-500/30">Rapide</span>
+            </label>
+
+            <!-- Virement Bancaire (RIB) -->
+            <label onclick="selectPaymentMethod('virement')" class="payment-method-card flex items-center justify-between p-3 rounded-2xl border border-white/10 bg-slate-900 cursor-pointer transition hover:border-blue-500/50">
+              <div class="flex items-center gap-2.5">
+                <input type="radio" name="payment_method" value="virement" class="accent-blue-500">
+                <div>
+                  <span class="font-extrabold text-white block text-xs">Virement / RIB</span>
+                  <span class="text-[10px] text-blue-300 font-semibold">Toutes banques tunisiennes</span>
+                </div>
+              </div>
+              <span class="text-[9px] font-black uppercase px-2 py-0.5 rounded-full bg-blue-500/20 text-blue-300 border border-blue-500/30">Banque</span>
+            </label>
+
+            <!-- Izi Zitouna -->
+            <label onclick="selectPaymentMethod('izi')" class="payment-method-card flex items-center justify-between p-3 rounded-2xl border border-white/10 bg-slate-900 cursor-pointer transition hover:border-emerald-500/50">
+              <div class="flex items-center gap-2.5">
+                <input type="radio" name="payment_method" value="izi" class="accent-emerald-500">
+                <div>
+                  <span class="font-extrabold text-white block text-xs">Izi Zitouna</span>
+                  <span class="text-[10px] text-emerald-300 font-semibold">Direct Banque Zitouna</span>
+                </div>
+              </div>
+              <span class="text-[9px] font-black uppercase px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">Zitouna</span>
+            </label>
+
+            <!-- Wafacash -->
+            <label onclick="selectPaymentMethod('wafacash')" class="payment-method-card sm:col-span-2 flex items-center justify-between p-3 rounded-2xl border border-white/10 bg-slate-900 cursor-pointer transition hover:border-orange-500/50">
+              <div class="flex items-center gap-2.5">
+                <input type="radio" name="payment_method" value="wafacash" class="accent-orange-500">
+                <div>
+                  <span class="font-extrabold text-white block text-xs">Wafacash Tunisie</span>
+                  <span class="text-[10px] text-orange-300 font-semibold">Paiement en espèces dans toute la Tunisie (sans carte)</span>
+                </div>
+              </div>
+              <span class="text-[9px] font-black uppercase px-2 py-0.5 rounded-full bg-orange-500/20 text-orange-300 border border-orange-500/30">Espèces</span>
+            </label>
+
+          </div>
+        </div>
+
+        <!-- Dynamic Official Coordinates Box -->
+        <div id="payment-instructions-box" class="p-4 rounded-2xl bg-gradient-to-br from-white/[0.04] to-white/[0.01] border border-white/10 space-y-2.5">
+          <!-- Populated dynamically via selectPaymentMethod() -->
+        </div>
+
+        <!-- Receipt Upload Dropzone -->
+        <div>
+          <label class="block text-xs font-semibold text-zinc-300 mb-1.5 flex items-center justify-between">
+            <span class="flex items-center gap-1.5">
+              <i data-lucide="paperclip" class="w-3.5 h-3.5 text-pink-400"></i>
+              <span>Reçu / Preuve de Paiement (Capture ou Photo) *</span>
+            </span>
+            <span class="text-[10px] text-emerald-400 font-bold">Vérification immédiate</span>
+          </label>
+
+          <div class="relative border-2 border-dashed border-white/15 hover:border-pink-500/50 rounded-2xl p-3 sm:p-4 text-center transition bg-slate-900/60 group">
+            <input 
+              type="file" 
+              id="order-receipt-file" 
+              accept="image/*,application/pdf"
+              onchange="handleReceiptFileChange(this)"
+              class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
+            />
+            
+            <div id="receipt-upload-prompt" class="space-y-1">
+              <div class="w-10 h-10 mx-auto rounded-xl bg-pink-500/10 border border-pink-500/30 flex items-center justify-center text-pink-400 group-hover:scale-110 transition-transform">
+                <i data-lucide="upload-cloud" class="w-5 h-5"></i>
+              </div>
+              <p class="text-xs font-bold text-white">Cliquez ou glissez-déposez le reçu de paiement</p>
+              <p class="text-[11px] text-zinc-400">Capture D17, Flouci, reçu Izi ou photo du bordereau Wafacash (JPG, PNG, PDF)</p>
+            </div>
+
+            <div id="receipt-file-preview" class="hidden items-center justify-between bg-pink-500/15 border border-pink-500/30 rounded-xl px-3 py-2 text-xs">
+              <div class="flex items-center gap-2 truncate">
+                <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-400 shrink-0"></i>
+                <span id="receipt-filename" class="font-mono text-white truncate max-w-[200px] sm:max-w-[280px]">recu.png</span>
+                <span id="receipt-filesize" class="text-zinc-400 text-[10px]"></span>
+              </div>
+              <button type="button" onclick="clearReceiptFile()" class="p-1 text-zinc-400 hover:text-red-400 transition cursor-pointer z-20">
+                <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="mt-2">
+            <input 
+              type="text" 
+              id="order-reference-code" 
+              placeholder="Numéro ou code de transaction (facultatif si reçu téléversé)" 
+              class="w-full bg-slate-900/70 border border-white/10 rounded-xl px-3.5 py-2 text-xs text-zinc-200 placeholder-zinc-500 focus:outline-none focus:border-pink-500"
+            />
+          </div>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="w-full btn-neon-magenta py-3.5 rounded-2xl font-black text-white text-sm sm:text-base flex items-center justify-center gap-2 cursor-pointer shadow-xl shadow-pink-500/20 hover:scale-[1.01] active:scale-[0.99] transition-all">
+          <i data-lucide="message-circle" class="w-5 h-5"></i>
+          <span>Valider & Envoyer Reçu sur WhatsApp</span>
         </button>
+
+        <p class="text-[11px] text-center text-zinc-400 flex items-center justify-center gap-1.5">
+          <i data-lucide="shield-check" class="w-3.5 h-3.5 text-emerald-400 shrink-0"></i>
+          <span>Vérification rapide sous 5 à 15 minutes • Identifiants garantis à vie</span>
+        </p>
       </form>
     </div>
   </div>
@@ -892,5 +1023,124 @@
       if (window.lucide) lucide.createIcons();
     }
   </script>
+
+  <!-- ========================================== -->
+  <!-- ESPACE CLIENT / AUTH & GOOGLE MODAL -->
+  <!-- ========================================== -->
+  <div id="account-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/85 backdrop-blur-md overflow-y-auto">
+    <div class="relative w-full max-w-md max-h-[92vh] overflow-y-auto rounded-3xl border border-white/10 bg-[#090b14] p-5 sm:p-7 shadow-2xl">
+      <button onclick="closeAccountModal()" class="absolute top-4 right-4 p-2 rounded-xl text-zinc-400 hover:text-white hover:bg-white/5 transition cursor-pointer">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+
+      <!-- AUTH VIEW (LOGIN / REGISTER) -->
+      <div id="account-auth-view" class="space-y-4">
+        <div class="text-center">
+          <div class="w-12 h-12 mx-auto mb-2.5 rounded-2xl bg-gradient-to-tr from-pink-500 via-purple-600 to-cyan-400 p-0.5 shadow-lg shadow-pink-500/20">
+            <div class="w-full h-full rounded-2xl bg-black flex items-center justify-center text-pink-400">
+              <i data-lucide="user-check" class="w-6 h-6"></i>
+            </div>
+          </div>
+          <h3 class="text-2xl font-black text-white font-headline">Espace Membre IONARA</h3>
+          <p class="text-xs text-zinc-400 mt-1">Créez votre compte ou connectez-vous avec Google.</p>
+        </div>
+
+        <!-- Google Sign-In Button -->
+        <button 
+          type="button" 
+          onclick="handleGoogleSignIn()" 
+          class="w-full py-3 px-4 rounded-2xl bg-white hover:bg-zinc-100 text-zinc-900 font-black text-xs sm:text-sm flex items-center justify-center gap-3 transition shadow-lg shadow-white/5 cursor-pointer active:scale-98"
+        >
+          <svg class="w-5 h-5 shrink-0" viewBox="0 0 24 24">
+            <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+            <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+            <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
+            <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
+          </svg>
+          <span>Continuer avec Google</span>
+        </button>
+
+        <div class="relative flex items-center justify-center my-3">
+          <div class="border-t border-white/10 w-full"></div>
+          <span class="bg-[#090b14] px-3 text-[10px] font-bold text-zinc-500 uppercase tracking-widest shrink-0">OU AVEC VOTRE EMAIL</span>
+          <div class="border-t border-white/10 w-full"></div>
+        </div>
+
+        <!-- Auth Tabs Toggle -->
+        <div class="grid grid-cols-2 p-1 rounded-2xl bg-white/[0.04] border border-white/10 text-xs font-bold">
+          <button 
+            type="button" 
+            id="tab-btn-login" 
+            onclick="switchAuthTab('login')" 
+            class="py-2 rounded-xl transition cursor-pointer bg-pink-600 text-white shadow-sm"
+          >
+            Se Connecter
+          </button>
+          <button 
+            type="button" 
+            id="tab-btn-register" 
+            onclick="switchAuthTab('register')" 
+            class="py-2 rounded-xl transition cursor-pointer text-zinc-400 hover:text-white"
+          >
+            Créer un Compte
+          </button>
+        </div>
+
+        <!-- LOGIN FORM -->
+        <form id="auth-login-form" onsubmit="handleLogin(event)" class="space-y-3">
+          <div>
+            <label class="block text-xs font-semibold text-zinc-300 mb-1">Email ou Nom d'utilisateur</label>
+            <input required type="text" id="login-email" placeholder="votre@email.com" class="w-full bg-slate-900 border border-white/10 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-pink-500">
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-zinc-300 mb-1">Mot de passe</label>
+            <input required type="password" id="login-password" placeholder="••••••••" class="w-full bg-slate-900 border border-white/10 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-pink-500">
+          </div>
+          <button type="submit" class="w-full btn-neon-magenta py-3 rounded-xl font-bold text-white text-xs cursor-pointer shadow-lg mt-2">
+            Se Connecter à mon Espace
+          </button>
+        </form>
+
+        <!-- REGISTER FORM -->
+        <form id="auth-register-form" onsubmit="handleRegister(event)" class="hidden space-y-3">
+          <div>
+            <label class="block text-xs font-semibold text-zinc-300 mb-1">Nom Complet / GamerTag *</label>
+            <input required type="text" id="reg-username" placeholder="Ex: Yassine Achour" class="w-full bg-slate-900 border border-white/10 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-pink-500">
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-zinc-300 mb-1">Adresse Email *</label>
+            <input required type="email" id="reg-email" placeholder="contact@email.com" class="w-full bg-slate-900 border border-white/10 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-pink-500">
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-zinc-300 mb-1">Numéro WhatsApp *</label>
+            <input required type="tel" id="reg-phone" placeholder="+216 27 031 500" class="w-full bg-slate-900 border border-white/10 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-pink-500">
+          </div>
+          <div class="grid grid-cols-2 gap-2">
+            <div>
+              <label class="block text-xs font-semibold text-zinc-300 mb-1">Mot de passe *</label>
+              <input required type="password" id="reg-password" placeholder="••••••••" class="w-full bg-slate-900 border border-white/10 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-pink-500">
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-zinc-300 mb-1">Confirmer *</label>
+              <input required type="password" id="reg-confirm" placeholder="••••••••" class="w-full bg-slate-900 border border-white/10 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-pink-500">
+            </div>
+          </div>
+          <div class="p-2.5 rounded-xl bg-pink-500/10 border border-pink-500/25 flex items-center gap-2 text-[11px] text-pink-300">
+            <span>🎁</span>
+            <span><strong>Cadeau :</strong> +50 Coins IONARA crédités dès votre inscription !</span>
+          </div>
+          <button type="submit" class="w-full btn-neon-magenta py-3 rounded-xl font-bold text-white text-xs cursor-pointer shadow-lg mt-1">
+            Créer mon Compte IONARA
+          </button>
+        </form>
+      </div>
+
+      <!-- DASHBOARD VIEW (WHEN LOGGED IN) -->
+      <div id="account-dashboard-view" class="hidden space-y-4">
+        <!-- Injected dynamically via renderAccountDashboard() -->
+      </div>
+    </div>
+  </div>
+
 </body>
 </html>
