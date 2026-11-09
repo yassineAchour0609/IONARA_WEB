@@ -1,6 +1,7 @@
 /**
  * IONARA WEB SHOP - Data Catalog
  * Boutique officielle de comptes de jeux vidéo et abonnements
+ * Devise officielle de référence : TND (Dinar Tunisien)
  */
 
 const PRODUCTS_DATA = [
@@ -17,8 +18,10 @@ const PRODUCTS_DATA = [
     badge: "BEST-SELLER 🔥",
     badgeColor: "from-pink-500 to-purple-600",
     tag: "Offre Légendaire",
-    priceDZD: 4500,
-    oldPriceDZD: 14000,
+    priceTND: 45,
+    oldPriceTND: 120,
+    priceDZD: 45,
+    oldPriceDZD: 120,
     priceEUR: 25,
     oldPriceEUR: 80,
     priceUSD: 28,
@@ -28,7 +31,7 @@ const PRODUCTS_DATA = [
     stockStatus: "En Stock (Livraison Express)",
     delivery: "5 - 15 minutes",
     guarantee: "Garantie à Vie",
-    description: "Le compte le plus rentable de l'histoire du gaming ! Accédez à plus de 1 170 jeux vidéo Steam complets sur un seul et unique compte personnel. Téléchargez et jouez à volonté à des chefs-d'œuvre mondiaux.",
+    description: "Le compte le plus rentable de l'histoire du gaming ! Accédez à plus de 1 170 jeux vidéo Steam complets sur un seul et unique compte personnel. Téléchargez et jouez à volonté à des chefs-d'œuvre mondiaux sans aucun frais supplémentaire.",
     keyGames: [
       "Grand Theft Auto V", "Red Dead Redemption 2", "Elden Ring", 
       "Baldur's Gate 3", "Cyberpunk 2077", "God of War", 
@@ -45,6 +48,42 @@ const PRODUCTS_DATA = [
     ]
   },
   {
+    id: "black-myth-wukong",
+    title: "Black Myth: Wukong — Compte Steam",
+    subtitle: "Édition Mythique Complète avec Bonus",
+    image: "assets/games/black-myth-wukong.png",
+    fallbackImage: "public/assets/games/black-myth-wukong.png",
+    platform: "Steam",
+    platformIcon: "assets/platforms/steam.png",
+    category: "steam",
+    isFeatured: true,
+    badge: "HIT MONDIAL 👑",
+    badgeColor: "from-amber-500 to-yellow-600",
+    tag: "Action RPG",
+    priceTND: 25,
+    oldPriceTND: 60,
+    priceDZD: 25,
+    oldPriceDZD: 60,
+    priceEUR: 18,
+    oldPriceEUR: 45,
+    priceUSD: 20,
+    oldPriceUSD: 49,
+    rating: 5.0,
+    reviewsCount: 194,
+    stockStatus: "En Stock Immédiat",
+    delivery: "5 - 15 minutes",
+    guarantee: "Garantie à Vie",
+    description: "Incarnez le Prédestiné dans un voyage spectaculaire à travers les légendes chinoises de la Pérégrination vers l'Ouest. Affrontez des boss légendaires colossaux dans un univers sombre aux graphismes nouvelle génération sous Unreal Engine 5.",
+    keyGames: ["Black Myth: Wukong (Jeu Complet)", "Armure Mythique du Roi Singe", "Bâton Ruyi Jingu Bang"],
+    features: [
+      "Region-Free : Jouez depuis la Tunisie et le monde entier sans restriction",
+      "Accès complet au mode Solo & Campagne intégrale",
+      "Sauvegardes locales et succès Steam enregistrés sur votre PC",
+      "Activation rapide en 3 étapes avec guide pas-à-pas officiel",
+      "Mises à jour officielles incluses directement depuis Steam"
+    ]
+  },
+  {
     id: "gta-6",
     title: "Grand Theft Auto VI — Édition VIP",
     subtitle: "Réservation Prioritaire & Accès Jour J",
@@ -57,8 +96,10 @@ const PRODUCTS_DATA = [
     badge: "PRÉCOMMANDE VIP ⭐",
     badgeColor: "from-purple-500 to-cyan-500",
     tag: "Le Plus Attendu",
-    priceDZD: 7900,
-    oldPriceDZD: 12500,
+    priceTND: 79,
+    oldPriceTND: 140,
+    priceDZD: 79,
+    oldPriceDZD: 140,
     priceEUR: 45,
     oldPriceEUR: 75,
     priceUSD: 49,
@@ -90,8 +131,10 @@ const PRODUCTS_DATA = [
     badge: "NOUVEAUTÉ ⚽",
     badgeColor: "from-emerald-500 to-teal-600",
     tag: "Compétitif",
-    priceDZD: 6500,
-    oldPriceDZD: 9800,
+    priceTND: 49,
+    oldPriceTND: 95,
+    priceDZD: 49,
+    oldPriceDZD: 95,
     priceEUR: 39,
     oldPriceEUR: 62,
     priceUSD: 42,
@@ -123,8 +166,10 @@ const PRODUCTS_DATA = [
     badge: "OFFRE SPÉCIALE 🚀",
     badgeColor: "from-green-500 to-emerald-600",
     tag: "Abonnement",
-    priceDZD: 5900,
-    oldPriceDZD: 13000,
+    priceTND: 49,
+    oldPriceTND: 110,
+    priceDZD: 49,
+    oldPriceDZD: 110,
     priceEUR: 36,
     oldPriceEUR: 85,
     priceUSD: 39,
@@ -156,8 +201,10 @@ const PRODUCTS_DATA = [
     badge: "TOP FPS 💥",
     badgeColor: "from-orange-500 to-red-600",
     tag: "Action",
-    priceDZD: 6900,
-    oldPriceDZD: 11000,
+    priceTND: 49,
+    oldPriceTND: 90,
+    priceDZD: 49,
+    oldPriceDZD: 90,
     priceEUR: 42,
     oldPriceEUR: 68,
     priceUSD: 45,
@@ -189,8 +236,10 @@ const PRODUCTS_DATA = [
     badge: "RACING PRO 🏎️",
     badgeColor: "from-blue-500 to-indigo-600",
     tag: "Courses",
-    priceDZD: 5200,
-    oldPriceDZD: 8500,
+    priceTND: 35,
+    oldPriceTND: 70,
+    priceDZD: 35,
+    oldPriceDZD: 70,
     priceEUR: 32,
     oldPriceEUR: 55,
     priceUSD: 35,
@@ -221,8 +270,10 @@ const PRODUCTS_DATA = [
     badge: "RIOT OFFICIEL 🎯",
     badgeColor: "from-rose-500 to-pink-600",
     tag: "Monnaies",
-    priceDZD: 3200,
-    oldPriceDZD: 5200,
+    priceTND: 25,
+    oldPriceTND: 45,
+    priceDZD: 25,
+    oldPriceDZD: 45,
     priceEUR: 19,
     oldPriceEUR: 32,
     priceUSD: 21,
@@ -253,8 +304,10 @@ const PRODUCTS_DATA = [
     badge: "ÉCONOMIQUE 💡",
     badgeColor: "from-emerald-500 to-green-600",
     tag: "Abonnement",
-    priceDZD: 3400,
-    oldPriceDZD: 6500,
+    priceTND: 29,
+    oldPriceTND: 55,
+    priceDZD: 29,
+    oldPriceDZD: 55,
     priceEUR: 20,
     oldPriceEUR: 40,
     priceUSD: 22,
@@ -281,8 +334,10 @@ const PRODUCTS_DATA = [
     badge: "HORREUR 🧟",
     badgeColor: "from-red-600 to-rose-700",
     tag: "Survival Horror",
-    priceDZD: 5600,
-    oldPriceDZD: 8900,
+    priceTND: 29,
+    oldPriceTND: 55,
+    priceDZD: 29,
+    oldPriceDZD: 55,
     priceEUR: 34,
     oldPriceEUR: 56,
     priceUSD: 37,
@@ -309,8 +364,10 @@ const PRODUCTS_DATA = [
     badge: "-40% PROMO",
     badgeColor: "from-amber-500 to-orange-600",
     tag: "Sport",
-    priceDZD: 4200,
-    oldPriceDZD: 7000,
+    priceTND: 29,
+    oldPriceTND: 50,
+    priceDZD: 29,
+    oldPriceDZD: 50,
     priceEUR: 24,
     oldPriceEUR: 44,
     priceUSD: 26,
@@ -337,8 +394,10 @@ const PRODUCTS_DATA = [
     badge: "FPS CLASSIQUE",
     badgeColor: "from-slate-600 to-zinc-800",
     tag: "Multijoueur",
-    priceDZD: 4800,
-    oldPriceDZD: 7900,
+    priceTND: 32,
+    oldPriceTND: 60,
+    priceDZD: 32,
+    oldPriceDZD: 60,
     priceEUR: 28,
     oldPriceEUR: 50,
     priceUSD: 30,
@@ -365,8 +424,10 @@ const PRODUCTS_DATA = [
     badge: "PIRATES ⚓",
     badgeColor: "from-cyan-600 to-blue-700",
     tag: "Aventure",
-    priceDZD: 2900,
-    oldPriceDZD: 4500,
+    priceTND: 22,
+    oldPriceTND: 40,
+    priceDZD: 22,
+    oldPriceDZD: 40,
     priceEUR: 17,
     oldPriceEUR: 28,
     priceUSD: 19,
@@ -393,8 +454,10 @@ const PRODUCTS_DATA = [
     badge: "BASKETBALL 🏀",
     badgeColor: "from-red-500 to-amber-600",
     tag: "Sport",
-    priceDZD: 4500,
-    oldPriceDZD: 7500,
+    priceTND: 32,
+    oldPriceTND: 60,
+    priceDZD: 32,
+    oldPriceDZD: 60,
     priceEUR: 27,
     oldPriceEUR: 48,
     priceUSD: 29,
@@ -421,8 +484,10 @@ const PRODUCTS_DATA = [
     badge: "INFILTRATION 🍸",
     badgeColor: "from-zinc-500 to-slate-700",
     tag: "Espionnage",
-    priceDZD: 4800,
-    oldPriceDZD: 7800,
+    priceTND: 35,
+    oldPriceTND: 65,
+    priceDZD: 35,
+    oldPriceDZD: 65,
     priceEUR: 29,
     oldPriceEUR: 49,
     priceUSD: 31,
@@ -444,74 +509,70 @@ const PLATFORMS_DATA = [
   { name: "Xbox", icon: "assets/platforms/xbox.png", color: "#107c10", count: "Game Pass & Store" },
   { name: "Riot Games", icon: "assets/platforms/riot.png", color: "#eb0029", count: "Valorant & LoL" },
   { name: "Rockstar", icon: "assets/platforms/rockstar.jpg", color: "#fcaf17", count: "GTA & RDR2" },
-  { name: "Roblox", icon: "assets/platforms/roblox.png", color: "#000000", count: "Robux & VIP" }
+  { name: "Roblox", icon: "assets/platforms/roblox.png", color: "#000000", count: "Robux & Packs" }
 ];
 
 const REVIEWS_DATA = [
   {
-    author: "Sofiane M.",
-    location: "Alger, Algérie",
-    avatar: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=120&q=80",
+    author: "Mohamed K.",
+    location: "Tunis",
     rating: 5,
-    date: "Il y a 2 jours",
     product: "Pack Ultime Steam 1000+ Jeux",
-    comment: "Franchement incroyable ! Au début j'hésitais un peu, mais j'ai reçu le compte en 7 minutes chrono sur WhatsApp. J'ai pu changer l'email et le mot de passe direct, GTA V et Elden Ring tournent à merveille ! Recommandé à 1000%."
+    comment: "Incroyable ! J'ai reçu mes identifiants en 6 minutes sur WhatsApp. GTA V, Elden Ring, Black Myth Wukong et Cyberpunk fonctionnent impeccablement en ultra.",
+    date: "Il y a 2 jours",
+    avatar: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=120&q=80"
   },
   {
-    author: "Karim B.",
-    location: "Oran, Algérie",
-    avatar: "https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?auto=format&fit=crop&w=120&q=80",
+    author: "Yassine B.",
+    location: "Sousse",
     rating: 5,
-    date: "Il y a 4 jours",
+    product: "Black Myth: Wukong — Compte Steam",
+    comment: "Paiement direct par D17 ultra rapide. Le compte est nickel, sauvegarde locale sur mon PC et aucun lag. Je recommande IONARA les yeux fermés !",
+    date: "Hier",
+    avatar: "https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?auto=format&fit=crop&w=120&q=80"
+  },
+  {
+    author: "Karim M.",
+    location: "Sfax",
+    rating: 5,
     product: "Xbox Game Pass Ultimate 1 An",
-    comment: "Paiement ultra simple par BaridiMob. Le vendeur est très sérieux et disponible. 1 an de Game Pass actif sans aucun problème. Meilleur shop gaming du pays !"
+    comment: "12 mois activés sans problème sur ma Xbox Series X. Économie monumentale par rapport aux abonnements classiques. Support au top 7j/7 !",
+    date: "Il y a 4 jours",
+    avatar: "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=120&q=80"
   },
   {
-    author: "Yanis K.",
-    location: "Constantine, Algérie",
-    avatar: "https://images.unsplash.com/photo-1527980965255-d3b416303d12?auto=format&fit=crop&w=120&q=80",
+    author: "Amine S.",
+    location: "Bizerte",
     rating: 5,
+    product: "EA SPORTS FC 27 — Édition Ultimate",
+    comment: "Identifiant et boîte mail reçus instantanément. J'ai pu personnaliser le mot de passe et lier mon email. Très sérieux et professionnel.",
     date: "Il y a 1 semaine",
-    product: "EA SPORTS FC 27",
-    comment: "Service au top, compte propre et sécurisé. J'ai eu une question pour la double authentification et le support m'a répondu en 2 minutes. Bravo l'équipe IONARA !"
-  },
-  {
-    author: "Amine L.",
-    location: "Paris, France",
-    avatar: "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=120&q=80",
-    rating: 5,
-    date: "Il y a 1 semaine",
-    product: "Packs Valorant Points",
-    comment: "Paiement par PayPal rapide, livraison sans prise de tête. Moins cher que sur le store officiel pour les mêmes VP. Je rachèterai ici à coup sûr."
+    avatar: "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&w=120&q=80"
   }
 ];
 
 const FAQ_DATA = [
   {
-    question: "Comment se déroule la livraison de ma commande ?",
-    answer: "Dès validation de votre paiement (BaridiMob, CCP, Carte Bancaire, PayPal ou Crypto), vos identifiants sécurisés (identifiant, mot de passe et accès email) vous sont envoyés en 5 à 15 minutes par email et via WhatsApp avec un guide pas-à-pas."
+    question: "Comment se déroule la livraison de mon compte ?",
+    answer: "Dès validation de votre paiement, vos identifiants sécurisés (identifiant, mot de passe et accès webmail) vous sont envoyés en 5 à 15 minutes par email et via WhatsApp avec un guide pas-à-pas illustré et votre attestation de garantie IONARA."
   },
   {
-    question: "Puis-je modifier l'email et le mot de passe du compte ?",
-    answer: "Oui, à 100% ! Tous nos comptes sont livrés avec un accès complet. Vous devenez l'unique propriétaire du compte et pouvez modifier immédiatement l'adresse email, le mot de passe et ajouter votre propre numéro de téléphone ou l'authentification à deux facteurs (2FA)."
+    question: "Comment fonctionne le Pack 1,000+ Jeux Steam ?",
+    answer: "Il s'agit d'un compte Steam d'exception contenant une bibliothèque colossale de plus de 1 170 jeux achetés et activés légalement, incluant les plus grands blockbusters AAA (GTA V, Red Dead 2, Elden Ring, Baldur's Gate 3, Cyberpunk, Black Myth Wukong, Resident Evil...) ainsi que des centaines de pépites indépendantes."
   },
   {
-    question: "Qu'est-ce que le 'Pack Ultime 1000+ Jeux' ?",
-    answer: "Il s'agit d'un compte Steam d'exception contenant une bibliothèque colossale de plus de 1 170 jeux achetés et activés légalement, incluant les plus grands blockbusters AAA (GTA V, Red Dead 2, Elden Ring, Baldur's Gate 3, Cyberpunk, Resident Evil, etc.) ainsi que des centaines de pépites indépendantes."
-  },
-  {
-    question: "Quels sont les modes de paiement acceptés ?",
-    answer: "Pour les clients en Algérie : BaridiMob (immédiat) et virement CCP. Pour les clients internationaux : Carte Bancaire (Visa / Mastercard), PayPal, et Cryptomonnaies (Binance Pay / USDT). Vous pouvez aussi commander directement via WhatsApp en 1 clic !"
+    question: "Quels sont les modes de paiement acceptés en Tunisie ?",
+    answer: "Pour les clients en Tunisie : D17 (La Poste Tunisienne), Konnect, Virement bancaire / Versement, Flouci et Cartes Bancaires. Pour les clients internationaux : Carte Bancaire (Visa / Mastercard), PayPal, et Cryptomonnaies (Binance Pay / USDT). Vous pouvez aussi commander directement via WhatsApp en 1 clic !"
   },
   {
     question: "Y a-t-il une garantie sur les comptes ?",
-    answer: "Absolument. Tous nos comptes bénéficient d'une garantie anti-récupération et anti-bannissement. Le Pack 1000 Jeux bénéficie d'une garantie à vie, et nos autres jeux d'une garantie d'au moins 1 an avec remplacement immédiat ou assistance 24/7."
+    answer: "Absolument. Tous nos comptes bénéficient d'une garantie officielle IONARA anti-récupération et anti-bannissement. Le Pack 1000 Jeux et Black Myth Wukong bénéficient d'une garantie à vie, avec remplacement immédiat ou assistance 7j/7."
   }
 ];
 
-// Currencies mapping and formatting
+// Currencies mapping and formatting (Default: TND)
 const CURRENCIES = {
-  DZD: { code: "DZD", symbol: "DA", label: "Dinar Algérien (DA)", rate: 1 },
-  EUR: { code: "EUR", symbol: "€", label: "Euro (€)", rate: 1 / 180 },
-  USD: { code: "USD", symbol: "$", label: "Dollar US ($)", rate: 1 / 160 }
+  TND: { code: "TND", symbol: "TND", label: "Dinar Tunisien (TND)", rate: 1 },
+  EUR: { code: "EUR", symbol: "€", label: "Euro (€)", rate: 0.30 },
+  USD: { code: "USD", symbol: "$", label: "Dollar US ($)", rate: 0.32 }
 };

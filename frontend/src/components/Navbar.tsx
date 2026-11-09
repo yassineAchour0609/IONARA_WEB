@@ -153,7 +153,7 @@ export default function Navbar({ onSearchChange }: { onSearchChange?: (val: stri
                   onChange={(e) => setCurrency(e.target.value as CurrencyCode)}
                   className="appearance-none bg-white/[0.05] hover:bg-white/[0.1] border border-white/10 hover:border-pink-500/40 text-xs font-bold text-white rounded-full pl-3 sm:pl-4 pr-7 sm:pr-8 py-1.5 sm:py-2 cursor-pointer focus:outline-none transition shadow-sm"
                 >
-                  <option value="DZD" className="bg-slate-900 text-white">🇩🇿 DZD (DA)</option>
+                  <option value="TND" className="bg-slate-900 text-white">🇹🇳 TND (DT)</option>
                   <option value="EUR" className="bg-slate-900 text-white">🇪🇺 EUR (€)</option>
                   <option value="USD" className="bg-slate-900 text-white">🇺🇸 USD ($)</option>
                 </select>
@@ -261,7 +261,7 @@ export default function Navbar({ onSearchChange }: { onSearchChange?: (val: stri
                   onChange={(e) => setCurrency(e.target.value as CurrencyCode)}
                   className="bg-white/[0.05] border border-white/10 text-xs font-bold text-white rounded-full px-3 py-1"
                 >
-                  <option value="DZD">🇩🇿 DZD (DA)</option>
+                  <option value="TND">🇹🇳 TND (DT)</option>
                   <option value="EUR">🇪🇺 EUR (€)</option>
                   <option value="USD">🇺🇸 USD ($)</option>
                 </select>

@@ -1,4 +1,4 @@
-export type CurrencyCode = 'DZD' | 'EUR' | 'USD';
+export type CurrencyCode = 'TND' | 'EUR' | 'USD';
 
 export interface Product {
   id?: string;
@@ -12,8 +12,10 @@ export interface Product {
   isFeatured?: boolean;
   badge: string;
   tag: string;
-  priceDZD: number;
-  oldPriceDZD: number;
+  priceTND: number;
+  oldPriceTND: number;
+  priceDZD?: number;
+  oldPriceDZD?: number;
   priceEUR: number;
   oldPriceEUR: number;
   priceUSD: number;
@@ -31,7 +33,8 @@ export interface Product {
 export interface CartItem {
   slug: string;
   title: string;
-  priceDZD: number;
+  priceTND: number;
+  priceDZD?: number;
   priceEUR: number;
   priceUSD: number;
   image: string;

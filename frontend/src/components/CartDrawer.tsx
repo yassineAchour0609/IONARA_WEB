@@ -52,16 +52,16 @@ export default function CartDrawer({ onOpenCheckout }: CartDrawerProps) {
     onOpenCheckout();
   };
 
-  const formatItemPrice = (dzd: number, eur: number, usd: number) => {
+  const formatItemPrice = (tnd: number, eur: number, usd: number) => {
     if (currency === 'EUR') return `${eur} €`;
     if (currency === 'USD') return `$${usd}`;
-    return `${dzd.toLocaleString('fr-FR')} DA`;
+    return `${(tnd || 0).toLocaleString('fr-FR')} TND`;
   };
 
   const formatCalcPrice = (val: number) => {
     if (currency === 'EUR') return `${val.toFixed(2)} €`;
     if (currency === 'USD') return `$${val.toFixed(2)}`;
-    return `${Math.round(val).toLocaleString('fr-FR')} DA`;
+    return `${Math.round(val).toLocaleString('fr-FR')} TND`;
   };
 
   return (
@@ -142,7 +142,7 @@ export default function CartDrawer({ onOpenCheckout }: CartDrawerProps) {
 
                       <div className="flex items-center justify-between mt-2">
                         <span className="text-xs font-extrabold text-white">
-                          {formatItemPrice(item.priceDZD, item.priceEUR, item.priceUSD)}
+                          {formatItemPrice(item.priceTND || item.priceDZD || 0, item.priceEUR, item.priceUSD)}
                         </span>
 
                         <div className="flex items-center gap-1.5 bg-black/40 border border-white/10 rounded-lg p-0.5">

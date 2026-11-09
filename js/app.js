@@ -1,11 +1,11 @@
 /**
  * IONARA WEB SHOP - Main Application Logic
- * Gestion des devises, du panier, des filtres, de la recherche et des modals
+ * Gestion des devises (TND, EUR, USD), du panier cyberpunk, des filtres et de la navigation produit
  */
 
 // Application State
 const state = {
-  currentCurrency: localStorage.getItem('ionara_currency') || 'DZD',
+  currentCurrency: localStorage.getItem('ionara_currency') || 'TND',
   activeCategory: 'all',
   searchQuery: '',
   cart: JSON.parse(localStorage.getItem('ionara_cart') || '[]'),
@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
-// Sound Effects via Web Audio API (Zero external assets needed)
+// Sound Effects via Web Audio API
 function playSound(type = 'click') {
   if (!state.soundEnabled) return;
   try {
@@ -92,25 +92,28 @@ function playSound(type = 'click') {
   }
 }
 
-// Currency Formatter
-function formatPrice(dzd, eur, usd) {
+// Currency Formatter - Default to TND (Tunisian Dinar)
+function formatPrice(tnd, eur, usd) {
   if (state.currentCurrency === 'EUR') {
     return `${eur} €`;
   } else if (state.currentCurrency === 'USD') {
     return `$${usd}`;
   } else {
-    return `${dzd.toLocaleString('fr-FR')} DA`;
+    const val = tnd !== undefined ? tnd : 0;
+    return `${val.toLocaleString('fr-FR')} TND`;
   }
 }
 
 function getNumericPrice(product) {
-  if (state.currentCurrency === 'EUR') return product.priceEUR;
-  if (state.currentCurrency === 'USD') return product.priceUSD;
-  return product.priceDZD;
+  if (state.currentCurrency === 'EUR') return product.priceEUR || 0;
+  if (state.currentCurrency === 'USD') return product.priceUSD || 0;
+  return product.priceTND || product.priceDZD || 0;
 }
 
 function getCurrencySymbol() {
-  return CURRENCIES[state.currentCurrency].symbol;
+  if (state.currentCurrency === 'EUR') return '€';
+  if (state.currentCurrency === 'USD') return '$';
+  return 'TND';
 }
 
 // Currency Switcher
@@ -119,7 +122,7 @@ function setCurrency(currency) {
   state.currentCurrency = currency;
   localStorage.setItem('ionara_currency', currency);
   
-  // Update select input and UI
+  // Update all select inputs
   const selects = document.querySelectorAll('.currency-selector');
   selects.forEach(s => s.value = currency);
 
@@ -131,7 +134,7 @@ function setCurrency(currency) {
     openQuickView(state.quickViewProduct.id);
   }
 
-  showToast(`Devise changée : ${CURRENCIES[currency].label}`, 'info');
+  showToast(`Devise sélectionnée : ${CURRENCIES[currency].label}`, 'info');
   playSound('click');
 }
 
@@ -149,11 +152,10 @@ async function loadGamesList() {
     const res = await fetch('assets/games_list.json');
     if (res.ok) {
       state.gamesCatalog = await res.json();
-      console.log(`Loaded ${state.gamesCatalog.length} games for instant search.`);
       updateGamesCountBadge();
     }
   } catch (e) {
-    console.log('Running without local JSON or in direct file mode.');
+    console.log('Running in standalone mode.');
   }
 }
 
@@ -172,6 +174,9 @@ function renderFeaturedSpotlight() {
   const pack = PRODUCTS_DATA.find(p => p.id === 'pack-1000-games');
   if (!pack) return;
 
+  const currentPrice = formatPrice(pack.priceTND || pack.priceDZD, pack.priceEUR, pack.priceUSD);
+  const oldPrice = formatPrice(pack.oldPriceTND || pack.oldPriceDZD, pack.oldPriceEUR, pack.oldPriceUSD);
+
   spotlightContainer.innerHTML = `
     <div class="relative overflow-hidden rounded-3xl border border-pink-500/30 bg-gradient-to-br from-purple-950/60 via-slate-900/80 to-pink-950/40 p-8 lg:p-12 shadow-2xl backdrop-blur-xl">
       <!-- Ambient Backlight -->
@@ -181,7 +186,7 @@ function renderFeaturedSpotlight() {
       <div class="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
         <!-- Poster & Badges -->
         <div class="lg:col-span-5 flex justify-center">
-          <div class="relative group cursor-pointer" onclick="openQuickView('${pack.id}')">
+          <div class="relative group cursor-pointer" onclick="window.location.href='product.html?id=${pack.id}'">
             <div class="absolute -inset-1 rounded-2xl bg-gradient-to-r from-pink-500 via-purple-500 to-cyan-500 opacity-60 blur-lg transition duration-500 group-hover:opacity-100"></div>
             <img 
               src="${pack.image}" 
@@ -214,7 +219,7 @@ function renderFeaturedSpotlight() {
               Compte Steam Ultime : <span class="text-transparent bg-clip-text bg-gradient-to-r from-pink-400 via-purple-300 to-cyan-400">+1,170 Jeux AAA</span>
             </h2>
             <p class="mt-3 text-base sm:text-lg text-zinc-300 leading-relaxed">
-              Le compte ultime rêvé par tout joueur. Une seule connexion pour débloquer GTA V, Red Dead 2, Elden Ring, Baldur's Gate 3, Cyberpunk 2077, God of War et plus d'un millier d'autres titres légendaires.
+              Le compte ultime rêvé par tout joueur. Une seule connexion pour débloquer GTA V, Red Dead 2, Elden Ring, Baldur's Gate 3, Black Myth Wukong, Cyberpunk 2077, God of War et plus d'un millier d'autres titres légendaires.
             </p>
           </div>
 
@@ -236,10 +241,10 @@ function renderFeaturedSpotlight() {
               <div class="text-xs font-medium uppercase text-zinc-400 tracking-wider">Prix Spécial Lancement</div>
               <div class="flex items-baseline gap-3">
                 <span class="text-3xl sm:text-4xl font-extrabold text-white">
-                  ${formatPrice(pack.priceDZD, pack.priceEUR, pack.priceUSD)}
+                  ${currentPrice}
                 </span>
                 <span class="text-lg text-zinc-500 line-through">
-                  ${formatPrice(pack.oldPriceDZD, pack.oldPriceEUR, pack.oldPriceUSD)}
+                  ${oldPrice}
                 </span>
               </div>
             </div>
@@ -252,12 +257,13 @@ function renderFeaturedSpotlight() {
                 <i data-lucide="shopping-bag" class="w-5 h-5"></i>
                 Ajouter au Panier
               </button>
-              <button 
-                onclick="openQuickView('${pack.id}')"
-                class="btn-neon-outline px-6 py-3.5 rounded-xl font-semibold text-zinc-200 text-sm sm:text-base hover:text-white transition cursor-pointer"
+              <a 
+                href="product.html?id=${pack.id}"
+                class="btn-neon-outline px-6 py-3.5 rounded-xl font-semibold text-zinc-200 text-sm sm:text-base hover:text-white transition cursor-pointer flex items-center gap-2"
               >
-                Détails du Compte
-              </button>
+                <span>Fiche Complète</span>
+                <i data-lucide="arrow-right" class="w-4 h-4"></i>
+              </a>
             </div>
           </div>
         </div>
@@ -267,13 +273,16 @@ function renderFeaturedSpotlight() {
   if (window.lucide) lucide.createIcons();
 }
 
-// Reusable Product Card HTML Builder
+// Reusable Product Card HTML Builder - Direct Link to Full Product Page
 function createProductCardHTML(product) {
+  const currentPrice = formatPrice(product.priceTND || product.priceDZD, product.priceEUR, product.priceUSD);
+  const oldPrice = formatPrice(product.oldPriceTND || product.oldPriceDZD, product.oldPriceEUR, product.oldPriceUSD);
+
   return `
     <div class="game-card group relative flex flex-col rounded-2xl border border-white/[0.08] bg-slate-900/60 backdrop-blur-md overflow-hidden transition-all duration-300 hover:border-pink-500/40 hover:shadow-xl hover:shadow-pink-500/10">
       
-      <!-- Poster Image with Badges -->
-      <div class="poster-container relative aspect-[4/5] w-full overflow-hidden bg-black/40 cursor-pointer" onclick="openQuickView('${product.id}')">
+      <!-- Poster Image with Badges - Click leads to full product page -->
+      <div class="poster-container relative aspect-[4/5] w-full overflow-hidden bg-black/40 cursor-pointer" onclick="window.location.href='product.html?id=${product.id}'">
         <img 
           src="${product.image}" 
           alt="${product.title}"
@@ -294,14 +303,15 @@ function createProductCardHTML(product) {
         </div>
 
         <!-- Hover Overlay Button -->
-        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-          <button 
-            onclick="event.stopPropagation(); openQuickView('${product.id}')"
-            class="w-full py-2.5 rounded-xl bg-white/20 hover:bg-white/30 backdrop-blur-md border border-white/30 text-white font-semibold text-xs tracking-wider uppercase transition flex items-center justify-center gap-1.5"
+        <div class="absolute inset-0 bg-gradient-to-t from-black/95 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4 gap-2">
+          <a 
+            href="product.html?id=${product.id}"
+            onclick="event.stopPropagation();"
+            class="w-full py-2.5 rounded-xl bg-pink-500 hover:bg-pink-400 text-white font-bold text-xs tracking-wider uppercase transition flex items-center justify-center gap-1.5 shadow-lg"
           >
             <i data-lucide="eye" class="w-4 h-4"></i>
-            Aperçu Rapide
-          </button>
+            Voir la fiche complète
+          </a>
         </div>
       </div>
 
@@ -315,7 +325,7 @@ function createProductCardHTML(product) {
           </span>
         </div>
 
-        <h3 class="text-lg font-bold text-white group-hover:text-pink-300 transition line-clamp-1 cursor-pointer" onclick="openQuickView('${product.id}')">
+        <h3 class="text-lg font-bold text-white group-hover:text-pink-300 transition line-clamp-1 cursor-pointer" onclick="window.location.href='product.html?id=${product.id}'">
           ${product.title}
         </h3>
         
@@ -337,27 +347,36 @@ function createProductCardHTML(product) {
         <div class="mt-auto pt-4 flex items-center justify-between border-t border-white/[0.06]">
           <div>
             <div class="text-lg font-extrabold text-white">
-              ${formatPrice(product.priceDZD, product.priceEUR, product.priceUSD)}
+              ${currentPrice}
             </div>
             <div class="text-xs text-zinc-500 line-through">
-              ${formatPrice(product.oldPriceDZD, product.oldPriceEUR, product.oldPriceUSD)}
+              ${oldPrice}
             </div>
           </div>
 
-          <button 
-            onclick="addToCart('${product.id}')"
-            class="p-2.5 rounded-xl bg-pink-500/15 hover:bg-pink-500 text-pink-400 hover:text-white border border-pink-500/30 hover:border-pink-500 transition-all duration-200 cursor-pointer shadow-md group/btn"
-            title="Ajouter au panier"
-          >
-            <i data-lucide="shopping-cart" class="w-5 h-5 transition-transform group-hover/btn:scale-110"></i>
-          </button>
+          <div class="flex items-center gap-1.5">
+            <button 
+              onclick="addToCart('${product.id}')"
+              class="p-2.5 rounded-xl bg-pink-500/15 hover:bg-pink-500 text-pink-400 hover:text-white border border-pink-500/30 hover:border-pink-500 transition-all duration-200 cursor-pointer shadow-md group/btn"
+              title="Ajouter au panier"
+            >
+              <i data-lucide="shopping-cart" class="w-4 h-4 transition-transform group-hover/btn:scale-110"></i>
+            </button>
+            <a 
+              href="product.html?id=${product.id}"
+              class="p-2.5 rounded-xl bg-white/5 hover:bg-white/15 text-zinc-300 hover:text-white border border-white/10 transition cursor-pointer"
+              title="Détails"
+            >
+              <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+            </a>
+          </div>
         </div>
       </div>
     </div>
   `;
 }
 
-// Render Top 4 Bestsellers for Homepage (index.html)
+// Render Bestsellers for Homepage
 function renderBestsellers() {
   const container = document.getElementById('bestsellers-grid');
   if (!container) return;
@@ -367,7 +386,7 @@ function renderBestsellers() {
   if (window.lucide) lucide.createIcons();
 }
 
-// Render Full Products Grid for Dedicated Catalog Page (catalog.html)
+// Render Full Products Grid for Catalog Page
 function renderProducts() {
   const container = document.getElementById('products-grid');
   if (!container) return;
@@ -402,7 +421,7 @@ function renderProducts() {
   if (window.lucide) lucide.createIcons();
 }
 
-// Platforms Carousel / List
+// Platforms List
 function renderPlatforms() {
   const container = document.getElementById('platforms-list');
   if (!container) return;
@@ -433,7 +452,7 @@ function renderReviews() {
             <img src="${r.avatar}" alt="${r.author}" class="w-10 h-10 rounded-full object-cover border border-pink-500/30">
             <div>
               <div class="text-sm font-bold text-white">${r.author}</div>
-              <div class="text-xs text-zinc-400">${r.location}</div>
+              <div class="text-xs text-zinc-400">${r.location} (Tunisie)</div>
             </div>
           </div>
           <div class="flex text-amber-400">
@@ -499,9 +518,9 @@ function addToCart(productId) {
     state.cart.push({
       id: product.id,
       title: product.title,
-      priceDZD: product.priceDZD,
-      priceEUR: product.priceEUR,
-      priceUSD: product.priceUSD,
+      priceTND: product.priceTND || product.priceDZD || 0,
+      priceEUR: product.priceEUR || 0,
+      priceUSD: product.priceUSD || 0,
       image: product.image,
       fallbackImage: product.fallbackImage,
       platform: product.platform,
@@ -546,9 +565,9 @@ function saveCart() {
 function getCartTotals() {
   let subtotal = 0;
   state.cart.forEach(item => {
-    let p = item.priceDZD;
-    if (state.currentCurrency === 'EUR') p = item.priceEUR;
-    if (state.currentCurrency === 'USD') p = item.priceUSD;
+    let p = item.priceTND || 0;
+    if (state.currentCurrency === 'EUR') p = item.priceEUR || 0;
+    if (state.currentCurrency === 'USD') p = item.priceUSD || 0;
     subtotal += p * item.quantity;
   });
 
@@ -558,8 +577,8 @@ function getCartTotals() {
   return { subtotal, discount, total };
 }
 
+// Updated & Redesigned Cart Drawer UI
 function updateCartUI() {
-  // Update header badges
   const badgeCounts = document.querySelectorAll('.cart-count-badge');
   const totalCount = state.cart.reduce((sum, i) => sum + i.quantity, 0);
   badgeCounts.forEach(b => {
@@ -574,64 +593,83 @@ function updateCartUI() {
 
   if (!cartItemsContainer) return;
 
+  const symbol = getCurrencySymbol();
+
+  // If Empty
   if (state.cart.length === 0) {
     cartItemsContainer.innerHTML = `
-      <div class="py-16 text-center">
-        <div class="w-16 h-16 mx-auto mb-3 rounded-full bg-white/5 flex items-center justify-center text-zinc-500">
-          <i data-lucide="shopping-bag" class="w-8 h-8"></i>
+      <div class="py-14 text-center px-4 flex flex-col items-center justify-center">
+        <div class="w-20 h-20 mb-4 rounded-3xl bg-gradient-to-br from-pink-500/20 via-purple-500/10 to-cyan-500/10 border border-pink-500/30 flex items-center justify-center shadow-lg shadow-pink-500/10 animate-pulse-glow">
+          <i data-lucide="shopping-bag" class="w-9 h-9 text-pink-400"></i>
         </div>
-        <p class="text-zinc-400 font-medium">Votre panier est vide</p>
-        <p class="text-xs text-zinc-500 mt-1">Explorez nos comptes et ajoutez des jeux !</p>
+        <h4 class="text-white font-bold text-base">Votre panier est vide</h4>
+        <p class="text-xs text-zinc-400 mt-1 max-w-xs leading-relaxed">
+          Explorez nos comptes de jeux vidéo vérifiés avec garantie à vie anti-bannissement.
+        </p>
+        <button 
+          onclick="closeCartDrawer(); window.location.href='catalog.html'" 
+          class="mt-5 btn-neon-magenta px-5 py-2.5 rounded-xl font-bold text-xs text-white inline-flex items-center gap-2 cursor-pointer shadow-md transition"
+        >
+          <i data-lucide="gamepad-2" class="w-4 h-4"></i>
+          Explorer le Catalogue
+        </button>
       </div>
     `;
-    if (cartSubtotalEl) cartSubtotalEl.textContent = `0 ${getCurrencySymbol()}`;
-    if (cartDiscountEl) cartDiscountEl.textContent = `0 ${getCurrencySymbol()}`;
-    if (cartTotalEl) cartTotalEl.textContent = `0 ${getCurrencySymbol()}`;
+    if (cartSubtotalEl) cartSubtotalEl.textContent = `0 ${symbol}`;
+    if (cartDiscountEl) cartDiscountEl.textContent = `0 ${symbol}`;
+    if (cartTotalEl) cartTotalEl.textContent = `0 ${symbol}`;
     if (window.lucide) lucide.createIcons();
     return;
   }
 
-  const symbol = getCurrencySymbol();
   const { subtotal, discount, total } = getCartTotals();
 
+  // Render Cart Items
   cartItemsContainer.innerHTML = state.cart.map(item => {
-    let price = item.priceDZD;
-    if (state.currentCurrency === 'EUR') price = item.priceEUR;
-    if (state.currentCurrency === 'USD') price = item.priceUSD;
+    let price = item.priceTND || 0;
+    if (state.currentCurrency === 'EUR') price = item.priceEUR || 0;
+    if (state.currentCurrency === 'USD') price = item.priceUSD || 0;
 
     return `
-      <div class="flex items-center gap-3.5 p-3 rounded-xl bg-white/[0.03] border border-white/5">
+      <div class="flex items-center gap-3.5 p-3.5 rounded-2xl bg-white/[0.04] hover:bg-white/[0.07] border border-white/10 hover:border-pink-500/30 transition">
         <img 
           src="${item.image}" 
           alt="${item.title}"
           onerror="this.src='${item.fallbackImage}'"
-          class="w-14 h-16 object-cover rounded-lg border border-white/10"
+          class="w-14 h-16 object-cover rounded-xl border border-white/10 shadow-md shrink-0 cursor-pointer"
+          onclick="window.location.href='product.html?id=${item.id}'"
         />
         <div class="flex-1 min-w-0">
-          <h4 class="text-sm font-bold text-white truncate">${item.title}</h4>
-          <span class="text-xs text-pink-400">${item.platform}</span>
-          <div class="text-sm font-semibold text-zinc-200 mt-1">
-            ${(price * item.quantity).toLocaleString()} ${symbol}
+          <h4 class="text-sm font-bold text-white truncate cursor-pointer hover:text-pink-300 transition" onclick="window.location.href='product.html?id=${item.id}'">
+            ${item.title}
+          </h4>
+          <div class="flex items-center gap-2 mt-0.5">
+            <span class="text-[11px] font-semibold text-pink-400">${item.platform}</span>
+            <span class="text-zinc-600">•</span>
+            <span class="text-[10px] text-emerald-400">⚡ 5-15 min</span>
+          </div>
+          <div class="text-sm font-extrabold text-white mt-1">
+            ${(price * item.quantity).toLocaleString('fr-FR')} ${symbol}
           </div>
         </div>
         
-        <div class="flex flex-col items-end gap-1.5">
-          <button onclick="removeFromCart('${item.id}')" class="text-zinc-500 hover:text-red-400 transition p-1">
+        <div class="flex flex-col items-end gap-2 shrink-0">
+          <button onclick="removeFromCart('${item.id}')" class="text-zinc-500 hover:text-rose-400 transition p-1" title="Supprimer">
             <i data-lucide="trash-2" class="w-4 h-4"></i>
           </button>
-          <div class="flex items-center gap-2 bg-black/40 border border-white/10 rounded-lg px-2 py-0.5 text-xs">
-            <button onclick="updateCartQuantity('${item.id}', -1)" class="text-zinc-400 hover:text-white">-</button>
+          <div class="flex items-center gap-1.5 bg-black/50 border border-white/10 rounded-xl px-2 py-0.5 text-xs">
+            <button onclick="updateCartQuantity('${item.id}', -1)" class="w-5 h-5 flex items-center justify-center text-zinc-400 hover:text-white transition cursor-pointer font-bold">-</button>
             <span class="font-bold text-white px-1">${item.quantity}</span>
-            <button onclick="updateCartQuantity('${item.id}', 1)" class="text-zinc-400 hover:text-white">+</button>
+            <button onclick="updateCartQuantity('${item.id}', 1)" class="w-5 h-5 flex items-center justify-center text-zinc-400 hover:text-white transition cursor-pointer font-bold">+</button>
           </div>
         </div>
       </div>
     `;
   }).join('');
 
-  if (cartSubtotalEl) cartSubtotalEl.textContent = `${Math.round(subtotal).toLocaleString()} ${symbol}`;
-  if (cartDiscountEl) cartDiscountEl.textContent = `-${Math.round(discount).toLocaleString()} ${symbol}`;
-  if (cartTotalEl) cartTotalEl.textContent = `${Math.round(total).toLocaleString()} ${symbol}`;
+  if (cartSubtotalEl) cartSubtotalEl.textContent = `${Math.round(subtotal).toLocaleString('fr-FR')} ${symbol}`;
+  if (cartDiscountEl) cartDiscountEl.textContent = `-${Math.round(discount).toLocaleString('fr-FR')} ${symbol}`;
+  if (cartTotalEl) cartTotalEl.textContent = `${Math.round(total).toLocaleString('fr-FR')} ${symbol}`;
 
   if (window.lucide) lucide.createIcons();
 }
@@ -667,12 +705,12 @@ function applyPromoCode() {
     state.promoDiscount = 10;
     state.activePromoCode = code;
     updateCartUI();
-    showToast(`Code ${code} appliqué : -10% de réduction !`, 'success');
+    showToast(`Code ${code} appliqué : -10% de réduction immédiate !`, 'success');
   } else if (code === 'VIP20') {
     state.promoDiscount = 20;
     state.activePromoCode = code;
     updateCartUI();
-    showToast(`Code VIP20 appliqué : -20% de réduction !`, 'success');
+    showToast(`Code VIP20 appliqué : -20% de réduction VIP !`, 'success');
   } else {
     showToast('Code promo invalide. Essayez "IONARA10"', 'error');
   }
@@ -687,6 +725,9 @@ function openQuickView(productId) {
   const modal = document.getElementById('quickview-modal');
   const body = document.getElementById('quickview-body');
   if (!modal || !body) return;
+
+  const currentPrice = formatPrice(product.priceTND || product.priceDZD, product.priceEUR, product.priceUSD);
+  const oldPrice = formatPrice(product.oldPriceTND || product.oldPriceDZD, product.oldPriceEUR, product.oldPriceUSD);
 
   body.innerHTML = `
     <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
@@ -742,7 +783,7 @@ function openQuickView(productId) {
 
         <!-- Features -->
         <div class="space-y-2 py-2">
-          <h4 class="text-xs font-bold uppercase tracking-wider text-zinc-400">Ce qui est garanti :</h4>
+          <h4 class="text-xs font-bold uppercase tracking-wider text-zinc-400">Avantages garantis :</h4>
           ${product.features.map(f => `
             <div class="flex items-center gap-2 text-xs text-zinc-200">
               <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-400 shrink-0"></i>
@@ -755,20 +796,28 @@ function openQuickView(productId) {
         <div class="pt-4 flex flex-wrap items-center gap-4">
           <div>
             <div class="text-2xl font-extrabold text-white">
-              ${formatPrice(product.priceDZD, product.priceEUR, product.priceUSD)}
+              ${currentPrice}
             </div>
             <div class="text-xs text-zinc-500 line-through">
-              ${formatPrice(product.oldPriceDZD, product.oldPriceEUR, product.oldPriceUSD)}
+              ${oldPrice}
             </div>
           </div>
 
-          <button 
-            onclick="addToCart('${product.id}'); closeQuickView();"
-            class="flex-1 btn-neon-magenta py-3 px-6 rounded-xl font-bold text-white text-sm flex items-center justify-center gap-2 cursor-pointer shadow-lg"
-          >
-            <i data-lucide="shopping-bag" class="w-4 h-4"></i>
-            Ajouter au Panier
-          </button>
+          <div class="flex-1 flex gap-3">
+            <button 
+              onclick="addToCart('${product.id}'); closeQuickView();"
+              class="flex-1 btn-neon-magenta py-3 px-6 rounded-xl font-bold text-white text-sm flex items-center justify-center gap-2 cursor-pointer shadow-lg"
+            >
+              <i data-lucide="shopping-bag" class="w-4 h-4"></i>
+              Ajouter au Panier
+            </button>
+            <a 
+              href="product.html?id=${product.id}"
+              class="btn-neon-outline py-3 px-5 rounded-xl font-bold text-white text-sm flex items-center justify-center gap-2 cursor-pointer"
+            >
+              Fiche Complète →
+            </a>
+          </div>
         </div>
       </div>
     </div>
@@ -850,29 +899,56 @@ function closeCheckoutModal() {
   }
 }
 
+// Quick WhatsApp Order from cart
+function orderViaWhatsApp() {
+  if (state.cart.length === 0) {
+    showToast('Votre panier est vide !', 'error');
+    return;
+  }
+
+  const { total } = getCartTotals();
+  const symbol = getCurrencySymbol();
+
+  let message = `Bonjour IONARA ! 🎮 Je souhaite passer commande :\n\n`;
+  state.cart.forEach(item => {
+    let p = item.priceTND || 0;
+    if (state.currentCurrency === 'EUR') p = item.priceEUR || 0;
+    if (state.currentCurrency === 'USD') p = item.priceUSD || 0;
+    message += `• ${item.title} (x${item.quantity}) - ${(p * item.quantity).toLocaleString('fr-FR')} ${symbol}\n`;
+  });
+  message += `\n💰 Total : ${Math.round(total).toLocaleString('fr-FR')} ${symbol}`;
+  message += `\n🇹🇳 Moyen de paiement souhaité : D17 / Virement / Konnect / Autre`;
+  message += `\n⚡ Merci de me transmettre les coordonnées pour finaliser la livraison en 5 min.`;
+
+  const encoded = encodeURIComponent(message);
+  // IONARA official WhatsApp
+  const whatsappUrl = `https://wa.me/21629000000?text=${encoded}`;
+  window.open(whatsappUrl, '_blank');
+}
+
 function submitOrder(e) {
   e.preventDefault();
   const name = document.getElementById('order-name').value.trim();
   const phone = document.getElementById('order-phone').value.trim();
   const email = document.getElementById('order-email').value.trim();
-  const paymentMethod = document.querySelector('input[name="payment_method"]:checked')?.value || 'BaridiMob';
+  const paymentMethod = document.querySelector('input[name="payment_method"]:checked')?.value || 'D17 (Tunisie)';
 
   const { total } = getCartTotals();
   const symbol = getCurrencySymbol();
 
   // Create WhatsApp prefilled message
-  let message = `Bonjour IONARA ! 🎮 Je souhaite commander :\n\n`;
+  let message = `Bonjour IONARA ! 🎮 Nouvelle commande effectuée sur le site :\n\n`;
   state.cart.forEach(item => {
     message += `• ${item.title} (x${item.quantity})\n`;
   });
-  message += `\n💰 Total : ${Math.round(total).toLocaleString()} ${symbol}`;
+  message += `\n💰 Total : ${Math.round(total).toLocaleString('fr-FR')} ${symbol}`;
   message += `\n👤 Client : ${name}`;
   message += `\n📱 WhatsApp / Tél : ${phone}`;
   message += `\n📧 Email : ${email}`;
-  message += `\n💳 Mode de paiement choisi : ${paymentMethod}`;
+  message += `\n💳 Paiement : ${paymentMethod}`;
 
   const encoded = encodeURIComponent(message);
-  const whatsappUrl = `https://wa.me/213555000000?text=${encoded}`; // Ready for real phone number
+  const whatsappUrl = `https://wa.me/21629000000?text=${encoded}`;
 
   // Clear cart and show confirmation
   state.cart = [];
@@ -880,19 +956,19 @@ function submitOrder(e) {
   updateCartUI();
   closeCheckoutModal();
 
-  showToast('Commande envoyée ! Redirection vers WhatsApp...', 'success');
+  showToast('Commande validée ! Redirection vers le support WhatsApp...', 'success');
   window.open(whatsappUrl, '_blank');
 }
 
-// Global Search Shortcuts (Ctrl + K)
+// Global Search Shortcuts (Ctrl + K) & Event Listeners
 function setupEventListeners() {
   document.addEventListener('keydown', (e) => {
     if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
       e.preventDefault();
-      const searchInput = document.getElementById('main-search-input');
-      if (searchInput) {
-        searchInput.focus();
-        searchInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      const navInput = document.getElementById('navbar-search-input');
+      if (navInput) {
+        navInput.focus();
+        navInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
       }
     }
   });
@@ -914,16 +990,14 @@ function setupEventListeners() {
     });
   });
 
-  // Navbar & Global Search Inputs
+  // Navbar Search Inputs
   const navSearch = document.getElementById('navbar-search-input');
   const mobileSearch = document.getElementById('mobile-search-input');
-  const mainSearch = document.getElementById('main-search-input');
 
   const handleSearchKey = (e) => {
     if (e.key === 'Enter') {
       const val = e.target.value.trim();
       if (!document.getElementById('products-grid')) {
-        // On homepage, redirect to dedicated catalog page with search parameter!
         window.location.href = `catalog.html?search=${encodeURIComponent(val)}`;
       }
     }
@@ -933,7 +1007,6 @@ function setupEventListeners() {
     state.searchQuery = val.trim();
     if (navSearch && navSearch.value !== val) navSearch.value = val;
     if (mobileSearch && mobileSearch.value !== val) mobileSearch.value = val;
-    if (mainSearch && mainSearch.value !== val) mainSearch.value = val;
     if (document.getElementById('products-grid')) {
       renderProducts();
     }
@@ -946,10 +1019,6 @@ function setupEventListeners() {
   if (mobileSearch) {
     mobileSearch.addEventListener('input', (e) => handleGlobalSearch(e.target.value));
     mobileSearch.addEventListener('keydown', handleSearchKey);
-  }
-  if (mainSearch) {
-    mainSearch.addEventListener('input', (e) => handleGlobalSearch(e.target.value));
-    mainSearch.addEventListener('keydown', handleSearchKey);
   }
 
   // Sound toggle button
@@ -970,7 +1039,7 @@ function setupEventListeners() {
 function resetFilters() {
   state.activeCategory = 'all';
   state.searchQuery = '';
-  const searchInput = document.getElementById('main-search-input') || document.getElementById('catalog-search-input');
+  const searchInput = document.getElementById('navbar-search-input') || document.getElementById('catalog-search-input');
   if (searchInput) searchInput.value = '';
 
   const filterButtons = document.querySelectorAll('.filter-btn');
@@ -988,7 +1057,6 @@ function resetFilters() {
 }
 
 window.filterCategory = function(cat) {
-  // If we are on index.html (no products-grid), redirect to catalog.html with parameter
   if (!document.getElementById('products-grid')) {
     window.location.href = `catalog.html?category=${encodeURIComponent(cat)}`;
     return;

@@ -43,7 +43,7 @@ interface ShopContextType {
 const ShopContext = createContext<ShopContextType | undefined>(undefined);
 
 export function ShopProvider({ children }: { children: React.ReactNode }) {
-  const [currency, setCurrencyState] = useState<CurrencyCode>('DZD');
+  const [currency, setCurrencyState] = useState<CurrencyCode>('TND');
   const [cart, setCart] = useState<CartItem[]>([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [promoCode, setPromoCode] = useState('');
@@ -83,10 +83,10 @@ export function ShopProvider({ children }: { children: React.ReactNode }) {
     showToast(`Devise modifiée en ${code}`, 'info');
   };
 
-  const formatPrice = (dzd: number, eur: number, usd: number) => {
+  const formatPrice = (tnd: number, eur: number, usd: number) => {
     if (currency === 'EUR') return `${eur} €`;
     if (currency === 'USD') return `$${usd}`;
-    return `${dzd.toLocaleString('fr-FR')} DA`;
+    return `${(tnd || 0).toLocaleString('fr-FR')} TND`;
   };
 
   const showToast = (message: string, type: 'success' | 'error' | 'info' = 'info') => {
@@ -109,6 +109,7 @@ export function ShopProvider({ children }: { children: React.ReactNode }) {
           {
             slug: product.slug,
             title: product.title,
+            priceTND: product.priceTND || product.priceDZD || 0,
             priceDZD: product.priceDZD,
             priceEUR: product.priceEUR,
             priceUSD: product.priceUSD,
@@ -177,7 +178,7 @@ export function ShopProvider({ children }: { children: React.ReactNode }) {
   const cartCount = cart.reduce((sum, i) => sum + i.quantity, 0);
 
   const cartSubtotal = cart.reduce((sum, item) => {
-    const p = currency === 'EUR' ? item.priceEUR : currency === 'USD' ? item.priceUSD : item.priceDZD;
+    const p = currency === 'EUR' ? item.priceEUR : currency === 'USD' ? item.priceUSD : (item.priceTND || item.priceDZD || 0);
     return sum + p * item.quantity;
   }, 0);
 

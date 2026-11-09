@@ -48,21 +48,6 @@ export default function Hero({
               Achetez vos <strong>comptes de jeux vidéo</strong> vérifiés en toute sécurité. Accès complet avec email et mot de passe personnalisables, garantie anti-bannissement et support client 24/7.
             </p>
 
-            {/* Live Search Input */}
-            <div className="max-w-xl mx-auto lg:mx-0 relative group">
-              <div className="absolute -inset-1 rounded-2xl bg-gradient-to-r from-pink-500/30 to-blue-500/30 opacity-75 blur-md group-focus-within:opacity-100 transition duration-300"></div>
-              <div className="relative flex items-center bg-slate-900/90 border border-white/10 rounded-2xl px-4 py-3 shadow-2xl backdrop-blur-xl">
-                <Search className="w-5 h-5 text-pink-400 shrink-0 mr-3" />
-                <input
-                  type="text"
-                  value={searchValue}
-                  onChange={(e) => onSearchChange && onSearchChange(e.target.value)}
-                  placeholder="Rechercher un jeu (GTA 6, FC 27, Elden Ring, Call of Duty...)"
-                  className="w-full bg-transparent text-sm text-white placeholder-zinc-500 focus:outline-none"
-                />
-              </div>
-            </div>
-
             {/* CTAs */}
             <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-1">
               <a
@@ -135,7 +120,7 @@ export default function Hero({
                     <p className="text-xs text-zinc-300 mt-0.5">{gta.subtitle}</p>
                     <div className="mt-3 flex items-center justify-between">
                       <span className="text-xl font-extrabold text-white">
-                        {formatPrice(gta.priceDZD, gta.priceEUR, gta.priceUSD)}
+                        {formatPrice(gta.priceTND || gta.priceDZD || 79, gta.priceEUR, gta.priceUSD)}
                       </span>
                       <button className="px-4 py-2 rounded-xl bg-pink-500 text-white font-bold text-xs hover:bg-pink-400 transition shadow-lg">
                         Voir l'offre →

@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="fr" class="dark scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fiche Produit — IONARA Gaming Store</title>
+  <meta name="description" content="Achetez vos comptes de jeux vidéo vérifiés avec garantie à vie anti-bannissement et support 7j/7 en Tunisie.">
+  <link rel="icon" type="image/svg+xml" href="assets/logo/ionara-logo.svg">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            ionara: {
+              magenta: '#d868d1',
+              blue: '#3b82f6',
+              cyan: '#06b6d4',
+              dark: '#08090e',
+              card: 'rgba(18, 21, 31, 0.7)'
+            }
+          },
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+            gaming: ['Orbitron', 'sans-serif'],
+            headline: ['Outfit', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-[#08090e] text-zinc-100 min-h-screen flex flex-col font-sans selection:bg-pink-500/30 selection:text-white relative overflow-x-hidden">
+
+  <!-- Ambient Glowing Orbs -->
+  <div class="ambient-glow-magenta top-0 -left-48"></div>
+  <div class="ambient-glow-blue top-96 -right-48"></div>
+  <div class="ambient-glow-cyan bottom-40 left-1/3"></div>
+
+  <!-- Background Cyber Grid -->
+  <div class="fixed inset-0 bg-cyber-grid opacity-30 pointer-events-none z-0"></div>
+
+  <!-- ========================================== -->
+  <!-- FLOATING NAVIGATION BAR -->
+  <!-- ========================================== -->
+  <header class="sticky top-4 z-40 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+    <div class="glass-panel navbar-capsule rounded-full px-4 sm:px-6 py-2.5 sm:py-3 flex items-center justify-between transition-all duration-300">
+      
+      <!-- LEFT: BRAND LOGO -->
+      <a href="index.html" class="flex items-center gap-2.5 group shrink-0">
+        <div class="relative w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-gradient-to-tr from-pink-500 via-purple-600 to-cyan-400 p-[1.5px] transition-transform duration-300 group-hover:scale-105 shadow-lg shadow-pink-500/30">
+          <div class="w-full h-full rounded-full bg-black flex items-center justify-center overflow-hidden">
+            <img src="assets/logo/ionara-logo.svg" alt="IONARA" class="w-5 h-5 object-contain" onerror="this.src='public/assets/logo/ionara-logo.svg'">
+          </div>
+        </div>
+        <div class="flex items-center gap-1.5">
+          <img src="assets/logo/ionara-wordmark.svg" alt="IONARA" class="h-5 sm:h-6 object-contain hidden xs:block" onerror="this.style.display='none'">
+          <span class="text-[10px] font-extrabold tracking-widest uppercase px-2 py-0.5 rounded-full bg-gradient-to-r from-pink-500/20 to-blue-500/20 text-pink-300 border border-pink-500/30">
+            STORE
+          </span>
+        </div>
+      </a>
+
+      <!-- CENTER: NAVIGATION LINKS -->
+      <nav class="hidden md:flex items-center gap-1 lg:gap-2">
+        <a href="index.html" class="px-3.5 py-1.5 rounded-full text-xs font-semibold text-zinc-300 hover:text-white hover:bg-white/[0.08] transition">
+          Accueil
+        </a>
+        <a href="catalog.html" class="px-3.5 py-1.5 rounded-full text-xs font-bold text-white bg-white/[0.08] border border-white/10 transition flex items-center gap-1.5">
+          <i data-lucide="grid" class="w-3.5 h-3.5 text-pink-400"></i>
+          Catalogue
+        </a>
+        <a href="catalog.html?category=steam" class="px-3.5 py-1.5 rounded-full text-xs font-semibold text-zinc-300 hover:text-white hover:bg-white/[0.08] transition flex items-center gap-1.5">
+          <i data-lucide="flame" class="w-3.5 h-3.5 text-pink-400"></i>
+          Pack 1,000+
+        </a>
+      </nav>
+
+      <!-- RIGHT: CURRENCY, CART & SUPPORT -->
+      <div class="flex items-center gap-2 sm:gap-3 shrink-0">
+        
+        <!-- Currency Selector Pill -->
+        <div class="relative flex items-center bg-white/[0.05] hover:bg-white/[0.09] border border-white/10 hover:border-pink-500/40 rounded-full px-2.5 sm:px-3 py-1.5 transition">
+          <span class="text-[11px] sm:text-xs font-black text-pink-400 mr-1 sm:mr-1.5">💱</span>
+          <select 
+            class="currency-selector bg-transparent text-white font-bold text-xs cursor-pointer focus:outline-none pr-1 appearance-none"
+            title="Changer de devise"
+          >
+            <option value="TND" class="bg-slate-900 text-white">🇹🇳 TND (DT)</option>
+            <option value="EUR" class="bg-slate-900 text-white">🇪🇺 EUR (€)</option>
+            <option value="USD" class="bg-slate-900 text-white">🇺🇸 USD ($)</option>
+          </select>
+          <i data-lucide="chevron-down" class="w-3 h-3 text-zinc-400 pointer-events-none"></i>
+        </div>
+
+        <!-- Cart Button -->
+        <button 
+          onclick="openCartDrawer()" 
+          class="relative w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-pink-500/20 hover:bg-pink-500/35 border border-pink-500/40 hover:border-pink-500/60 flex items-center justify-center text-pink-300 hover:text-white transition shadow-lg shadow-pink-500/20 cursor-pointer"
+          title="Ouvrir le panier"
+        >
+          <i data-lucide="shopping-cart" class="w-4 h-4"></i>
+          <span class="cart-count-badge hidden absolute -top-1 -right-1 w-5 h-5 rounded-full bg-gradient-to-r from-pink-500 to-rose-500 text-[10px] font-black text-white flex items-center justify-center shadow-md animate-pulse">
+            0
+          </span>
+        </button>
+
+        <!-- Direct WhatsApp Support Button -->
+        <a 
+          href="https://wa.me/21629000000?text=Bonjour%20IONARA%20!%20J'ai%20une%20question%20sur%20un%20jeu."
+          target="_blank"
+          class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-500/15 hover:bg-emerald-500/25 border border-emerald-500/30 text-emerald-300 text-xs font-bold transition"
+        >
+          <i data-lucide="message-circle" class="w-3.5 h-3.5 text-emerald-400"></i>
+          <span>Support 7j/7</span>
+        </a>
+
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ========================================== -->
+  <!-- MAIN PRODUCT SECTION -->
+  <!-- ========================================== -->
+  <main class="relative z-10 flex-1 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10 w-full">
+
+    <!-- BREADCRUMBS & BACK LINK (Arcetis Style) -->
+    <div class="flex items-center justify-between pb-6 mb-6 border-b border-white/[0.08]">
+      <a 
+        href="catalog.html"
+        class="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold text-zinc-400 hover:text-pink-400 transition group"
+      >
+        <i data-lucide="arrow-left" class="w-4 h-4 transition-transform group-hover:-translate-x-1"></i>
+        <span>Retour au catalogue des jeux</span>
+      </a>
+
+      <div class="hidden sm:flex items-center gap-2 text-xs text-zinc-500 font-medium">
+        <span>Boutique</span>
+        <span>/</span>
+        <span id="breadcrumb-category" class="text-zinc-400">Steam</span>
+        <span>/</span>
+        <span id="breadcrumb-title" class="text-pink-300 font-semibold truncate max-w-xs">Fiche Produit</span>
+      </div>
+    </div>
+
+    <!-- 2-COLUMN MAIN PRODUCT LAYOUT -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-10 items-start">
+      
+      <!-- ================= LEFT COLUMN: HERO CARD & DETAILS ================= -->
+      <div class="lg:col-span-7 space-y-6">
+        
+        <!-- MAIN PRESENTATION CARD (Image + Hero Meta) -->
+        <div class="glass-panel rounded-3xl p-6 sm:p-8 border border-white/10 shadow-2xl relative overflow-hidden">
+          
+          <!-- Subtle Glow Behind Card -->
+          <div class="absolute -top-24 -right-24 w-80 h-80 rounded-full bg-pink-500/10 blur-3xl pointer-events-none"></div>
+
+          <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-start">
+            
+            <!-- Product Box Art / Poster (Arcetis Left-Side Poster) -->
+            <div class="md:col-span-5 relative group">
+              <div class="relative aspect-[3/4] rounded-2xl overflow-hidden bg-black/60 border border-white/10 shadow-2xl">
+                <img 
+                  id="product-cover-img"
+                  src="assets/games/black-myth-wukong.png" 
+                  alt="Game Cover"
+                  class="w-full h-full object-cover object-center transform transition duration-500 group-hover:scale-105"
+                  onerror="this.src='public/assets/games/1000-games-pack.png'"
+                />
+                <!-- Subtle Gradient Overlay -->
+                <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none"></div>
+              </div>
+            </div>
+
+            <!-- Title & Meta Badges (Arcetis Right-Side Information) -->
+            <div class="md:col-span-7 space-y-4">
+              
+              <!-- Badges Row -->
+              <div class="flex flex-wrap items-center gap-2">
+                <span id="product-badge-platform" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-white/10 border border-white/15 text-white shadow-sm">
+                  <i data-lucide="gamepad" class="w-3.5 h-3.5 text-pink-400"></i>
+                  <span id="product-platform-text">Steam</span>
+                </span>
+                
+                <span id="product-badge-type" class="px-3 py-1 rounded-full text-xs font-bold uppercase bg-pink-500/20 text-pink-300 border border-pink-500/30">
+                  Compte Personnel Garanti
+                </span>
+                
+                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/15 text-emerald-400 border border-emerald-500/30">
+                  <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+                  En Stock
+                </span>
+
+                <span id="product-sold-badge" class="px-2.5 py-1 rounded-full text-xs font-semibold bg-amber-500/10 text-amber-300 border border-amber-500/20 flex items-center gap-1">
+                  <i data-lucide="flame" class="w-3 h-3 text-amber-400"></i>
+                  <span>142 vendus</span>
+                </span>
+              </div>
+
+              <!-- Main Title -->
+              <div>
+                <h1 id="product-title" class="text-2xl sm:text-3xl lg:text-4xl font-black text-white leading-tight font-headline">
+                  Black Myth: Wukong — Édition Mythique Steam
+                </h1>
+                <p id="product-subtitle" class="text-sm text-zinc-400 mt-1.5 leading-relaxed">
+                  Compte Steam Garanti & Accès Immédiat
+                </p>
+              </div>
+
+              <!-- Review Stars & Delivery Specs -->
+              <div class="flex flex-wrap items-center gap-4 text-xs text-zinc-300 pt-2 border-t border-white/[0.08]">
+                <div class="flex items-center gap-1 text-amber-400 font-bold">
+                  <div class="flex">
+                    <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
+                    <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
+                    <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
+                    <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
+                    <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
+                  </div>
+                  <span id="product-rating-text" class="text-white ml-1">5.0</span>
+                  <span id="product-reviews-text" class="text-zinc-500">(194 avis)</span>
+                </div>
+                <span>•</span>
+                <div class="flex items-center gap-1 text-zinc-300">
+                  <i data-lucide="zap" class="w-3.5 h-3.5 text-amber-400"></i>
+                  <span>Livraison : <strong id="product-delivery-text" class="text-white">5 - 15 minutes</strong></span>
+                </div>
+              </div>
+
+              <!-- Trust Highlights Checklist -->
+              <div class="space-y-2 pt-2 text-xs text-zinc-300">
+                <div class="flex items-center gap-2 text-emerald-400">
+                  <i data-lucide="check-circle" class="w-4 h-4 shrink-0"></i>
+                  <span class="text-zinc-200">Identifiants 100% personnels avec email et mot de passe modifiables</span>
+                </div>
+                <div class="flex items-center gap-2 text-cyan-400">
+                  <i data-lucide="shield-check" class="w-4 h-4 shrink-0"></i>
+                  <span class="text-zinc-200">Garantie à vie officielle anti-récupération & anti-ban IONARA</span>
+                </div>
+                <div class="flex items-center gap-2 text-pink-400">
+                  <i data-lucide="headphones" class="w-4 h-4 shrink-0"></i>
+                  <span class="text-zinc-200">Assistance client 7j/7 jusqu'au premier lancement de votre jeu</span>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- DESCRIPTION & FEATURES CARD (Arcetis Bullet Points Style) -->
+        <div class="glass-panel rounded-3xl p-6 sm:p-8 border border-white/10 shadow-xl space-y-5">
+          <div class="flex items-center gap-2.5 pb-3 border-b border-white/10">
+            <div class="w-8 h-8 rounded-xl bg-pink-500/20 text-pink-400 flex items-center justify-center">
+              <i data-lucide="file-text" class="w-4 h-4"></i>
+            </div>
+            <div>
+              <h3 class="text-base font-bold text-white uppercase tracking-wider font-headline">Description & Avantages Clés</h3>
+              <p class="text-[11px] text-zinc-400">Tout ce qui est inclus et garanti lors de votre achat</p>
+            </div>
+          </div>
+
+          <!-- Paragraph Summary -->
+          <p id="product-description-full" class="text-sm text-zinc-300 leading-relaxed">
+            Incarnez le Prédestiné dans un voyage spectaculaire à travers les légendes chinoises. Affrontez des boss colossaux dans un action-RPG révolutionnaire propulsé par l'Unreal Engine 5.
+          </p>
+
+          <!-- Arcetis-Inspired Bullet Features -->
+          <div class="space-y-3.5 pt-2" id="product-features-container">
+            <!-- Rendered dynamically -->
+          </div>
+        </div>
+
+        <!-- ADDITIONAL INFORMATION / SPÉCIFICATIONS TECHNIQUES -->
+        <div class="glass-panel rounded-3xl p-6 sm:p-8 border border-white/10 shadow-xl space-y-5">
+          <div class="flex items-center gap-2.5 pb-3 border-b border-white/10">
+            <div class="w-8 h-8 rounded-xl bg-cyan-500/20 text-cyan-400 flex items-center justify-center">
+              <i data-lucide="info" class="w-4 h-4"></i>
+            </div>
+            <div>
+              <h3 class="text-base font-bold text-white uppercase tracking-wider font-headline">Informations Complémentaires</h3>
+              <p class="text-[11px] text-zinc-400">Spécifications officielles et conditions de licence</p>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
+            <div class="p-3.5 rounded-2xl bg-white/[0.03] border border-white/5 space-y-1">
+              <span class="text-zinc-500 uppercase tracking-wider text-[10px] font-bold">Plateforme Officielle</span>
+              <p id="spec-platform" class="text-white font-semibold text-sm">Steam / PC</p>
+            </div>
+            <div class="p-3.5 rounded-2xl bg-white/[0.03] border border-white/5 space-y-1">
+              <span class="text-zinc-500 uppercase tracking-wider text-[10px] font-bold">Région</span>
+              <p class="text-emerald-400 font-semibold text-sm">Region-Free (Monde Entier)</p>
+            </div>
+            <div class="p-3.5 rounded-2xl bg-white/[0.03] border border-white/5 space-y-1">
+              <span class="text-zinc-500 uppercase tracking-wider text-[10px] font-bold">Format de Livraison</span>
+              <p class="text-white font-semibold text-sm">Digital Express (Email + WhatsApp)</p>
+            </div>
+            <div class="p-3.5 rounded-2xl bg-white/[0.03] border border-white/5 space-y-1">
+              <span class="text-zinc-500 uppercase tracking-wider text-[10px] font-bold">Garantie & Support</span>
+              <p id="spec-guarantee" class="text-pink-300 font-semibold text-sm">Garantie à Vie IONARA</p>
+            </div>
+          </div>
+
+          <!-- Pack Content Checklist -->
+          <div class="p-4 rounded-2xl bg-slate-900/80 border border-white/5 space-y-2.5">
+            <span class="text-zinc-400 uppercase tracking-wider text-[10px] font-bold">Contenu du Pack Livré :</span>
+            <ul class="space-y-1.5 text-xs text-zinc-300">
+              <li class="flex items-center gap-2">
+                <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-400"></i>
+                <span>1x Identifiant de connexion direct au compte de jeu</span>
+              </li>
+              <li class="flex items-center gap-2">
+                <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-400"></i>
+                <span>1x Mot de passe sécurisé (100% modifiable à tout moment)</span>
+              </li>
+              <li class="flex items-center gap-2">
+                <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-400"></i>
+                <span>1x Boîte mail associée et codes de validation directe</span>
+              </li>
+              <li class="flex items-center gap-2">
+                <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-400"></i>
+                <span>1x Guide pas-à-pas illustré de configuration en 3 minutes</span>
+              </li>
+              <li class="flex items-center gap-2">
+                <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-400"></i>
+                <span>1x Fiche PDF officielle de garantie IONARA Enterprise (1976 - 2026)</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ================= RIGHT COLUMN: BUY BOX & CONTACT (Arcetis Right-Side Card) ================= -->
+      <div class="lg:col-span-5 space-y-6 lg:sticky lg:top-24">
+        
+        <!-- BUY BOX CARD -->
+        <div class="glass-panel rounded-3xl p-6 sm:p-8 border border-white/10 shadow-2xl space-y-6 relative overflow-hidden">
+          
+          <!-- Cyber Ambient Accent -->
+          <div class="absolute -top-10 -right-10 w-40 h-40 rounded-full bg-pink-500/20 blur-2xl pointer-events-none"></div>
+
+          <!-- Price Display (Large Arcetis Style) -->
+          <div class="pb-5 border-b border-white/10">
+            <div class="flex items-baseline justify-between">
+              <div>
+                <span class="text-[11px] font-bold text-zinc-400 uppercase tracking-wider">Prix de l'offre</span>
+                <div class="flex items-baseline gap-3 mt-1">
+                  <span id="buy-current-price" class="text-3xl sm:text-4xl font-black text-white font-headline">
+                    25 TND
+                  </span>
+                  <span id="buy-old-price" class="text-base text-zinc-500 line-through">
+                    60 TND
+                  </span>
+                </div>
+              </div>
+
+              <span id="buy-discount-badge" class="px-3 py-1 rounded-full text-xs font-black bg-pink-500/20 text-pink-300 border border-pink-500/30">
+                -58% PROMO
+              </span>
+            </div>
+
+            <div class="mt-2 text-[11px] font-semibold text-zinc-400 uppercase tracking-wider">
+              Paiement unique • Tous frais inclus • Aucun abonnement
+            </div>
+          </div>
+
+          <!-- Actions CTA Buttons -->
+          <div class="space-y-3">
+            <!-- Buy Now Button (High Contrast White / Primary) -->
+            <button 
+              id="btn-buy-now"
+              class="w-full py-4 rounded-2xl bg-white hover:bg-zinc-200 text-slate-950 font-black text-sm sm:text-base flex items-center justify-center gap-2 cursor-pointer transition shadow-xl hover:shadow-2xl hover:scale-[1.01]"
+            >
+              <i data-lucide="credit-card" class="w-5 h-5"></i>
+              Acheter Maintenant
+            </button>
+
+            <!-- Add to Cart Button (Neon Magenta) -->
+            <button 
+              id="btn-add-cart"
+              class="w-full btn-neon-magenta py-3.5 rounded-2xl font-bold text-white text-sm flex items-center justify-center gap-2 cursor-pointer shadow-lg transition"
+            >
+              <i data-lucide="shopping-cart" class="w-4 h-4"></i>
+              Ajouter au Panier
+            </button>
+
+            <!-- WhatsApp Fast Track Button -->
+            <button 
+              id="btn-whatsapp-order"
+              class="w-full py-3 rounded-2xl bg-emerald-500/15 hover:bg-emerald-500/25 border border-emerald-500/30 text-emerald-300 hover:text-white font-bold text-xs flex items-center justify-center gap-2 transition cursor-pointer"
+            >
+              <i data-lucide="message-circle" class="w-4 h-4 text-emerald-400"></i>
+              Commander en 1-Clic sur WhatsApp
+            </button>
+          </div>
+
+          <!-- Delivery & Order Guarantees (Arcetis Style) -->
+          <div class="space-y-2.5 pt-2 text-xs text-zinc-300 border-t border-white/[0.08]">
+            <div class="flex items-center gap-2.5">
+              <i data-lucide="package-check" class="w-4 h-4 text-pink-400 shrink-0"></i>
+              <span>Suivi en direct de votre commande de l'achat jusqu'à la livraison</span>
+            </div>
+            <div class="flex items-center gap-2.5">
+              <i data-lucide="headphones" class="w-4 h-4 text-cyan-400 shrink-0"></i>
+              <span>Support dédié sur WhatsApp jusqu'à confirmation complète du jeu</span>
+            </div>
+            <div class="flex items-center gap-2.5">
+              <i data-lucide="shield-check" class="w-4 h-4 text-emerald-400 shrink-0"></i>
+              <span>Paiement sécurisé par D17, Konnect, Virement, PayPal & Crypto</span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- QUESTIONS BEFORE YOU BUY BOX (Exact Arcetis Style with IONARA Luxury) -->
+        <div class="glass-panel rounded-3xl p-6 sm:p-7 border border-white/10 shadow-xl space-y-4">
+          <div>
+            <h4 class="text-base font-bold text-white font-headline">Une question avant d'acheter ?</h4>
+            <p class="text-xs text-zinc-400 mt-1">
+              Contactez directement notre équipe et nous vous répondrons en moins de 10 minutes.
+            </p>
+          </div>
+
+          <!-- Contact Channels List -->
+          <div class="space-y-2.5">
+            <!-- Instagram -->
+            <a 
+              href="https://instagram.com/ionara_shop_tn" 
+              target="_blank"
+              class="flex items-center justify-between p-3 rounded-2xl bg-white/[0.03] hover:bg-white/[0.08] border border-white/5 hover:border-pink-500/30 transition group"
+            >
+              <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-xl bg-pink-500/20 text-pink-400 flex items-center justify-center">
+                  <i data-lucide="instagram" class="w-4 h-4"></i>
+                </div>
+                <div>
+                  <span class="text-xs font-bold text-white block">Instagram Officiel</span>
+                  <span class="text-[11px] text-pink-400">@ionara_shop_tn</span>
+                </div>
+              </div>
+              <i data-lucide="external-link" class="w-4 h-4 text-zinc-500 group-hover:text-pink-300 transition"></i>
+            </a>
+
+            <!-- WhatsApp Support -->
+            <a 
+              id="contact-whatsapp-link"
+              href="https://wa.me/21629000000" 
+              target="_blank"
+              class="flex items-center justify-between p-3 rounded-2xl bg-white/[0.03] hover:bg-white/[0.08] border border-white/5 hover:border-emerald-500/30 transition group"
+            >
+              <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center">
+                  <i data-lucide="message-circle" class="w-4 h-4"></i>
+                </div>
+                <div>
+                  <span class="text-xs font-bold text-white block">Assistance WhatsApp</span>
+                  <span class="text-[11px] text-emerald-400">Support en direct 7j/7</span>
+                </div>
+              </div>
+              <i data-lucide="external-link" class="w-4 h-4 text-zinc-500 group-hover:text-emerald-300 transition"></i>
+            </a>
+
+            <!-- Email Support -->
+            <a 
+              href="mailto:ionara_tn@outlook.com"
+              class="flex items-center justify-between p-3 rounded-2xl bg-white/[0.03] hover:bg-white/[0.08] border border-white/5 hover:border-cyan-500/30 transition group"
+            >
+              <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-xl bg-cyan-500/20 text-cyan-400 flex items-center justify-center">
+                  <i data-lucide="mail" class="w-4 h-4"></i>
+                </div>
+                <div>
+                  <span class="text-xs font-bold text-white block">Support par Email</span>
+                  <span class="text-[11px] text-cyan-400">ionara_tn@outlook.com</span>
+                </div>
+              </div>
+              <i data-lucide="external-link" class="w-4 h-4 text-zinc-500 group-hover:text-cyan-300 transition"></i>
+            </a>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- ================= RELATED GAMES SECTION ================= -->
+    <section class="mt-16 pt-12 border-t border-white/[0.08]">
+      <div class="flex items-center justify-between mb-8">
+        <div>
+          <span class="text-xs font-bold text-pink-400 uppercase tracking-widest">SÉLECTION PERSONNALISÉE</span>
+          <h3 class="text-2xl sm:text-3xl font-extrabold text-white font-headline mt-1">Vous pourriez aussi aimer</h3>
+        </div>
+        <a href="catalog.html" class="text-xs sm:text-sm font-bold text-pink-400 hover:text-pink-300 transition flex items-center gap-1">
+          <span>Voir tout</span>
+          <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </a>
+      </div>
+
+      <div id="related-products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- Rendered dynamically -->
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ========================================== -->
+  <!-- FOOTER -->
+  <!-- ========================================== -->
+  <footer class="mt-20 border-t border-white/10 bg-black/60 backdrop-blur-xl">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-zinc-400">
+      <div class="flex items-center gap-3">
+        <img src="assets/logo/ionara-logo.svg" alt="IONARA" class="w-6 h-6 object-contain" onerror="this.src='public/assets/logo/ionara-logo.svg'">
+        <span>© 1976 – 2026 <strong>IONARA Enterprise</strong>. Tous droits réservés.</span>
+      </div>
+      <div class="flex items-center gap-4 text-zinc-500">
+        <a href="catalog.html" class="hover:text-zinc-300 transition">Catalogue</a>
+        <span>•</span>
+        <a href="index.html#faq" class="hover:text-zinc-300 transition">FAQ</a>
+        <span>•</span>
+        <a href="https://instagram.com/ionara_shop_tn" target="_blank" class="hover:text-pink-400 transition">Instagram</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ========================================== -->
+  <!-- CART SLIDE-OVER DRAWER (CYBERPUNK LUXURY) -->
+  <!-- ========================================== -->
+  <div id="cart-backdrop" onclick="closeCartDrawer()" class="hidden fixed inset-0 bg-black/80 backdrop-blur-sm z-50 transition-opacity"></div>
+  
+  <div id="cart-drawer" class="fixed top-0 right-0 h-full w-full max-w-md bg-slate-950/95 border-l border-white/10 z-50 transform translate-x-full transition-transform duration-300 flex flex-col shadow-2xl backdrop-blur-2xl">
+    
+    <!-- Top Cyber Accent Line -->
+    <div class="h-1 w-full bg-gradient-to-r from-pink-500 via-purple-500 to-cyan-400"></div>
+
+    <!-- Drawer Header -->
+    <div class="p-5 border-b border-white/10 flex items-center justify-between bg-black/40">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-2xl bg-gradient-to-br from-pink-500/20 to-purple-500/20 border border-pink-500/30 flex items-center justify-center text-pink-400 shadow-md">
+          <i data-lucide="shopping-bag" class="w-5 h-5"></i>
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <h3 class="text-base font-black text-white font-headline">Votre Panier</h3>
+            <span class="cart-count-badge hidden px-2 py-0.5 rounded-full bg-pink-500/20 border border-pink-500/30 text-[10px] font-bold text-pink-400">0</span>
+          </div>
+          <p class="text-[11px] text-zinc-400">Garantie anti-bannissement & livraison 5-15m</p>
+        </div>
+      </div>
+      <button onclick="closeCartDrawer()" class="p-2 rounded-xl text-zinc-400 hover:text-white hover:bg-white/10 transition cursor-pointer">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+    </div>
+
+    <!-- Items List -->
+    <div id="cart-items-list" class="flex-1 overflow-y-auto p-5 space-y-3">
+      <!-- Rendered dynamically -->
+    </div>
+
+    <!-- Promo code input -->
+    <div class="p-3.5 mx-5 my-2 rounded-2xl bg-white/[0.03] border border-white/10">
+      <div class="flex gap-2">
+        <div class="relative flex-1">
+          <i data-lucide="tag" class="w-3.5 h-3.5 text-zinc-500 absolute left-3 top-1/2 -translate-y-1/2"></i>
+          <input 
+            type="text" 
+            id="promo-input" 
+            placeholder="CODE PROMO (EX: IONARA10)" 
+            class="w-full bg-black/50 border border-white/10 rounded-xl pl-9 pr-3 py-2 text-xs text-white uppercase placeholder-zinc-500 focus:outline-none focus:border-pink-500 font-mono tracking-wider"
+          />
+        </div>
+        <button 
+          onclick="applyPromoCode()"
+          class="px-4 py-2 rounded-xl bg-pink-600/30 hover:bg-pink-600 text-pink-300 hover:text-white font-bold text-xs border border-pink-500/40 transition cursor-pointer shadow-sm"
+        >
+          Appliquer
+        </button>
+      </div>
+    </div>
+
+    <!-- Drawer Footer & Totals -->
+    <div class="p-5 border-t border-white/10 bg-slate-950/90 space-y-3">
+      <div class="flex justify-between text-xs text-zinc-400">
+        <span>Sous-total</span>
+        <span id="cart-subtotal" class="font-bold text-white">0 TND</span>
+      </div>
+      <div class="flex justify-between text-xs text-emerald-400">
+        <span>Réduction</span>
+        <span id="cart-discount" class="font-bold">0 TND</span>
+      </div>
+      <div class="flex justify-between text-lg font-black text-white pt-2 border-t border-white/10">
+        <span>Total à Payer</span>
+        <span id="cart-total" class="text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-cyan-300 font-headline">0 TND</span>
+      </div>
+
+      <div class="grid grid-cols-1 gap-2 pt-1">
+        <button 
+          onclick="openCheckoutModal()"
+          class="w-full btn-neon-magenta py-3.5 rounded-xl font-bold text-white text-sm flex items-center justify-center gap-2 cursor-pointer shadow-lg"
+        >
+          <i data-lucide="check-circle-2" class="w-4 h-4"></i>
+          Passer la Commande
+        </button>
+        <button 
+          onclick="orderViaWhatsApp()"
+          class="w-full py-2.5 rounded-xl bg-emerald-500/15 hover:bg-emerald-500/25 border border-emerald-500/30 text-emerald-300 hover:text-white font-semibold text-xs flex items-center justify-center gap-2 transition cursor-pointer"
+        >
+          <i data-lucide="message-circle" class="w-4 h-4 text-emerald-400"></i>
+          Commander directement sur WhatsApp
+        </button>
+      </div>
+
+      <p class="text-[10px] text-center text-zinc-500 pt-1 flex items-center justify-center gap-1.5">
+        <i data-lucide="shield-check" class="w-3.5 h-3.5 text-cyan-400"></i>
+        <span>Paiement sécurisé · D17 · Konnect · PayPal · USDT</span>
+      </p>
+    </div>
+
+  </div>
+
+  <!-- ========================================== -->
+  <!-- CHECKOUT MODAL -->
+  <!-- ========================================== -->
+  <div id="checkout-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/80 backdrop-blur-md">
+    <div class="relative w-full max-w-lg rounded-3xl border border-white/10 bg-slate-950 p-6 sm:p-8 shadow-2xl">
+      <button onclick="closeCheckoutModal()" class="absolute top-5 right-5 p-2 rounded-xl text-zinc-400 hover:text-white hover:bg-white/5 transition">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+
+      <div class="mb-6">
+        <span class="text-xs font-bold text-pink-400 uppercase tracking-wider">COMMANDE EXPRESS</span>
+        <h3 class="text-2xl font-black text-white font-headline mt-1">Finaliser votre commande</h3>
+        <p class="text-xs text-zinc-400 mt-1">Vos identifiants seront transmis immédiatement après validation.</p>
+      </div>
+
+      <form onsubmit="submitOrder(event)" class="space-y-4">
+        <div>
+          <label class="block text-xs font-semibold text-zinc-300 mb-1">Votre Nom & Prénom</label>
+          <input required type="text" id="order-name" placeholder="Ex: Yassine Achour" class="w-full bg-slate-900 border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-pink-500">
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-zinc-300 mb-1">Numéro WhatsApp / Téléphone (pour la livraison)</label>
+          <input required type="tel" id="order-phone" placeholder="Ex: +216 29 000 000" class="w-full bg-slate-900 border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-pink-500">
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-zinc-300 mb-1">Adresse Email</label>
+          <input required type="email" id="order-email" placeholder="Ex: contact@email.com" class="w-full bg-slate-900 border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-pink-500">
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-zinc-300 mb-2">Moyen de paiement souhaité :</label>
+          <div class="grid grid-cols-2 gap-2 text-xs">
+            <label class="flex items-center gap-2 p-2.5 rounded-xl border border-white/10 bg-slate-900 cursor-pointer hover:border-pink-500/50">
+              <input type="radio" name="payment_method" value="D17 (Tunisie)" checked class="accent-pink-500">
+              <span class="font-bold text-white">D17 (Poste TN) 🇹🇳</span>
+            </label>
+            <label class="flex items-center gap-2 p-2.5 rounded-xl border border-white/10 bg-slate-900 cursor-pointer hover:border-pink-500/50">
+              <input type="radio" name="payment_method" value="Konnect / Flouci / Virement" class="accent-pink-500">
+              <span class="font-bold text-white">Konnect / Virement</span>
+            </label>
+            <label class="flex items-center gap-2 p-2.5 rounded-xl border border-white/10 bg-slate-900 cursor-pointer hover:border-pink-500/50">
+              <input type="radio" name="payment_method" value="Carte Bancaire / PayPal" class="accent-pink-500">
+              <span class="font-bold text-white">Carte / PayPal</span>
+            </label>
+            <label class="flex items-center gap-2 p-2.5 rounded-xl border border-white/10 bg-slate-900 cursor-pointer hover:border-pink-500/50">
+              <input type="radio" name="payment_method" value="Binance / USDT" class="accent-pink-500">
+              <span class="font-bold text-white">USDT (Crypto)</span>
+            </label>
+          </div>
+        </div>
+
+        <button type="submit" class="w-full btn-neon-magenta py-3.5 rounded-xl font-bold text-white text-sm flex items-center justify-center gap-2 cursor-pointer shadow-lg mt-4">
+          <i data-lucide="send" class="w-4 h-4"></i>
+          Confirmer et Envoyer sur WhatsApp
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div id="toast-container"></div>
+
+  <!-- Application Logic -->
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+
+  <!-- Product Detail Dedicated Script -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      initProductDetailPage();
+    });
+
+    let currentProduct = null;
+
+    function initProductDetailPage() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const productId = urlParams.get('id') || 'black-myth-wukong';
+
+      currentProduct = PRODUCTS_DATA.find(p => p.id === productId) || PRODUCTS_DATA[0];
+      if (!currentProduct) return;
+
+      // Update Document Title & Breadcrumbs
+      document.title = `${currentProduct.title} — IONARA Gaming Store`;
+      const bcCat = document.getElementById('breadcrumb-category');
+      const bcTitle = document.getElementById('breadcrumb-title');
+      if (bcCat) bcCat.textContent = currentProduct.platform;
+      if (bcTitle) bcTitle.textContent = currentProduct.title;
+
+      // Populate Main presentation card
+      const coverImg = document.getElementById('product-cover-img');
+      if (coverImg) {
+        coverImg.src = currentProduct.image;
+        coverImg.alt = currentProduct.title;
+        coverImg.onerror = () => { coverImg.src = currentProduct.fallbackImage; };
+      }
+
+      const platformText = document.getElementById('product-platform-text');
+      if (platformText) platformText.textContent = currentProduct.platform;
+
+      const titleEl = document.getElementById('product-title');
+      if (titleEl) titleEl.textContent = currentProduct.title;
+
+      const subtitleEl = document.getElementById('product-subtitle');
+      if (subtitleEl) subtitleEl.textContent = currentProduct.subtitle;
+
+      const ratingEl = document.getElementById('product-rating-text');
+      if (ratingEl) ratingEl.textContent = currentProduct.rating ? currentProduct.rating.toFixed(1) : '5.0';
+
+      const reviewsEl = document.getElementById('product-reviews-text');
+      if (reviewsEl) reviewsEl.textContent = `(${currentProduct.reviewsCount || 120} avis)`;
+
+      const deliveryEl = document.getElementById('product-delivery-text');
+      if (deliveryEl) deliveryEl.textContent = currentProduct.delivery || '5 - 15 minutes';
+
+      const soldBadge = document.getElementById('product-sold-badge');
+      if (soldBadge) {
+        const soldCount = Math.floor((currentProduct.reviewsCount || 80) * 1.6);
+        soldBadge.innerHTML = `<i data-lucide="flame" class="w-3 h-3 text-amber-400"></i><span>${soldCount} vendus</span>`;
+      }
+
+      // Populate Full Description
+      const descEl = document.getElementById('product-description-full');
+      if (descEl) descEl.textContent = currentProduct.description;
+
+      // Populate Arcetis-Style Features
+      const featuresContainer = document.getElementById('product-features-container');
+      if (featuresContainer) {
+        const defaultBulletPoints = [
+          {
+            icon: 'globe',
+            title: 'Region-Free & Global',
+            desc: `Jouez à ${currentProduct.title} depuis la Tunisie ou n'importe où dans le monde sans VPN ni restriction.`
+          },
+          {
+            icon: 'gamepad-2',
+            title: '100% Mode Solo & Histoire Intégrale',
+            desc: 'Accès sans coupure à l’histoire principale, aux cinématiques 4K et aux sauvegardes sans interférence.'
+          },
+          {
+            icon: 'hard-drive',
+            title: 'Sauvegardes Locales & Succès PC',
+            desc: 'Tous vos fichiers de sauvegarde et vos succès sont enregistrés directement sur votre propre ordinateur.'
+          },
+          {
+            icon: 'zap',
+            title: 'Installation Rapide en 3 Étapes',
+            desc: 'Identifiants livrés en direct avec guide illustré étape par étape. Aucune manipulation risquée.'
+          },
+          {
+            icon: 'refresh-cw',
+            title: 'Mises à Jour Officielles Incluses',
+            desc: 'Téléchargez les derniers patchs, corrections et mises à niveau directement via les serveurs officiels.'
+          },
+          {
+            icon: 'headphones',
+            title: 'Assistance Technique 7j/7 IONARA',
+            desc: 'Support client réactif en direct sur WhatsApp pour toute question ou configuration.'
+          }
+        ];
+
+        featuresContainer.innerHTML = defaultBulletPoints.map(f => `
+          <div class="flex items-start gap-3 p-3 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-pink-500/30 transition">
+            <div class="w-7 h-7 rounded-lg bg-pink-500/15 text-pink-400 flex items-center justify-center shrink-0 mt-0.5">
+              <i data-lucide="${f.icon}" class="w-4 h-4"></i>
+            </div>
+            <div>
+              <h5 class="text-xs font-bold text-white flex items-center gap-1.5">
+                <span>${f.title}</span>
+              </h5>
+              <p class="text-[11px] text-zinc-400 mt-0.5 leading-relaxed">${f.desc}</p>
+            </div>
+          </div>
+        `).join('');
+      }
+
+      // Specs
+      const specPlatform = document.getElementById('spec-platform');
+      if (specPlatform) specPlatform.textContent = `${currentProduct.platform} / PC`;
+
+      const specGuarantee = document.getElementById('spec-guarantee');
+      if (specGuarantee) specGuarantee.textContent = currentProduct.guarantee || 'Garantie à Vie IONARA';
+
+      // Update Prices in Buy Box
+      updateProductPrices();
+
+      // Hook CTA Buttons
+      const btnBuyNow = document.getElementById('btn-buy-now');
+      if (btnBuyNow) {
+        btnBuyNow.onclick = () => {
+          addToCart(currentProduct.id);
+          openCheckoutModal();
+        };
+      }
+
+      const btnAddCart = document.getElementById('btn-add-cart');
+      if (btnAddCart) {
+        btnAddCart.onclick = () => {
+          addToCart(currentProduct.id);
+        };
+      }
+
+      const btnWhatsApp = document.getElementById('btn-whatsapp-order');
+      if (btnWhatsApp) {
+        btnWhatsApp.onclick = () => {
+          const price = formatPrice(currentProduct.priceTND || currentProduct.priceDZD, currentProduct.priceEUR, currentProduct.priceUSD);
+          const msg = `Bonjour IONARA ! 🎮 Je souhaite commander directement :\n\n• ${currentProduct.title}\n• Prix : ${price}\n• Plateforme : ${currentProduct.platform}\n\nMerci de m'indiquer la marche à suivre pour la livraison en 5 min !`;
+          window.open(`https://wa.me/21629000000?text=${encodeURIComponent(msg)}`, '_blank');
+        };
+      }
+
+      // Render Related Products
+      renderRelatedProducts(currentProduct.id);
+
+      if (window.lucide) lucide.createIcons();
+    }
+
+    function updateProductPrices() {
+      if (!currentProduct) return;
+      const curPriceEl = document.getElementById('buy-current-price');
+      const oldPriceEl = document.getElementById('buy-old-price');
+      const discountEl = document.getElementById('buy-discount-badge');
+
+      const currentFormatted = formatPrice(currentProduct.priceTND || currentProduct.priceDZD, currentProduct.priceEUR, currentProduct.priceUSD);
+      const oldFormatted = formatPrice(currentProduct.oldPriceTND || currentProduct.oldPriceDZD, currentProduct.oldPriceEUR, currentProduct.oldPriceUSD);
+
+      if (curPriceEl) curPriceEl.textContent = currentFormatted;
+      if (oldPriceEl) oldPriceEl.textContent = oldFormatted;
+
+      const pCur = currentProduct.priceTND || currentProduct.priceDZD || 1;
+      const pOld = currentProduct.oldPriceTND || currentProduct.oldPriceDZD || pCur;
+      const pct = Math.round(((pOld - pCur) / pOld) * 100);
+      if (discountEl && pct > 0) {
+        discountEl.textContent = `-${pct}% PROMO`;
+      }
+    }
+
+    // Override setCurrency to also refresh product page prices
+    const origSetCurrency = window.setCurrency;
+    window.setCurrency = function(c) {
+      if (typeof origSetCurrency === 'function') origSetCurrency(c);
+      updateProductPrices();
+      renderRelatedProducts(currentProduct ? currentProduct.id : '');
+    };
+
+    function renderRelatedProducts(currentId) {
+      const container = document.getElementById('related-products-grid');
+      if (!container) return;
+
+      const related = PRODUCTS_DATA.filter(p => p.id !== currentId).slice(0, 4);
+      container.innerHTML = related.map(createProductCardHTML).join('');
+      if (window.lucide) lucide.createIcons();
+    }
+  </script>
+</body>
+</html>
