@@ -1,40 +1,11 @@
-const express = require('express');
-const cors = require('cors');
-const dotenv = require('dotenv');
+require('dotenv').config({ path: require('path').join(__dirname, '.env') });
+if (!process.env.JWT_SECRET || process.env.JWT_SECRET.length < 32 || process.env.JWT_SECRET.includes('your_jwt')) {
+  console.error('Set JWT_SECRET to a random secret of at least 32 characters in backend/.env.');
+  process.exit(1);
+}
 const connectDB = require('./config/db');
-
-dotenv.config();
-
-const app = express();
-
-// Connect to MongoDB
-connectDB();
-
-// Middleware
-app.use(cors({
-  origin: '*',
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  allowedHeaders: ['Content-Type', 'Authorization']
-}));
-app.use(express.json());
-
-// API Health Check
-app.get('/api/health', (req, res) => {
-  res.json({
-    status: 'online',
-    store: 'IONARA Gaming Shop API',
-    version: '1.0.0',
-    timestamp: new Date().toISOString()
-  });
-});
-
-// API Routes
-app.use('/api/auth', require('./routes/auth'));
-app.use('/api/products', require('./routes/products'));
-app.use('/api/orders', require('./routes/orders'));
-
-const PORT = process.env.PORT || 5000;
-
-app.listen(PORT, () => {
-  console.log(`🚀 Serveur IONARA Backend démarré sur le port ${PORT} (http://localhost:${PORT})`);
+const app = require('./app');
+connectDB().then(() => app.listen(process.env.PORT || 5000, '127.0.0.1', () => console.log('IONARA API ready'))).catch(() => {
+  console.error('MongoDB is unavailable. Start MongoDB or configure MONGODB_URI. No mock data was saved.');
+  process.exit(1);
 });
