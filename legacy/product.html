@@ -625,7 +625,7 @@
       }
 
       renderRelatedProducts(currentProduct.id);
-      if (window.lucide) lucide.createIcons();
+      if (window.lucide) window.lucide.createIcons();
     }
 
     function updateProductPrices() {
@@ -652,8 +652,6 @@
       if (curPriceEl) curPriceEl.textContent = currentFormatted;
       if (oldPriceEl) oldPriceEl.textContent = oldFormatted;
 
-      const pCur = currentProduct.priceTND || currentProduct.priceDZD || 1;
-      const pOld = currentProduct.oldPriceTND || currentProduct.oldPriceDZD || pCur;
       const pct = Math.round(((pOld - pCur) / pOld) * 100);
       if (discountEl && pct > 0) discountEl.textContent = `-${pct}% PROMO`;
     }
@@ -670,7 +668,7 @@
       if (!container) return;
       const related = PRODUCTS_DATA.filter(p => p.id !== currentId).slice(0, 4);
       container.innerHTML = related.map(createProductCardHTML).join('');
-      if (window.lucide) lucide.createIcons();
+      if (window.lucide) window.lucide.createIcons();
     }
   </script>
 
