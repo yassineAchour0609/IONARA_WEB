@@ -977,5 +977,83 @@
   <!-- Application Logic Scripts -->
   <script src="js/data.js"></script>
   <script src="js/app.js"></script>
+
+  <!-- ========================================== -->
+  <!-- QUICK GIFTCARD CONFIGURATOR MODAL -->
+  <!-- ========================================== -->
+  <div id="quick-giftcard-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/85 backdrop-blur-md overflow-y-auto">
+    <div class="relative w-full max-w-lg max-h-[92vh] overflow-y-auto rounded-3xl border border-white/10 bg-[#090b14] p-5 sm:p-7 shadow-2xl space-y-4">
+      <button onclick="closeQuickGiftCardModal()" class="absolute top-4 right-4 p-2 rounded-xl text-zinc-400 hover:text-white hover:bg-white/5 transition cursor-pointer">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+
+      <!-- Header with mini poster -->
+      <div class="flex items-center gap-3.5 pb-3 border-b border-white/10">
+        <img id="qgc-img" src="assets/games/steam-gift-card.svg" alt="Gift Card" class="w-14 h-16 object-cover rounded-xl border border-white/10 shadow-md shrink-0">
+        <div>
+          <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-pink-500/20 text-pink-300 text-[10px] font-black uppercase tracking-wider">
+            🎁 Carte Cadeau Officielle
+          </span>
+          <h3 id="qgc-title" class="text-lg sm:text-xl font-black text-white font-headline mt-1">Carte Cadeau Steam Wallet</h3>
+          <p class="text-xs text-zinc-400">Sélectionnez la région et le montant souhaité.</p>
+        </div>
+      </div>
+
+      <!-- Step 1: Region Selection -->
+      <div>
+        <label class="block text-xs font-bold text-white uppercase tracking-wider mb-2 flex items-center gap-1.5">
+          <i data-lucide="globe" class="w-3.5 h-3.5 text-cyan-400"></i>
+          <span>1. Choisissez votre Région :</span>
+        </label>
+        <div id="qgc-regions-container" class="grid grid-cols-2 sm:grid-cols-3 gap-2">
+          <!-- Injected dynamically -->
+        </div>
+      </div>
+
+      <!-- Step 2: Amount / Denomination Selection (Preset buttons, no typed input) -->
+      <div>
+        <label class="block text-xs font-bold text-white uppercase tracking-wider mb-2 flex items-center gap-1.5">
+          <i data-lucide="tag" class="w-3.5 h-3.5 text-pink-400"></i>
+          <span>2. Choisissez le Montant :</span>
+        </label>
+        <div id="qgc-denoms-container" class="grid grid-cols-3 gap-2">
+          <!-- Injected dynamically: 5$, 10$, 20$, 25$, 50$, 100$ -->
+        </div>
+      </div>
+
+      <!-- Price summary -->
+      <div class="p-3.5 rounded-2xl bg-white/[0.03] border border-white/10 flex items-center justify-between">
+        <div>
+          <span class="text-[10px] text-zinc-400 uppercase font-bold tracking-wider block">Montant total à régler</span>
+          <span id="qgc-price" class="text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-cyan-300 font-headline">35 TND</span>
+        </div>
+        <span class="text-[11px] text-emerald-400 font-bold flex items-center gap-1">
+          <i data-lucide="zap" class="w-3.5 h-3.5"></i>
+          <span>Code Digital Instantané</span>
+        </span>
+      </div>
+
+      <!-- Actions CTA -->
+      <div class="grid grid-cols-2 gap-2 pt-1">
+        <button 
+          type="button" 
+          onclick="confirmQuickGiftCard('cart')" 
+          class="btn-neon-outline py-3 rounded-xl font-bold text-pink-300 hover:text-white text-xs flex items-center justify-center gap-2 cursor-pointer shadow-md"
+        >
+          <i data-lucide="shopping-cart" class="w-4 h-4 text-pink-400"></i>
+          <span>Ajouter au Panier</span>
+        </button>
+        <button 
+          type="button" 
+          onclick="confirmQuickGiftCard('checkout')" 
+          class="btn-neon-magenta py-3 rounded-xl font-black text-white text-xs flex items-center justify-center gap-2 cursor-pointer shadow-lg"
+        >
+          <i data-lucide="zap" class="w-4 h-4"></i>
+          <span>Acheter Maintenant</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
 </body>
 </html>

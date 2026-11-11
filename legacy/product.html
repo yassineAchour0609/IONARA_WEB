@@ -419,6 +419,107 @@
     });
 
     let currentProduct = null;
+    let currentGiftCardSelection = null;
+
+    function renderProductGiftCardConfigurator() {
+      const box = document.getElementById('giftcard-configurator-box');
+      if (!box || !currentProduct || !currentProduct.giftCardConfig) return;
+
+      const cfg = currentProduct.giftCardConfig;
+      box.classList.remove('hidden');
+
+      // Update region label
+      const regionLabel = document.getElementById('selected-region-label');
+      if (regionLabel && currentGiftCardSelection) {
+        regionLabel.textContent = `${currentGiftCardSelection.regionFlag} ${currentGiftCardSelection.regionName}`;
+      }
+
+      // Update amount label
+      const amountLabel = document.getElementById('selected-amount-label');
+      if (amountLabel && currentGiftCardSelection) {
+        const formatted = formatPrice(currentGiftCardSelection.priceTND, currentGiftCardSelection.priceEUR, currentGiftCardSelection.priceUSD);
+        amountLabel.textContent = `${currentGiftCardSelection.amountLabel} (${formatted})`;
+      }
+
+      // Render Region Buttons
+      const regionsContainer = document.getElementById('giftcard-regions-container');
+      if (regionsContainer) {
+        regionsContainer.innerHTML = cfg.regions.map(r => {
+          const isSelected = currentGiftCardSelection && r.id === currentGiftCardSelection.regionId;
+          return `
+            <button 
+              type="button" 
+              onclick="selectProductGiftCardRegion('${r.id}')"
+              class="p-2 sm:p-2.5 rounded-xl border text-left flex items-center gap-2 transition cursor-pointer ${
+                isSelected 
+                  ? 'border-cyan-400 bg-cyan-500/25 shadow-md shadow-cyan-500/25 text-white scale-[1.02]' 
+                  : 'border-white/10 bg-slate-900/80 hover:border-white/30 text-zinc-300'
+              }"
+            >
+              <span class="text-base sm:text-lg shrink-0">${r.flag}</span>
+              <span class="text-xs font-bold truncate">${r.name}</span>
+            </button>
+          `;
+        }).join('');
+      }
+
+      // Render Denomination Buttons (Presets - click to select, no typed input)
+      const denomsContainer = document.getElementById('giftcard-denominations-container');
+      if (denomsContainer) {
+        denomsContainer.innerHTML = cfg.denominations.map(d => {
+          const isSelected = currentGiftCardSelection && d.value === currentGiftCardSelection.amount;
+          const formatted = formatPrice(d.priceTND, d.priceEUR, d.priceUSD);
+          return `
+            <button 
+              type="button" 
+              onclick="selectProductGiftCardAmount(${d.value})"
+              class="relative p-2.5 sm:p-3 rounded-2xl border text-center transition cursor-pointer ${
+                isSelected 
+                  ? 'border-pink-500 bg-pink-500/25 shadow-lg shadow-pink-500/25 scale-[1.03]' 
+                  : 'border-white/10 bg-slate-900/80 hover:border-pink-500/40 text-zinc-300 hover:scale-[1.01]'
+              }"
+            >
+              ${d.isPopular ? '<span class="absolute -top-2 left-1/2 -translate-x-1/2 px-2 py-0.5 rounded-full bg-pink-500 text-white text-[9px] font-black uppercase">TOP</span>' : ''}
+              ${d.isBestValue ? '<span class="absolute -top-2 left-1/2 -translate-x-1/2 px-2 py-0.5 rounded-full bg-cyan-500 text-white text-[9px] font-black uppercase">VIP</span>' : ''}
+              <span class="block text-sm sm:text-base font-black text-white font-headline">${d.label}</span>
+              <span class="block text-[11px] font-bold text-pink-300 mt-0.5">${formatted}</span>
+            </button>
+          `;
+        }).join('');
+      }
+    }
+
+    function selectProductGiftCardRegion(regId) {
+      if (!currentProduct || !currentProduct.giftCardConfig) return;
+      const reg = currentProduct.giftCardConfig.regions.find(r => r.id === regId);
+      if (!reg || !currentGiftCardSelection) return;
+
+      currentGiftCardSelection.regionId = reg.id;
+      currentGiftCardSelection.regionName = reg.name;
+      currentGiftCardSelection.regionFlag = reg.flag;
+
+      renderProductGiftCardConfigurator();
+      updateProductPrices();
+      playSound('click');
+    }
+
+    function selectProductGiftCardAmount(val) {
+      if (!currentProduct || !currentProduct.giftCardConfig) return;
+      const denom = currentProduct.giftCardConfig.denominations.find(d => d.value === val);
+      if (!denom || !currentGiftCardSelection) return;
+
+      currentGiftCardSelection.amount = denom.value;
+      currentGiftCardSelection.amountLabel = denom.label;
+      currentGiftCardSelection.priceTND = denom.priceTND;
+      currentGiftCardSelection.priceEUR = denom.priceEUR || 0;
+      currentGiftCardSelection.priceUSD = denom.priceUSD || 0;
+      currentGiftCardSelection.oldPriceTND = denom.oldPriceTND || Math.round(denom.priceTND * 1.2);
+
+      renderProductGiftCardConfigurator();
+      updateProductPrices();
+      playSound('click');
+    }
+
 
     function initProductDetailPage() {
       const urlParams = new URLSearchParams(window.location.search);
@@ -512,8 +613,13 @@
       const btnWhatsApp = document.getElementById('btn-whatsapp-order');
       if (btnWhatsApp) {
         btnWhatsApp.onclick = () => {
-          const price = formatPrice(currentProduct.priceTND || currentProduct.priceDZD, currentProduct.priceEUR, currentProduct.priceUSD);
-          const msg = `Bonjour IONARA ! 🎮 Je souhaite commander directement :\n\n• ${currentProduct.title}\n• Prix : ${price}\n• Plateforme : ${currentProduct.platform}\n\nMerci de m'indiquer la marche à suivre pour la livraison en 5 min !`;
+          let price = formatPrice(currentProduct.priceTND || currentProduct.priceDZD, currentProduct.priceEUR, currentProduct.priceUSD);
+          let extraInfo = '';
+          if (currentGiftCardSelection) {
+            price = formatPrice(currentGiftCardSelection.priceTND, currentGiftCardSelection.priceEUR, currentGiftCardSelection.priceUSD);
+            extraInfo = `\n• Montant : ${currentGiftCardSelection.amountLabel}\n• Région : ${currentGiftCardSelection.regionFlag} ${currentGiftCardSelection.regionName}`;
+          }
+          const msg = `Bonjour IONARA ! 🎮 Je souhaite commander directement :\n\n• ${currentProduct.title}${extraInfo}\n• Prix : ${price}\n• Plateforme : ${currentProduct.platform}\n\nMerci de m'indiquer la marche à suivre pour la livraison immédiate du code !`;
           window.open(`https://wa.me/21627031500?text=${encodeURIComponent(msg)}`, '_blank');
         };
       }
@@ -528,8 +634,20 @@
       const oldPriceEl = document.getElementById('buy-old-price');
       const discountEl = document.getElementById('buy-discount-badge');
 
-      const currentFormatted = formatPrice(currentProduct.priceTND || currentProduct.priceDZD, currentProduct.priceEUR, currentProduct.priceUSD);
-      const oldFormatted = formatPrice(currentProduct.oldPriceTND || currentProduct.oldPriceDZD, currentProduct.oldPriceEUR, currentProduct.oldPriceUSD);
+      let pCur = currentProduct.priceTND || currentProduct.priceDZD || 1;
+      let pOld = currentProduct.oldPriceTND || currentProduct.oldPriceDZD || pCur;
+      let pEUR = currentProduct.priceEUR;
+      let pUSD = currentProduct.priceUSD;
+
+      if (currentGiftCardSelection) {
+        pCur = currentGiftCardSelection.priceTND;
+        pOld = currentGiftCardSelection.oldPriceTND || Math.round(pCur * 1.2);
+        pEUR = currentGiftCardSelection.priceEUR;
+        pUSD = currentGiftCardSelection.priceUSD;
+      }
+
+      const currentFormatted = formatPrice(pCur, pEUR, pUSD);
+      const oldFormatted = formatPrice(pOld, pEUR ? Math.round(pEUR * 1.2) : 0, pUSD ? Math.round(pUSD * 1.2) : 0);
 
       if (curPriceEl) curPriceEl.textContent = currentFormatted;
       if (oldPriceEl) oldPriceEl.textContent = oldFormatted;

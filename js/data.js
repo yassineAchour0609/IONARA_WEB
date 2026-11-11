@@ -290,6 +290,27 @@ const PRODUCTS_DATA = [
       "Crédit immédiat en moins de 5 minutes",
       "Sans aucun risque de restriction ou ban"
     ]
+  ,
+    isGiftCard: true,
+    giftCardConfig: {
+      defaultRegion: "tr",
+      defaultAmount: 1000,
+      regions: [
+        { id: "tr", name: "Turquie (TR - Économique)", flag: "🇹🇷", currency: "TRY", symbol: "VP" },
+        { id: "eu", name: "Europe (EU)", flag: "🇪🇺", currency: "EUR", symbol: "VP" },
+        { id: "global", name: "Global / Mondial", flag: "🌍", currency: "USD", symbol: "VP" }
+      ],
+      denominations: [
+        { value: 475, label: "475 VP", priceTND: 20, oldPriceTND: 28, priceEUR: 6, priceUSD: 6.5 },
+        { value: 1000, label: "1000 VP", priceTND: 40, oldPriceTND: 55, priceEUR: 12, priceUSD: 13, isPopular: true },
+        { value: 2050, label: "2050 VP", priceTND: 80, oldPriceTND: 105, priceEUR: 24, priceUSD: 26 },
+        { value: 2575, label: "2575 VP", priceTND: 100, oldPriceTND: 130, priceEUR: 30, priceUSD: 33 },
+        { value: 3650, label: "3650 VP", priceTND: 135, oldPriceTND: 175, priceEUR: 41, priceUSD: 44, isPopular: true },
+        { value: 5350, label: "5350 VP", priceTND: 190, oldPriceTND: 245, priceEUR: 58, priceUSD: 62 },
+        { value: 8700, label: "8700 VP", priceTND: 330, oldPriceTND: 410, priceEUR: 100, priceUSD: 108 },
+        { value: 11000, label: "11000 VP", priceTND: 415, oldPriceTND: 510, priceEUR: 126, priceUSD: 135, isBestValue: true }
+      ]
+    }
   },
   {
     id: "xbox-game-pass-ultimate-6months",
@@ -500,6 +521,266 @@ const PRODUCTS_DATA = [
     description: "Les origines de James Bond dans un jeu d'action et d'espionnage nouvelle génération signé IO Interactive.",
     keyGames: ["007 First Light", "Costume Tuxedo Classique"],
     features: ["Infiltration tactique", "Scénario cinématique"]
+  },
+
+  {
+    id: "steam-gift-card",
+    title: "Carte Cadeau Steam Wallet",
+    subtitle: "Code numérique officiel — Montant & Région au choix",
+    image: "assets/games/steam-gift-card.svg",
+    fallbackImage: "public/assets/games/steam-gift-card.svg",
+    platform: "Steam",
+    platformIcon: "assets/platforms/steam.png",
+    category: "giftcards",
+    isFeatured: true,
+    isGiftCard: true,
+    badge: "CARTE CADEAU OFFICIELLE 🎁",
+    badgeColor: "from-sky-500 to-blue-600",
+    tag: "Carte Cadeau",
+    priceTND: 35,
+    oldPriceTND: 42,
+    priceEUR: 11,
+    oldPriceEUR: 13,
+    priceUSD: 10,
+    oldPriceUSD: 12,
+    rating: 5.0,
+    reviewsCount: 348,
+    stockStatus: "En Stock Immédiat",
+    delivery: "5 minutes",
+    guarantee: "Code Officiel Garanti à Vie",
+    description: "Rechargez votre portefeuille Steam instantanément pour acheter tous les jeux de votre choix, des DLC, des skins ou des passes de combat sans carte bancaire internationale. Choisissez votre région et le montant exact en 1 clic.",
+    keyGames: ["Steam Wallet Officiel", "Jeux, DLC & Soldes Steam", "Sans date d'expiration"],
+    features: [
+      "Code digital authentique 100% vérifié et garanti",
+      "Montants disponibles en 1 clic : 5$, 10$, 20$, 25$, 50$, 100$",
+      "Régions au choix : USA (🇺🇸), Europe (🇪🇺), Global (🌍), Turquie (🇹🇷), UK (🇬🇧), Émirats (🇦🇪)",
+      "Livraison expresse par WhatsApp & Email sous 5 à 15 minutes"
+    ],
+    giftCardConfig: {
+      defaultRegion: "us",
+      defaultAmount: 10,
+      regions: [
+        { id: "us", name: "USA (États-Unis)", flag: "🇺🇸", currency: "USD", symbol: "$" },
+        { id: "eu", name: "Europe (France/UE)", flag: "🇪🇺", currency: "EUR", symbol: "€" },
+        { id: "global", name: "Global / Mondial", flag: "🌍", currency: "USD", symbol: "$" },
+        { id: "tr", name: "Turquie (TR)", flag: "🇹🇷", currency: "TRY", symbol: "TL" },
+        { id: "uk", name: "Royaume-Uni (UK)", flag: "🇬🇧", currency: "GBP", symbol: "£" },
+        { id: "ae", name: "Émirats / Golf", flag: "🇦🇪", currency: "AED", symbol: "AED" }
+      ],
+      denominations: [
+        { value: 5, label: "5$", priceTND: 18, oldPriceTND: 22, priceEUR: 5.5, priceUSD: 5 },
+        { value: 10, label: "10$", priceTND: 35, oldPriceTND: 42, priceEUR: 11, priceUSD: 10, isPopular: true },
+        { value: 20, label: "20$", priceTND: 69, oldPriceTND: 80, priceEUR: 22, priceUSD: 20 },
+        { value: 25, label: "25$", priceTND: 86, oldPriceTND: 100, priceEUR: 27, priceUSD: 25 },
+        { value: 50, label: "50$", priceTND: 170, oldPriceTND: 195, priceEUR: 53, priceUSD: 50, isPopular: true },
+        { value: 100, label: "100$", priceTND: 335, oldPriceTND: 380, priceEUR: 104, priceUSD: 100, isBestValue: true }
+      ]
+    }
+  },
+  {
+    id: "playstation-gift-card",
+    title: "Carte Cadeau PlayStation Network (PSN)",
+    subtitle: "Code PS Store officiel pour PS4 & PS5 — Montant & Région",
+    image: "assets/games/playstation-gift-card.svg",
+    fallbackImage: "public/assets/games/playstation-gift-card.svg",
+    platform: "PlayStation",
+    platformIcon: "assets/platforms/playstation.png",
+    category: "giftcards",
+    isFeatured: true,
+    isGiftCard: true,
+    badge: "PS STORE OFFICIEL 🎮",
+    badgeColor: "from-blue-600 to-indigo-700",
+    tag: "Carte Cadeau",
+    priceTND: 35,
+    oldPriceTND: 42,
+    priceEUR: 11,
+    oldPriceEUR: 13,
+    priceUSD: 10,
+    oldPriceUSD: 12,
+    rating: 4.9,
+    reviewsCount: 289,
+    stockStatus: "En Stock Immédiat",
+    delivery: "5 minutes",
+    guarantee: "100% Code PSN Officiel",
+    description: "Approvisionnez votre compte PlayStation Network (PSN) pour acheter des jeux complets PS4 et PS5, des extensions, des abonnements PlayStation Plus ou des monnaies de jeux (V-Bucks, FC Points, GTA $).",
+    keyGames: ["Jeux PS4 & PS5", "Abonnement PlayStation Plus", "Achats en jeu & DLC"],
+    features: [
+      "Code officiel Sony PlayStation Network",
+      "Montants au choix : 10$, 20$, 25$, 50$, 75$, 100$",
+      "Régions : USA (🇺🇸), France / Europe (🇪🇺), Global (🌍), UK (🇬🇧)",
+      "Activation instantanée sur PlayStation Store"
+    ],
+    giftCardConfig: {
+      defaultRegion: "us",
+      defaultAmount: 10,
+      regions: [
+        { id: "us", name: "USA (États-Unis)", flag: "🇺🇸", currency: "USD", symbol: "$" },
+        { id: "eu", name: "France / Europe", flag: "🇪🇺", currency: "EUR", symbol: "€" },
+        { id: "global", name: "Global / Mondial", flag: "🌍", currency: "USD", symbol: "$" },
+        { id: "uk", name: "Royaume-Uni (UK)", flag: "🇬🇧", currency: "GBP", symbol: "£" }
+      ],
+      denominations: [
+        { value: 10, label: "10$", priceTND: 35, oldPriceTND: 42, priceEUR: 11, priceUSD: 10, isPopular: true },
+        { value: 20, label: "20$", priceTND: 69, oldPriceTND: 80, priceEUR: 22, priceUSD: 20 },
+        { value: 25, label: "25$", priceTND: 86, oldPriceTND: 100, priceEUR: 27, priceUSD: 25 },
+        { value: 50, label: "50$", priceTND: 170, oldPriceTND: 195, priceEUR: 53, priceUSD: 50, isPopular: true },
+        { value: 75, label: "75$", priceTND: 255, oldPriceTND: 285, priceEUR: 79, priceUSD: 75 },
+        { value: 100, label: "100$", priceTND: 335, oldPriceTND: 380, priceEUR: 104, priceUSD: 100, isBestValue: true }
+      ]
+    }
+  },
+  {
+    id: "xbox-gift-card",
+    title: "Carte Cadeau Xbox & Microsoft Store",
+    subtitle: "Solde Microsoft pour Xbox Series X|S, Xbox One & PC",
+    image: "assets/games/xbox-gift-card.svg",
+    fallbackImage: "public/assets/games/xbox-gift-card.svg",
+    platform: "Xbox / PC",
+    platformIcon: "assets/platforms/xbox.png",
+    category: "giftcards",
+    isFeatured: true,
+    isGiftCard: true,
+    badge: "XBOX OFFICIEL ⚡",
+    badgeColor: "from-emerald-500 to-green-700",
+    tag: "Carte Cadeau",
+    priceTND: 35,
+    oldPriceTND: 42,
+    priceEUR: 11,
+    oldPriceEUR: 13,
+    priceUSD: 10,
+    oldPriceUSD: 12,
+    rating: 4.9,
+    reviewsCount: 194,
+    stockStatus: "En Stock Immédiat",
+    delivery: "5 minutes",
+    guarantee: "100% Garanti Microsoft",
+    description: "Rechargez votre compte Xbox / Microsoft pour vous offrir les jeux les plus récents, des extensions de cartes, des films, des séries ou des accessoires sur le Microsoft Store.",
+    keyGames: ["Jeux Xbox Series & PC", "Microsoft Store", "Abonnements Game Pass"],
+    features: [
+      "Code prépayé Xbox officiel Microsoft",
+      "Montants au choix : 10$, 15$, 25$, 50$, 75$, 100$",
+      "Régions : USA (🇺🇸), Europe (🇪🇺), Global (🌍), Turquie (🇹🇷)",
+      "Aucune expiration de votre solde"
+    ],
+    giftCardConfig: {
+      defaultRegion: "us",
+      defaultAmount: 10,
+      regions: [
+        { id: "us", name: "USA (États-Unis)", flag: "🇺🇸", currency: "USD", symbol: "$" },
+        { id: "eu", name: "Europe (UE)", flag: "🇪🇺", currency: "EUR", symbol: "€" },
+        { id: "global", name: "Global / Mondial", flag: "🌍", currency: "USD", symbol: "$" },
+        { id: "tr", name: "Turquie (TR)", flag: "🇹🇷", currency: "TRY", symbol: "TL" }
+      ],
+      denominations: [
+        { value: 10, label: "10$", priceTND: 35, oldPriceTND: 42, priceEUR: 11, priceUSD: 10, isPopular: true },
+        { value: 15, label: "15$", priceTND: 52, oldPriceTND: 60, priceEUR: 16, priceUSD: 15 },
+        { value: 25, label: "25$", priceTND: 86, oldPriceTND: 100, priceEUR: 27, priceUSD: 25 },
+        { value: 50, label: "50$", priceTND: 170, oldPriceTND: 195, priceEUR: 53, priceUSD: 50, isPopular: true },
+        { value: 75, label: "75$", priceTND: 255, oldPriceTND: 285, priceEUR: 79, priceUSD: 75 },
+        { value: 100, label: "100$", priceTND: 335, oldPriceTND: 380, priceEUR: 104, priceUSD: 100, isBestValue: true }
+      ]
+    }
+  },
+  {
+    id: "roblox-gift-card",
+    title: "Carte Cadeau Roblox (Robux)",
+    subtitle: "Recharge Robux & Crédit virtuel officielle — Tous appareils",
+    image: "assets/games/roblox-gift-card.svg",
+    fallbackImage: "public/assets/games/roblox-gift-card.svg",
+    platform: "Roblox",
+    platformIcon: "assets/platforms/roblox.png",
+    category: "giftcards",
+    isFeatured: true,
+    isGiftCard: true,
+    badge: "ROBUX OFFICIEL 💎",
+    badgeColor: "from-rose-500 to-red-600",
+    tag: "Carte Cadeau",
+    priceTND: 35,
+    oldPriceTND: 42,
+    priceEUR: 11,
+    oldPriceEUR: 13,
+    priceUSD: 10,
+    oldPriceUSD: 12,
+    rating: 5.0,
+    reviewsCount: 420,
+    stockStatus: "En Stock Immédiat",
+    delivery: "5 minutes",
+    guarantee: "Garantie 100% Officielle",
+    description: "Obtenez des Robux pour personnaliser votre avatar avec des accessoires exclusifs ou débloquer des avantages dans vos jeux Roblox préférés (Blox Fruits, Brookhaven, Pet Simulator 99...).",
+    keyGames: ["Robux & Crédit", "Blox Fruits, Brookhaven", "Avatar & Objets Virtuels"],
+    features: [
+      "Code officiel Roblox Corporation",
+      "Montants au choix : 10$ (800 R$), 25$ (2,000 R$), 40$ (3,200 R$), 50$ (4,500 R$), 100$ (10,000 R$)",
+      "Régions : Global (🌍), USA (🇺🇸), Europe (🇪🇺)",
+      "Bonus exclusif d'objet virtuel offert avec chaque carte"
+    ],
+    giftCardConfig: {
+      defaultRegion: "global",
+      defaultAmount: 10,
+      regions: [
+        { id: "global", name: "Global / Mondial", flag: "🌍", currency: "USD", symbol: "$" },
+        { id: "us", name: "USA (États-Unis)", flag: "🇺🇸", currency: "USD", symbol: "$" },
+        { id: "eu", name: "Europe (UE)", flag: "🇪🇺", currency: "EUR", symbol: "€" }
+      ],
+      denominations: [
+        { value: 10, label: "10$ (800 R$)", priceTND: 35, oldPriceTND: 42, priceEUR: 11, priceUSD: 10, isPopular: true },
+        { value: 25, label: "25$ (2,000 R$)", priceTND: 86, oldPriceTND: 100, priceEUR: 27, priceUSD: 25 },
+        { value: 40, label: "40$ (3,200 R$)", priceTND: 138, oldPriceTND: 160, priceEUR: 43, priceUSD: 40 },
+        { value: 50, label: "50$ (4,500 R$)", priceTND: 170, oldPriceTND: 195, priceEUR: 53, priceUSD: 50, isPopular: true },
+        { value: 100, label: "100$ (10,000 R$)", priceTND: 335, oldPriceTND: 380, priceEUR: 104, priceUSD: 100, isBestValue: true }
+      ]
+    }
+  },
+  {
+    id: "google-play-gift-card",
+    title: "Carte Cadeau Google Play Store",
+    subtitle: "Crédit Play Store pour jeux, applications & abonnements Android",
+    image: "assets/games/google-play-gift-card.svg",
+    fallbackImage: "public/assets/games/google-play-gift-card.svg",
+    platform: "Android / Google",
+    platformIcon: "assets/platforms/1.png",
+    category: "giftcards",
+    isFeatured: false,
+    isGiftCard: true,
+    badge: "GOOGLE PLAY 📱",
+    badgeColor: "from-emerald-500 via-sky-500 to-amber-500",
+    tag: "Carte Cadeau",
+    priceTND: 35,
+    oldPriceTND: 42,
+    priceEUR: 11,
+    oldPriceEUR: 13,
+    priceUSD: 10,
+    oldPriceUSD: 12,
+    rating: 4.8,
+    reviewsCount: 168,
+    stockStatus: "En Stock Immédiat",
+    delivery: "5 minutes",
+    guarantee: "100% Code Play Store Garanti",
+    description: "Rechargez votre solde Google Play pour acheter des passes, des diamants Free Fire, des gemmes Brawl Stars, des Pokémon GO Coins ou des livres et films sur le Play Store.",
+    keyGames: ["Free Fire, Brawl Stars, PUBG Mobile", "Google Play Store", "Abonnements & Apps"],
+    features: [
+      "Code numérique officiel Google Play Store",
+      "Montants au choix : 5$, 10$, 15$, 25$, 50$, 100$",
+      "Régions : USA (🇺🇸), France / Europe (🇪🇺), Global (🌍)",
+      "Sans carte de crédit internationale requise"
+    ],
+    giftCardConfig: {
+      defaultRegion: "us",
+      defaultAmount: 10,
+      regions: [
+        { id: "us", name: "USA (États-Unis)", flag: "🇺🇸", currency: "USD", symbol: "$" },
+        { id: "eu", name: "France / Europe", flag: "🇪🇺", currency: "EUR", symbol: "€" },
+        { id: "global", name: "Global / Mondial", flag: "🌍", currency: "USD", symbol: "$" }
+      ],
+      denominations: [
+        { value: 5, label: "5$", priceTND: 18, oldPriceTND: 22, priceEUR: 5.5, priceUSD: 5 },
+        { value: 10, label: "10$", priceTND: 35, oldPriceTND: 42, priceEUR: 11, priceUSD: 10, isPopular: true },
+        { value: 15, label: "15$", priceTND: 52, oldPriceTND: 60, priceEUR: 16, priceUSD: 15 },
+        { value: 25, label: "25$", priceTND: 86, oldPriceTND: 100, priceEUR: 27, priceUSD: 25 },
+        { value: 50, label: "50$", priceTND: 170, oldPriceTND: 195, priceEUR: 53, priceUSD: 50, isPopular: true },
+        { value: 100, label: "100$", priceTND: 335, oldPriceTND: 380, priceEUR: 104, priceUSD: 100, isBestValue: true }
+      ]
+    }
   }
 ];
 

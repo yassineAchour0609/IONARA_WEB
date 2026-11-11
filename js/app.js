@@ -356,11 +356,11 @@ function createProductCardHTML(product) {
 
           <div class="flex items-center gap-1.5">
             <button 
-              onclick="addToCart('${product.id}')"
+              onclick="${product.isGiftCard ? `openQuickGiftCardModal('${product.id}')` : `addToCart('${product.id}')`}"
               class="p-2.5 rounded-xl bg-pink-500/15 hover:bg-pink-500 text-pink-400 hover:text-white border border-pink-500/30 hover:border-pink-500 transition-all duration-200 cursor-pointer shadow-md group/btn"
-              title="Ajouter au panier"
+              title="${product.isGiftCard ? 'Choisir le montant & la région' : 'Ajouter au panier'}"
             >
-              <i data-lucide="shopping-cart" class="w-4 h-4 transition-transform group-hover/btn:scale-110"></i>
+              <i data-lucide="${product.isGiftCard ? 'sliders-horizontal' : 'shopping-cart'}" class="w-4 h-4 transition-transform group-hover/btn:scale-110"></i>
             </button>
             <a 
               href="product.html?id=${product.id}"
@@ -507,41 +507,71 @@ function toggleFAQ(index) {
 }
 
 // Cart Functionality
-function addToCart(productId) {
+function addToCart(productId, customVariant) {
   const product = PRODUCTS_DATA.find(p => p.id === productId);
   if (!product) return;
 
-  const existingIndex = state.cart.findIndex(item => item.id === productId);
+  // Handle gift cards with auto default variant if none provided
+  let variant = customVariant;
+  if (!variant && product.isGiftCard && product.giftCardConfig) {
+    const defReg = product.giftCardConfig.regions.find(r => r.id === product.giftCardConfig.defaultRegion) || product.giftCardConfig.regions[0];
+    const defDenom = product.giftCardConfig.denominations.find(d => d.value === product.giftCardConfig.defaultAmount) || product.giftCardConfig.denominations[0];
+    variant = {
+      amount: defDenom.value,
+      amountLabel: defDenom.label,
+      regionId: defReg.id,
+      regionName: defReg.name,
+      regionFlag: defReg.flag,
+      priceTND: defDenom.priceTND,
+      priceEUR: defDenom.priceEUR || 0,
+      priceUSD: defDenom.priceUSD || 0
+    };
+  }
+
+  const cartKey = variant ? `${productId}_${variant.amount}_${variant.regionId}` : productId;
+  const existingIndex = state.cart.findIndex(item => (item.cartKey || item.id) === cartKey);
+
+  const itemTitle = variant 
+    ? `${product.title} — ${variant.amountLabel} (${variant.regionName})`
+    : product.title;
+
+  const pTND = variant ? variant.priceTND : (product.priceTND || product.priceDZD || 0);
+  const pEUR = variant ? variant.priceEUR : (product.priceEUR || 0);
+  const pUSD = variant ? variant.priceUSD : (product.priceUSD || 0);
+
   if (existingIndex > -1) {
     state.cart[existingIndex].quantity += 1;
   } else {
     state.cart.push({
+      cartKey: cartKey,
       id: product.id,
-      title: product.title,
-      priceTND: product.priceTND || product.priceDZD || 0,
-      priceEUR: product.priceEUR || 0,
-      priceUSD: product.priceUSD || 0,
+      title: itemTitle,
+      baseTitle: product.title,
+      priceTND: pTND,
+      priceEUR: pEUR,
+      priceUSD: pUSD,
       image: product.image,
       fallbackImage: product.fallbackImage,
       platform: product.platform,
-      quantity: 1
+      quantity: 1,
+      variant: variant || null
     });
   }
 
   saveCart();
   updateCartUI();
   openCartDrawer();
-  showToast(`"${product.title}" ajouté au panier !`, 'success');
+  showToast(`"${itemTitle}" ajouté au panier !`, 'success');
   playSound('add');
 }
 
-function updateCartQuantity(productId, delta) {
-  const item = state.cart.find(i => i.id === productId);
+function updateCartQuantity(cartKey, delta) {
+  const item = state.cart.find(i => (i.cartKey || i.id) === cartKey);
   if (!item) return;
 
   item.quantity += delta;
   if (item.quantity <= 0) {
-    removeFromCart(productId);
+    removeFromCart(cartKey);
     return;
   }
 
@@ -550,8 +580,8 @@ function updateCartQuantity(productId, delta) {
   playSound('click');
 }
 
-function removeFromCart(productId) {
-  state.cart = state.cart.filter(item => item.id !== productId);
+function removeFromCart(cartKey) {
+  state.cart = state.cart.filter(item => (item.cartKey || item.id) !== cartKey);
   saveCart();
   updateCartUI();
   playSound('click');
@@ -654,13 +684,13 @@ function updateCartUI() {
         </div>
         
         <div class="flex flex-col items-end gap-2 shrink-0">
-          <button onclick="removeFromCart('${item.id}')" class="text-zinc-500 hover:text-rose-400 transition p-1" title="Supprimer">
+          <button onclick="removeFromCart('${item.cartKey || item.id}')" class="text-zinc-500 hover:text-rose-400 transition p-1" title="Supprimer">
             <i data-lucide="trash-2" class="w-4 h-4"></i>
           </button>
           <div class="flex items-center gap-1.5 bg-black/50 border border-white/10 rounded-xl px-2 py-0.5 text-xs">
-            <button onclick="updateCartQuantity('${item.id}', -1)" class="w-5 h-5 flex items-center justify-center text-zinc-400 hover:text-white transition cursor-pointer font-bold">-</button>
+            <button onclick="updateCartQuantity('${item.cartKey || item.id}', -1)" class="w-5 h-5 flex items-center justify-center text-zinc-400 hover:text-white transition cursor-pointer font-bold">-</button>
             <span class="font-bold text-white px-1">${item.quantity}</span>
-            <button onclick="updateCartQuantity('${item.id}', 1)" class="w-5 h-5 flex items-center justify-center text-zinc-400 hover:text-white transition cursor-pointer font-bold">+</button>
+            <button onclick="updateCartQuantity('${item.cartKey || item.id}', 1)" class="w-5 h-5 flex items-center justify-center text-zinc-400 hover:text-white transition cursor-pointer font-bold">+</button>
           </div>
         </div>
       </div>
@@ -1580,7 +1610,10 @@ window.submitOrder = function(e) {
   let itemsText = '';
   let itemsSummary = [];
   state.cart.forEach(item => {
-    itemsText += `• ${item.title} (x${item.quantity}) - ${item.priceTND * item.quantity} TND\n`;
+    const variantInfo = item.variant 
+      ? ` [Montant : ${item.variant.amountLabel} • Région : ${item.variant.regionFlag || ''} ${item.variant.regionName}]`
+      : '';
+    itemsText += `• ${item.title}${variantInfo} (x${item.quantity}) - ${item.priceTND * item.quantity} TND\n`;
     itemsSummary.push(item.title);
   });
 
@@ -1646,3 +1679,169 @@ window.selectPaymentMethod = selectPaymentMethod;
 window.copyToClipboard = copyToClipboard;
 window.handleReceiptFileChange = handleReceiptFileChange;
 window.clearReceiptFile = clearReceiptFile;
+
+
+// ==========================================
+// QUICK GIFTCARD CONFIGURATOR MODAL
+// ==========================================
+let quickGiftCardProduct = null;
+let quickGiftCardSelection = {
+  regionId: 'us',
+  regionName: 'USA (États-Unis)',
+  regionFlag: '🇺🇸',
+  amount: 10,
+  amountLabel: '10$',
+  priceTND: 35,
+  priceEUR: 11,
+  priceUSD: 10
+};
+
+function openQuickGiftCardModal(productId) {
+  const product = PRODUCTS_DATA.find(p => p.id === productId);
+  if (!product || !product.giftCardConfig) {
+    addToCart(productId);
+    return;
+  }
+
+  quickGiftCardProduct = product;
+  const cfg = product.giftCardConfig;
+  const defRegion = cfg.regions.find(r => r.id === cfg.defaultRegion) || cfg.regions[0];
+  const defDenom = cfg.denominations.find(d => d.value === cfg.defaultAmount) || cfg.denominations[0];
+
+  quickGiftCardSelection = {
+    regionId: defRegion.id,
+    regionName: defRegion.name,
+    regionFlag: defRegion.flag,
+    amount: defDenom.value,
+    amountLabel: defDenom.label,
+    priceTND: defDenom.priceTND,
+    priceEUR: defDenom.priceEUR || 0,
+    priceUSD: defDenom.priceUSD || 0
+  };
+
+  const modal = document.getElementById('quick-giftcard-modal');
+  if (!modal) {
+    // If no modal on page, redirect to product page
+    window.location.href = 'product.html?id=' + productId;
+    return;
+  }
+
+  renderQuickGiftCardUI();
+  modal.classList.remove('hidden');
+  document.body.style.overflow = 'hidden';
+  if (window.lucide) lucide.createIcons();
+}
+
+function closeQuickGiftCardModal() {
+  const modal = document.getElementById('quick-giftcard-modal');
+  if (modal) {
+    modal.classList.add('hidden');
+    document.body.style.overflow = '';
+  }
+}
+
+function renderQuickGiftCardUI() {
+  if (!quickGiftCardProduct || !quickGiftCardProduct.giftCardConfig) return;
+  const cfg = quickGiftCardProduct.giftCardConfig;
+
+  // Title & Poster
+  const titleEl = document.getElementById('qgc-title');
+  const imgEl = document.getElementById('qgc-img');
+  const priceEl = document.getElementById('qgc-price');
+  if (titleEl) titleEl.textContent = quickGiftCardProduct.title;
+  if (imgEl) {
+    imgEl.src = quickGiftCardProduct.image;
+    imgEl.alt = quickGiftCardProduct.title;
+  }
+  if (priceEl) {
+    priceEl.textContent = formatPrice(quickGiftCardSelection.priceTND, quickGiftCardSelection.priceEUR, quickGiftCardSelection.priceUSD);
+  }
+
+  // Regions buttons
+  const regionsContainer = document.getElementById('qgc-regions-container');
+  if (regionsContainer) {
+    regionsContainer.innerHTML = cfg.regions.map(r => {
+      const isSelected = r.id === quickGiftCardSelection.regionId;
+      return `
+        <button 
+          type="button" 
+          onclick="selectQuickRegion('${r.id}')"
+          class="p-2 sm:p-2.5 rounded-xl border text-left flex items-center gap-2 transition cursor-pointer ${
+            isSelected 
+              ? 'border-cyan-400 bg-cyan-500/20 shadow-md shadow-cyan-500/20' 
+              : 'border-white/10 bg-slate-900/80 hover:border-white/30 text-zinc-300'
+          }"
+        >
+          <span class="text-base sm:text-lg shrink-0">${r.flag}</span>
+          <div class="truncate">
+            <span class="block text-xs font-bold text-white truncate">${r.name}</span>
+            <span class="block text-[10px] text-zinc-400 uppercase">${r.currency}</span>
+          </div>
+        </button>
+      `;
+    }).join('');
+  }
+
+  // Denominations buttons (clickable presets, user clicks, does not type)
+  const denomsContainer = document.getElementById('qgc-denoms-container');
+  if (denomsContainer) {
+    denomsContainer.innerHTML = cfg.denominations.map(d => {
+      const isSelected = d.value === quickGiftCardSelection.amount;
+      const formatted = formatPrice(d.priceTND, d.priceEUR, d.priceUSD);
+      return `
+        <button 
+          type="button" 
+          onclick="selectQuickAmount(${d.value})"
+          class="relative p-2.5 sm:p-3 rounded-2xl border text-center transition cursor-pointer ${
+            isSelected 
+              ? 'border-pink-500 bg-pink-500/20 shadow-lg shadow-pink-500/20 scale-[1.02]' 
+              : 'border-white/10 bg-slate-900/80 hover:border-pink-500/40 text-zinc-300 hover:scale-[1.01]'
+          }"
+        >
+          ${d.isPopular ? '<span class="absolute -top-2 left-1/2 -translate-x-1/2 px-2 py-0.5 rounded-full bg-pink-500 text-white text-[9px] font-black uppercase">TOP</span>' : ''}
+          <span class="block text-sm sm:text-base font-black text-white font-headline">${d.label}</span>
+          <span class="block text-[11px] font-bold text-pink-300 mt-0.5">${formatted}</span>
+        </button>
+      `;
+    }).join('');
+  }
+}
+
+function selectQuickRegion(regId) {
+  if (!quickGiftCardProduct) return;
+  const reg = quickGiftCardProduct.giftCardConfig.regions.find(r => r.id === regId);
+  if (!reg) return;
+  quickGiftCardSelection.regionId = reg.id;
+  quickGiftCardSelection.regionName = reg.name;
+  quickGiftCardSelection.regionFlag = reg.flag;
+  renderQuickGiftCardUI();
+  playSound('click');
+}
+
+function selectQuickAmount(val) {
+  if (!quickGiftCardProduct) return;
+  const denom = quickGiftCardProduct.giftCardConfig.denominations.find(d => d.value === val);
+  if (!denom) return;
+  quickGiftCardSelection.amount = denom.value;
+  quickGiftCardSelection.amountLabel = denom.label;
+  quickGiftCardSelection.priceTND = denom.priceTND;
+  quickGiftCardSelection.priceEUR = denom.priceEUR || 0;
+  quickGiftCardSelection.priceUSD = denom.priceUSD || 0;
+  renderQuickGiftCardUI();
+  playSound('click');
+}
+
+function confirmQuickGiftCard(action = 'cart') {
+  if (!quickGiftCardProduct) return;
+  addToCart(quickGiftCardProduct.id, { ...quickGiftCardSelection });
+  closeQuickGiftCardModal();
+  if (action === 'checkout') {
+    openCheckoutModal();
+  }
+}
+
+window.openQuickGiftCardModal = openQuickGiftCardModal;
+window.closeQuickGiftCardModal = closeQuickGiftCardModal;
+window.selectQuickRegion = selectQuickRegion;
+window.selectQuickAmount = selectQuickAmount;
+window.confirmQuickGiftCard = confirmQuickGiftCard;
