@@ -1,21 +1,21 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Flouci">
   <defs>
-    <linearGradient id="flouci-bg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#3b0764" />
-      <stop offset="50%" stop-color="#581c87" />
-      <stop offset="100%" stop-color="#1e0538" />
+    <linearGradient id="flouciBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0c2623" />
+      <stop offset="100%" stop-color="#0a111a" />
     </linearGradient>
-    <linearGradient id="flouci-spiral" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#c084fc" />
-      <stop offset="50%" stop-color="#a855f7" />
-      <stop offset="100%" stop-color="#7e22ce" />
+    <linearGradient id="flouciCoral" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ff9955" />
+      <stop offset="100%" stop-color="#eb654a" />
+    </linearGradient>
+    <linearGradient id="flouciTeal" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#34d399" />
+      <stop offset="100%" stop-color="#0eaa7e" />
     </linearGradient>
   </defs>
-  <rect width="120" height="120" rx="28" fill="url(#flouci-bg)" stroke="#a855f7" stroke-width="2" stroke-opacity="0.7" />
-  <g transform="translate(18, 16)">
-    <!-- Spiral / Lightning Icon of Flouci -->
-    <path d="M42 10 A 28 28 0 0 1 70 38 A 28 28 0 0 1 42 66 A 18 18 0 0 1 24 48 A 18 18 0 0 1 42 30 A 8 8 0 0 1 50 38" fill="none" stroke="url(#flouci-spiral)" stroke-width="7" stroke-linecap="round" />
-    <circle cx="42" cy="38" r="4" fill="#ffffff" />
-    <text x="42" y="78" font-family="system-ui, sans-serif" font-size="14" font-weight="900" fill="#ffffff" text-anchor="middle" letter-spacing="1">FLOUCI</text>
-  </g>
+  <rect width="64" height="64" rx="16" fill="url(#flouciBg)" />
+  <!-- Sleek geometric ribbon F of Flouci -->
+  <path d="M21 47V22c0-4.4 3.6-8 8-8h17c1.6 0 2.8 1.2 2.8 2.8v1.4c0 2.2-1.8 4-4 4H29.5v24.8c0 2.2-1.8 4-4 4h-.5c-2.2 0-4-1.8-4-4z" fill="url(#flouciCoral)" />
+  <path d="M29.5 29.5h13.5c2 0 3.6 1.6 3.6 3.6v.6c0 2-1.6 3.6-3.6 3.6H29.5v-7.8z" fill="url(#flouciTeal)" />
+  <circle cx="43.5" cy="44" r="4.2" fill="#34d399" />
 </svg>

@@ -1,17 +1,10 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-1.5 -1.5 27 27" role="img" aria-label="Riot Games">
   <defs>
-    <linearGradient id="riot-bg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#3b0808" />
-      <stop offset="50%" stop-color="#5a0d0d" />
-      <stop offset="100%" stop-color="#1f0303" />
+    <linearGradient id="riotGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ff3b5c" />
+      <stop offset="55%" stop-color="#EB0029" />
+      <stop offset="100%" stop-color="#b91c1c" />
     </linearGradient>
   </defs>
-  <rect width="100" height="100" rx="24" fill="url(#riot-bg)" stroke="#ef4444" stroke-width="2" stroke-opacity="0.5" />
-  <g transform="translate(18, 18) scale(0.64)">
-    <!-- Red Fist of Riot Games -->
-    <path fill="#ef4444" d="M12 25l24-6 2 12-14 3 2 11 15-3 2 12-19 4 4 19 32-6 8-41-43 9-3-14 54-12 16 75-71 14z" />
-    <polygon fill="#ffffff" points="40,24 58,20 60,33 42,37" />
-    <polygon fill="#ffffff" points="43,41 62,37 64,50 45,54" />
-    <polygon fill="#ffffff" points="47,58 66,54 68,67 49,71" />
-  </g>
+  <path fill="url(#riotGrad)" d="M13.458.86 0 7.093l3.353 12.761 2.552-.313-.701-8.024.838-.373 1.447 8.202 4.361-.535-.775-8.857.83-.37 1.591 9.025 4.412-.542-.849-9.708.84-.374 1.74 9.87L24 17.318V3.5Zm.316 19.356.222 1.256L24 23.14v-4.18l-10.22 1.256Z"/>
 </svg>

@@ -427,41 +427,41 @@ function renderPlatforms() {
   if (!container) return;
 
   container.innerHTML = PLATFORMS_DATA.map(p => `
-    <div 
+    <button
+      type="button"
       onclick="handlePlatformClick('${p.id}', '${p.categoryFilter || 'all'}')"
-      class="group relative flex items-center gap-3.5 p-3.5 sm:p-4 rounded-2xl border border-white/10 bg-gradient-to-br from-slate-900/90 via-[#0a0d16] to-slate-950/95 backdrop-blur-xl shadow-lg transition-all duration-300 hover:border-pink-500/50 hover:shadow-2xl hover:scale-[1.03] cursor-pointer overflow-hidden"
+      style="--brand-color: ${p.color}; --brand-glow: ${p.glowColor};"
+      class="platform-showcase-card group flex flex-col items-center justify-center text-center px-3 py-5 rounded-2xl bg-gradient-to-b from-white/[0.045] via-[#0c0f19]/90 to-[#07080f]/95 backdrop-blur-xl hover:-translate-y-1.5 hover:bg-white/[0.065] cursor-pointer overflow-hidden"
     >
-      <!-- Ambient Backglow on hover -->
-      <div class="absolute -right-6 -bottom-6 w-24 h-24 rounded-full opacity-0 group-hover:opacity-40 blur-xl transition-opacity duration-500 pointer-events-none" style="background: ${p.color};"></div>
-      
-      <!-- Logo Container with Cyber Border -->
-      <div class="relative w-12 h-12 rounded-2xl p-1 flex items-center justify-center shrink-0 border border-white/15 bg-white/[0.03] shadow-md group-hover:border-pink-400 group-hover:scale-105 transition-all duration-300">
-        <img 
-          src="${p.icon}" 
-          alt="${p.name}" 
-          class="w-full h-full object-contain filter drop-shadow-[0_2px_8px_${p.glowColor}] group-hover:rotate-3 transition-transform duration-300" 
+      <!-- Top Razor Neon Accent Line -->
+      <span
+        class="absolute top-0 left-1/2 -translate-x-1/2 h-[2px] w-8 group-hover:w-3/4 rounded-full opacity-35 group-hover:opacity-100 transition-all duration-300 pointer-events-none"
+        style="background: linear-gradient(90deg, transparent, ${p.color}, transparent);"
+      ></span>
+
+      <!-- Floating Brand Emblem with Soft Ambient Aura (Zero Inner Box!) -->
+      <div class="relative flex items-center justify-center w-14 h-14">
+        <span
+          class="absolute inset-0 rounded-full blur-xl opacity-20 group-hover:opacity-60 transition-opacity duration-500 pointer-events-none"
+          style="background: ${p.color};"
+        ></span>
+        <img
+          src="${p.icon}"
+          alt="${p.name}"
+          class="relative z-10 w-11 h-11 object-contain transition-transform duration-300 group-hover:scale-110 group-hover:-translate-y-0.5"
+          style="filter: drop-shadow(0 4px 12px ${p.glowColor});"
           onerror="this.src='assets/logo/ionara-logo.svg'"
         />
-        <!-- Live status pulse -->
-        <span class="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-emerald-400 border-2 border-[#090b12] animate-pulse"></span>
       </div>
 
-      <!-- Platform Info -->
-      <div class="min-w-0 flex-1">
-        <div class="flex items-center justify-between gap-1">
-          <span class="text-sm sm:text-base font-black text-white group-hover:text-pink-300 transition-colors truncate font-headline tracking-tight">
-            ${p.name}
-          </span>
-          <i data-lucide="arrow-up-right" class="w-3.5 h-3.5 text-zinc-500 group-hover:text-pink-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all shrink-0"></i>
-        </div>
-        <div class="flex items-center gap-1.5 mt-0.5">
-          <span class="text-[10px] font-black uppercase tracking-wider px-1.5 py-0.5 rounded-md bg-white/5 border border-white/10 text-zinc-300 group-hover:text-white group-hover:border-pink-500/30 transition-colors">
-            ${p.badge || 'Supporté'}
-          </span>
-          <span class="text-[11px] text-zinc-400 font-medium truncate">${p.count}</span>
-        </div>
-      </div>
-    </div>
+      <!-- Clean Brand Typography -->
+      <span class="mt-2.5 text-[13px] font-extrabold text-zinc-100 group-hover:text-white tracking-tight font-headline transition-colors truncate max-w-full">
+        ${p.name}
+      </span>
+      <span class="mt-0.5 text-[11px] font-medium text-zinc-500 group-hover:text-zinc-300 transition-colors truncate max-w-full">
+        ${p.count}
+      </span>
+    </button>
   `).join('');
   if (window.lucide) window.lucide.createIcons();
 }
@@ -470,10 +470,12 @@ function handlePlatformClick(platformId, categoryFilter) {
   if (window.location.pathname.includes('catalog.html')) {
     if (typeof filterCategory === 'function') filterCategory(categoryFilter);
   } else {
-    window.location.href = 'catalog.html?category=' + categoryFilter + '&search=' + platformId;
+    window.location.href = 'catalog.html?category=' + categoryFilter + '&search=' + encodeURIComponent(platformId === 'rockstar' ? 'gta' : platformId);
   }
 }
 window.handlePlatformClick = handlePlatformClick;
+
+
 
 
 // Reviews Section
@@ -989,7 +991,7 @@ function orderViaWhatsApp() {
 
   const encoded = encodeURIComponent(message);
   // IONARA official WhatsApp
-  const whatsappUrl = `https://wa.me/21629000000?text=${encoded}`;
+  const whatsappUrl = `https://wa.me/21627031500?text=${encoded}`;
   window.open(whatsappUrl, '_blank');
 }
 
@@ -1015,7 +1017,7 @@ function submitOrder(e) {
   message += `\n💳 Paiement : ${paymentMethod}`;
 
   const encoded = encodeURIComponent(message);
-  const whatsappUrl = `https://wa.me/21629000000?text=${encoded}`;
+  const whatsappUrl = `https://wa.me/21627031500?text=${encoded}`;
 
   // Clear cart and show confirmation
   state.cart = [];
@@ -1511,9 +1513,9 @@ function selectPaymentMethod(methodId) {
   if (box) {
     box.innerHTML = `
       <div class="flex items-center justify-between pb-2 border-b border-white/10">
-        <span class="text-xs font-bold text-white flex items-center gap-1.5">
-          <span class="w-2 h-2 rounded-full bg-pink-400 animate-ping"></span>
-          ${found.name}
+        <span class="text-xs font-bold text-white flex items-center gap-2.5">
+          ${found.icon ? `<img src="${found.icon}" alt="${found.name}" class="w-7 h-7 object-contain rounded-lg shrink-0" />` : '<span class="w-2 h-2 rounded-full bg-pink-400 animate-ping"></span>'}
+          <span>${found.name}</span>
         </span>
         <span class="text-xs font-black text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-cyan-300 font-headline">
           Montant : ${totalTND} TND

@@ -1,21 +1,16 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="D17 DigiPostbank">
   <defs>
-    <linearGradient id="d17-bg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#0f2b48" />
-      <stop offset="100%" stop-color="#061320" />
+    <linearGradient id="d17bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#07192f" />
+      <stop offset="100%" stop-color="#030a14" />
     </linearGradient>
-    <linearGradient id="d17-gold" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#fde047" />
-      <stop offset="50%" stop-color="#eab308" />
-      <stop offset="100%" stop-color="#ca8a04" />
+    <linearGradient id="d17cyan" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8" />
+      <stop offset="100%" stop-color="#0284c7" />
     </linearGradient>
   </defs>
-  <rect width="120" height="120" rx="28" fill="url(#d17-bg)" stroke="#eab308" stroke-width="2" stroke-opacity="0.6" />
-  <!-- Poste Tunisienne Wings & Emblem -->
-  <g transform="translate(15, 18)">
-    <circle cx="45" cy="42" r="38" fill="#0284c7" fill-opacity="0.25" />
-    <path d="M12 40 C 25 15, 65 15, 78 40 C 65 65, 25 65, 12 40 Z" fill="none" stroke="url(#d17-gold)" stroke-width="3" />
-    <text x="45" y="49" font-family="system-ui, -apple-system, sans-serif" font-size="28" font-weight="900" fill="url(#d17-gold)" text-anchor="middle" letter-spacing="1">D17</text>
-    <text x="45" y="74" font-family="system-ui, sans-serif" font-size="10" font-weight="800" fill="#ffffff" text-anchor="middle" letter-spacing="2">POSTE TN</text>
-  </g>
+  <rect width="64" height="64" rx="16" fill="url(#d17bg)" />
+  <rect x="8" y="13" width="48" height="30" rx="8" fill="#009ee3" fill-opacity="0.08" stroke="url(#d17cyan)" stroke-width="2.2" />
+  <text x="32" y="34" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="18.5" font-weight="900" fill="#38bdf8" text-anchor="middle" letter-spacing="0.5">D17</text>
+  <rect x="18" y="49" width="28" height="2.6" rx="1.3" fill="#facc15" />
 </svg>

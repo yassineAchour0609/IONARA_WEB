@@ -584,7 +584,7 @@ const PRODUCTS_DATA = [
     image: "assets/games/playstation-gift-card.svg",
     fallbackImage: "public/assets/games/playstation-gift-card.svg",
     platform: "PlayStation",
-    platformIcon: "assets/platforms/playstation.png",
+    platformIcon: "assets/platforms/playstation.svg",
     category: "giftcards",
     isFeatured: true,
     isGiftCard: true,
@@ -738,7 +738,7 @@ const PRODUCTS_DATA = [
     image: "assets/games/google-play-gift-card.svg",
     fallbackImage: "public/assets/games/google-play-gift-card.svg",
     platform: "Android / Google",
-    platformIcon: "assets/platforms/1.png",
+    platformIcon: "assets/platforms/google-play.svg",
     category: "giftcards",
     isFeatured: false,
     isGiftCard: true,
@@ -785,84 +785,76 @@ const PRODUCTS_DATA = [
 ];
 
 const PLATFORMS_DATA = [
-  { 
-    id: "steam", 
-    name: "Steam", 
-    icon: "assets/platforms/steam.svg", 
-    color: "#0284c7", 
-    glowColor: "rgba(2, 132, 199, 0.4)",
-    badge: "Officiel Valve",
+  {
+    id: "steam",
+    name: "Steam",
+    icon: "assets/platforms/steam.svg",
+    color: "#38bdf8",
+    glowColor: "rgba(56, 189, 248, 0.45)",
     count: "+1,200 Jeux",
     categoryFilter: "steam"
   },
-  { 
-    id: "playstation", 
-    name: "PlayStation", 
-    icon: "assets/platforms/playstation.svg", 
-    color: "#2563eb", 
-    glowColor: "rgba(37, 99, 235, 0.4)",
-    badge: "PS4 & PS5",
-    count: "Store & Plus",
-    categoryFilter: "all"
+  {
+    id: "playstation",
+    name: "PlayStation",
+    icon: "assets/platforms/playstation.svg",
+    color: "#3b82f6",
+    glowColor: "rgba(59, 130, 246, 0.45)",
+    count: "PS4 & PS5",
+    categoryFilter: "giftcards"
   },
-  { 
-    id: "xbox", 
-    name: "Xbox", 
-    icon: "assets/platforms/xbox.svg", 
-    color: "#16a34a", 
-    glowColor: "rgba(22, 163, 74, 0.4)",
-    badge: "Game Pass",
-    count: "Series X|S & PC",
+  {
+    id: "xbox",
+    name: "Xbox",
+    icon: "assets/platforms/xbox.svg",
+    color: "#22c55e",
+    glowColor: "rgba(34, 197, 94, 0.45)",
+    count: "Game Pass",
     categoryFilter: "passes"
   },
-  { 
-    id: "riot", 
-    name: "Riot Games", 
-    icon: "assets/platforms/riot.svg", 
-    color: "#ef4444", 
-    glowColor: "rgba(239, 68, 68, 0.4)",
-    badge: "VP & Skins",
+  {
+    id: "riot",
+    name: "Riot Games",
+    icon: "assets/platforms/riot.svg",
+    color: "#ef4444",
+    glowColor: "rgba(239, 68, 68, 0.45)",
     count: "Valorant & LoL",
     categoryFilter: "currencies"
   },
-  { 
-    id: "rockstar", 
-    name: "Rockstar Games", 
-    icon: "assets/platforms/rockstar.svg", 
-    color: "#f59e0b", 
-    glowColor: "rgba(245, 158, 11, 0.4)",
-    badge: "GTA & RDR",
-    count: "Clés & Comptes",
+  {
+    id: "rockstar",
+    name: "Rockstar",
+    icon: "assets/platforms/rockstar.svg",
+    color: "#fcaf17",
+    glowColor: "rgba(252, 175, 23, 0.45)",
+    count: "GTA VI & RDR",
     categoryFilter: "preorder"
   },
-  { 
-    id: "roblox", 
-    name: "Roblox", 
-    icon: "assets/platforms/roblox.svg", 
-    color: "#f43f5e", 
-    glowColor: "rgba(244, 63, 94, 0.4)",
-    badge: "Robux VIP",
-    count: "Packs & Crédit",
+  {
+    id: "roblox",
+    name: "Roblox",
+    icon: "assets/platforms/roblox.svg",
+    color: "#93c5fd",
+    glowColor: "rgba(147, 197, 253, 0.40)",
+    count: "Packs Robux",
     categoryFilter: "giftcards"
   },
-  { 
-    id: "ea", 
-    name: "EA Sports", 
-    icon: "assets/platforms/ea.svg", 
-    color: "#a855f7", 
-    glowColor: "rgba(168, 85, 247, 0.4)",
-    badge: "FC & Apex",
-    count: "EA App & Steam",
+  {
+    id: "ea",
+    name: "EA Sports",
+    icon: "assets/platforms/ea.svg",
+    color: "#d868d1",
+    glowColor: "rgba(216, 104, 209, 0.45)",
+    count: "FC 27 & Apex",
     categoryFilter: "all"
   },
-  { 
-    id: "epic", 
-    name: "Epic Games", 
-    icon: "assets/platforms/epic.svg", 
-    color: "#0ea5e9", 
-    glowColor: "rgba(14, 165, 233, 0.4)",
-    badge: "Fortnite & AAA",
-    count: "V-Bucks & Jeux",
+  {
+    id: "epic",
+    name: "Epic Games",
+    icon: "assets/platforms/epic.svg",
+    color: "#0ea5e9",
+    glowColor: "rgba(14, 165, 233, 0.40)",
+    count: "Fortnite & AAA",
     categoryFilter: "all"
   }
 ];
@@ -917,7 +909,7 @@ const FAQ_DATA = [
   },
   {
     question: "Quels sont les modes de paiement acceptés en Tunisie ?",
-    answer: "Pour les clients en Tunisie : D17 (La Poste Tunisienne), Konnect, Virement bancaire / Versement, Flouci et Cartes Bancaires. Pour les clients internationaux : Carte Bancaire (Visa / Mastercard), PayPal, et Cryptomonnaies (Binance Pay / USDT). Vous pouvez aussi commander directement via WhatsApp en 1 clic !"
+    answer: "Nous acceptons à 100% les paiements tunisiens instantanés : D17 (Poste Tunisienne), Flouci, Virement / Versement Bancaire (RIB), Izi Zitouna et Wafacash en agence. Il vous suffit de joindre votre reçu pour recevoir vos identifiants sur WhatsApp en 5 minutes !"
   },
   {
     question: "Y a-t-il une garantie sur les comptes ?",
