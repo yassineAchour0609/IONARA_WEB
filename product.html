@@ -737,63 +737,68 @@
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
             
             <!-- D17 -->
-            <label onclick="selectPaymentMethod('d17')" class="payment-method-card flex items-center justify-between p-3 rounded-2xl border border-pink-500/50 bg-pink-500/10 cursor-pointer transition hover:border-pink-500">
-              <div class="flex items-center gap-2.5">
+            <label onclick="selectPaymentMethod('d17')" class="payment-method-card flex items-center justify-between p-3 rounded-2xl border border-pink-500/50 bg-pink-500/10 cursor-pointer transition hover:border-pink-500 group">
+              <div class="flex items-center gap-3">
                 <input type="radio" name="payment_method" value="d17" checked class="accent-pink-500">
+                <img src="assets/payments/d17.svg" alt="D17" class="w-9 h-9 object-contain rounded-xl p-0.5 border border-amber-500/40 bg-slate-950 shrink-0 shadow-sm" onerror="this.style.display='none'">
                 <div>
                   <span class="font-extrabold text-white block text-xs">D17 (Poste TN)</span>
                   <span class="text-[10px] text-amber-300 font-semibold">Transfert Mobile / Carte</span>
                 </div>
               </div>
-              <span class="text-[9px] font-black uppercase px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30">Top</span>
+              <span class="text-[9px] font-black uppercase px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30 shrink-0">Top</span>
             </label>
 
             <!-- Flouci -->
-            <label onclick="selectPaymentMethod('flouci')" class="payment-method-card flex items-center justify-between p-3 rounded-2xl border border-white/10 bg-slate-900 cursor-pointer transition hover:border-purple-500/50">
-              <div class="flex items-center gap-2.5">
+            <label onclick="selectPaymentMethod('flouci')" class="payment-method-card flex items-center justify-between p-3 rounded-2xl border border-white/10 bg-slate-900 cursor-pointer transition hover:border-purple-500/50 group">
+              <div class="flex items-center gap-3">
                 <input type="radio" name="payment_method" value="flouci" class="accent-purple-500">
+                <img src="assets/payments/flouci.svg" alt="Flouci" class="w-9 h-9 object-contain rounded-xl p-0.5 border border-purple-500/40 bg-slate-950 shrink-0 shadow-sm" onerror="this.style.display='none'">
                 <div>
                   <span class="font-extrabold text-white block text-xs">Flouci</span>
                   <span class="text-[10px] text-purple-300 font-semibold">0% Frais • Instantané</span>
                 </div>
               </div>
-              <span class="text-[9px] font-black uppercase px-2 py-0.5 rounded-full bg-purple-500/20 text-purple-300 border border-purple-500/30">Rapide</span>
+              <span class="text-[9px] font-black uppercase px-2 py-0.5 rounded-full bg-purple-500/20 text-purple-300 border border-purple-500/30 shrink-0">Rapide</span>
             </label>
 
             <!-- Virement Bancaire (RIB) -->
-            <label onclick="selectPaymentMethod('virement')" class="payment-method-card flex items-center justify-between p-3 rounded-2xl border border-white/10 bg-slate-900 cursor-pointer transition hover:border-blue-500/50">
-              <div class="flex items-center gap-2.5">
+            <label onclick="selectPaymentMethod('virement')" class="payment-method-card flex items-center justify-between p-3 rounded-2xl border border-white/10 bg-slate-900 cursor-pointer transition hover:border-blue-500/50 group">
+              <div class="flex items-center gap-3">
                 <input type="radio" name="payment_method" value="virement" class="accent-blue-500">
+                <img src="assets/payments/virement.svg" alt="Virement" class="w-9 h-9 object-contain rounded-xl p-0.5 border border-blue-500/40 bg-slate-950 shrink-0 shadow-sm" onerror="this.style.display='none'">
                 <div>
                   <span class="font-extrabold text-white block text-xs">Virement / RIB</span>
                   <span class="text-[10px] text-blue-300 font-semibold">Toutes banques tunisiennes</span>
                 </div>
               </div>
-              <span class="text-[9px] font-black uppercase px-2 py-0.5 rounded-full bg-blue-500/20 text-blue-300 border border-blue-500/30">Banque</span>
+              <span class="text-[9px] font-black uppercase px-2 py-0.5 rounded-full bg-blue-500/20 text-blue-300 border border-blue-500/30 shrink-0">Banque</span>
             </label>
 
             <!-- Izi Zitouna -->
-            <label onclick="selectPaymentMethod('izi')" class="payment-method-card flex items-center justify-between p-3 rounded-2xl border border-white/10 bg-slate-900 cursor-pointer transition hover:border-emerald-500/50">
-              <div class="flex items-center gap-2.5">
+            <label onclick="selectPaymentMethod('izi')" class="payment-method-card flex items-center justify-between p-3 rounded-2xl border border-white/10 bg-slate-900 cursor-pointer transition hover:border-emerald-500/50 group">
+              <div class="flex items-center gap-3">
                 <input type="radio" name="payment_method" value="izi" class="accent-emerald-500">
+                <img src="assets/payments/izi.svg" alt="Izi Zitouna" class="w-9 h-9 object-contain rounded-xl p-0.5 border border-emerald-500/40 bg-slate-950 shrink-0 shadow-sm" onerror="this.style.display='none'">
                 <div>
                   <span class="font-extrabold text-white block text-xs">Izi Zitouna</span>
                   <span class="text-[10px] text-emerald-300 font-semibold">Direct Banque Zitouna</span>
                 </div>
               </div>
-              <span class="text-[9px] font-black uppercase px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">Zitouna</span>
+              <span class="text-[9px] font-black uppercase px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 shrink-0">Zitouna</span>
             </label>
 
             <!-- Wafacash -->
-            <label onclick="selectPaymentMethod('wafacash')" class="payment-method-card sm:col-span-2 flex items-center justify-between p-3 rounded-2xl border border-white/10 bg-slate-900 cursor-pointer transition hover:border-orange-500/50">
-              <div class="flex items-center gap-2.5">
+            <label onclick="selectPaymentMethod('wafacash')" class="payment-method-card sm:col-span-2 flex items-center justify-between p-3 rounded-2xl border border-white/10 bg-slate-900 cursor-pointer transition hover:border-orange-500/50 group">
+              <div class="flex items-center gap-3">
                 <input type="radio" name="payment_method" value="wafacash" class="accent-orange-500">
+                <img src="assets/payments/wafacash.svg" alt="Wafacash" class="w-9 h-9 object-contain rounded-xl p-0.5 border border-orange-500/40 bg-slate-950 shrink-0 shadow-sm" onerror="this.style.display='none'">
                 <div>
                   <span class="font-extrabold text-white block text-xs">Wafacash Tunisie</span>
                   <span class="text-[10px] text-orange-300 font-semibold">Paiement en espèces dans toute la Tunisie (sans carte)</span>
                 </div>
               </div>
-              <span class="text-[9px] font-black uppercase px-2 py-0.5 rounded-full bg-orange-500/20 text-orange-300 border border-orange-500/30">Espèces</span>
+              <span class="text-[9px] font-black uppercase px-2 py-0.5 rounded-full bg-orange-500/20 text-orange-300 border border-orange-500/30 shrink-0">Espèces</span>
             </label>
 
           </div>

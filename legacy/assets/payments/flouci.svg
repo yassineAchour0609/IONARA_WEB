@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
+  <defs>
+    <linearGradient id="flouci-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3b0764" />
+      <stop offset="50%" stop-color="#581c87" />
+      <stop offset="100%" stop-color="#1e0538" />
+    </linearGradient>
+    <linearGradient id="flouci-spiral" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#c084fc" />
+      <stop offset="50%" stop-color="#a855f7" />
+      <stop offset="100%" stop-color="#7e22ce" />
+    </linearGradient>
+  </defs>
+  <rect width="120" height="120" rx="28" fill="url(#flouci-bg)" stroke="#a855f7" stroke-width="2" stroke-opacity="0.7" />
+  <g transform="translate(18, 16)">
+    <!-- Spiral / Lightning Icon of Flouci -->
+    <path d="M42 10 A 28 28 0 0 1 70 38 A 28 28 0 0 1 42 66 A 18 18 0 0 1 24 48 A 18 18 0 0 1 42 30 A 8 8 0 0 1 50 38" fill="none" stroke="url(#flouci-spiral)" stroke-width="7" stroke-linecap="round" />
+    <circle cx="42" cy="38" r="4" fill="#ffffff" />
+    <text x="42" y="78" font-family="system-ui, sans-serif" font-size="14" font-weight="900" fill="#ffffff" text-anchor="middle" letter-spacing="1">FLOUCI</text>
+  </g>
+</svg>

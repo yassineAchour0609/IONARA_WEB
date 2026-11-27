@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+  <defs>
+    <linearGradient id="roblox-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1f1115" />
+      <stop offset="50%" stop-color="#2d1319" />
+      <stop offset="100%" stop-color="#0d0709" />
+    </linearGradient>
+  </defs>
+  <rect width="100" height="100" rx="24" fill="url(#roblox-bg)" stroke="#f43f5e" stroke-width="2" stroke-opacity="0.5" />
+  <g transform="translate(18, 18) scale(0.64)">
+    <!-- Tilted Square of Roblox -->
+    <g transform="rotate(-15 50 50)">
+      <rect x="18" y="18" width="64" height="64" rx="14" fill="#ffffff" />
+      <rect x="38" y="38" width="24" height="24" rx="5" fill="#18181b" />
+    </g>
+  </g>
+</svg>

@@ -427,17 +427,54 @@ function renderPlatforms() {
   if (!container) return;
 
   container.innerHTML = PLATFORMS_DATA.map(p => `
-    <div class="flex items-center gap-3.5 px-4 py-3 rounded-2xl border border-white/5 bg-slate-900/40 backdrop-blur-sm hover:border-pink-500/30 transition group">
-      <div class="w-10 h-10 rounded-xl bg-white/5 p-1.5 flex items-center justify-center border border-white/10 group-hover:scale-105 transition">
-        <img src="${p.icon}" alt="${p.name}" class="w-full h-full object-contain" onerror="this.src='assets/logo/ionara-logo.svg'">
+    <div 
+      onclick="handlePlatformClick('${p.id}', '${p.categoryFilter || 'all'}')"
+      class="group relative flex items-center gap-3.5 p-3.5 sm:p-4 rounded-2xl border border-white/10 bg-gradient-to-br from-slate-900/90 via-[#0a0d16] to-slate-950/95 backdrop-blur-xl shadow-lg transition-all duration-300 hover:border-pink-500/50 hover:shadow-2xl hover:scale-[1.03] cursor-pointer overflow-hidden"
+    >
+      <!-- Ambient Backglow on hover -->
+      <div class="absolute -right-6 -bottom-6 w-24 h-24 rounded-full opacity-0 group-hover:opacity-40 blur-xl transition-opacity duration-500 pointer-events-none" style="background: ${p.color};"></div>
+      
+      <!-- Logo Container with Cyber Border -->
+      <div class="relative w-12 h-12 rounded-2xl p-1 flex items-center justify-center shrink-0 border border-white/15 bg-white/[0.03] shadow-md group-hover:border-pink-400 group-hover:scale-105 transition-all duration-300">
+        <img 
+          src="${p.icon}" 
+          alt="${p.name}" 
+          class="w-full h-full object-contain filter drop-shadow-[0_2px_8px_${p.glowColor}] group-hover:rotate-3 transition-transform duration-300" 
+          onerror="this.src='assets/logo/ionara-logo.svg'"
+        />
+        <!-- Live status pulse -->
+        <span class="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-emerald-400 border-2 border-[#090b12] animate-pulse"></span>
       </div>
-      <div>
-        <div class="text-sm font-bold text-white group-hover:text-pink-300 transition">${p.name}</div>
-        <div class="text-xs text-zinc-400">${p.count}</div>
+
+      <!-- Platform Info -->
+      <div class="min-w-0 flex-1">
+        <div class="flex items-center justify-between gap-1">
+          <span class="text-sm sm:text-base font-black text-white group-hover:text-pink-300 transition-colors truncate font-headline tracking-tight">
+            ${p.name}
+          </span>
+          <i data-lucide="arrow-up-right" class="w-3.5 h-3.5 text-zinc-500 group-hover:text-pink-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all shrink-0"></i>
+        </div>
+        <div class="flex items-center gap-1.5 mt-0.5">
+          <span class="text-[10px] font-black uppercase tracking-wider px-1.5 py-0.5 rounded-md bg-white/5 border border-white/10 text-zinc-300 group-hover:text-white group-hover:border-pink-500/30 transition-colors">
+            ${p.badge || 'Supporté'}
+          </span>
+          <span class="text-[11px] text-zinc-400 font-medium truncate">${p.count}</span>
+        </div>
       </div>
     </div>
   `).join('');
+  if (window.lucide) window.lucide.createIcons();
 }
+
+function handlePlatformClick(platformId, categoryFilter) {
+  if (window.location.pathname.includes('catalog.html')) {
+    if (typeof filterCategory === 'function') filterCategory(categoryFilter);
+  } else {
+    window.location.href = 'catalog.html?category=' + categoryFilter + '&search=' + platformId;
+  }
+}
+window.handlePlatformClick = handlePlatformClick;
+
 
 // Reviews Section
 function renderReviews() {

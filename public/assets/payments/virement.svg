@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
+  <defs>
+    <linearGradient id="rib-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0c2340" />
+      <stop offset="50%" stop-color="#103663" />
+      <stop offset="100%" stop-color="#061221" />
+    </linearGradient>
+    <linearGradient id="rib-gold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#93c5fd" />
+      <stop offset="100%" stop-color="#3b82f6" />
+    </linearGradient>
+  </defs>
+  <rect width="120" height="120" rx="28" fill="url(#rib-bg)" stroke="#3b82f6" stroke-width="2" stroke-opacity="0.6" />
+  <!-- Bank Pillars Facade & RIB Transfer -->
+  <g transform="translate(20, 20)">
+    <!-- Pediment -->
+    <polygon points="40,12 8,24 72,24" fill="url(#rib-gold)" />
+    <!-- Pillars -->
+    <rect x="14" y="27" width="8" height="24" rx="2" fill="#ffffff" />
+    <rect x="28" y="27" width="8" height="24" rx="2" fill="#ffffff" />
+    <rect x="44" y="27" width="8" height="24" rx="2" fill="#ffffff" />
+    <rect x="58" y="27" width="8" height="24" rx="2" fill="#ffffff" />
+    <!-- Base -->
+    <rect x="8" y="52" width="64" height="6" rx="2" fill="url(#rib-gold)" />
+    <text x="40" y="72" font-family="system-ui, sans-serif" font-size="12" font-weight="900" fill="#ffffff" text-anchor="middle" letter-spacing="1.5">RIB / TN</text>
+  </g>
+</svg>

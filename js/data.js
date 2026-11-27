@@ -785,12 +785,86 @@ const PRODUCTS_DATA = [
 ];
 
 const PLATFORMS_DATA = [
-  { name: "Steam", icon: "assets/platforms/steam.png", color: "#1b2838", count: "+1,200 Jeux" },
-  { name: "PlayStation", icon: "assets/platforms/playstation.png", color: "#003791", count: "PS4 & PS5" },
-  { name: "Xbox", icon: "assets/platforms/xbox.png", color: "#107c10", count: "Game Pass & Store" },
-  { name: "Riot Games", icon: "assets/platforms/riot.png", color: "#eb0029", count: "Valorant & LoL" },
-  { name: "Rockstar", icon: "assets/platforms/rockstar.jpg", color: "#fcaf17", count: "GTA & RDR2" },
-  { name: "Roblox", icon: "assets/platforms/roblox.png", color: "#000000", count: "Robux & Packs" }
+  { 
+    id: "steam", 
+    name: "Steam", 
+    icon: "assets/platforms/steam.svg", 
+    color: "#0284c7", 
+    glowColor: "rgba(2, 132, 199, 0.4)",
+    badge: "Officiel Valve",
+    count: "+1,200 Jeux",
+    categoryFilter: "steam"
+  },
+  { 
+    id: "playstation", 
+    name: "PlayStation", 
+    icon: "assets/platforms/playstation.svg", 
+    color: "#2563eb", 
+    glowColor: "rgba(37, 99, 235, 0.4)",
+    badge: "PS4 & PS5",
+    count: "Store & Plus",
+    categoryFilter: "all"
+  },
+  { 
+    id: "xbox", 
+    name: "Xbox", 
+    icon: "assets/platforms/xbox.svg", 
+    color: "#16a34a", 
+    glowColor: "rgba(22, 163, 74, 0.4)",
+    badge: "Game Pass",
+    count: "Series X|S & PC",
+    categoryFilter: "passes"
+  },
+  { 
+    id: "riot", 
+    name: "Riot Games", 
+    icon: "assets/platforms/riot.svg", 
+    color: "#ef4444", 
+    glowColor: "rgba(239, 68, 68, 0.4)",
+    badge: "VP & Skins",
+    count: "Valorant & LoL",
+    categoryFilter: "currencies"
+  },
+  { 
+    id: "rockstar", 
+    name: "Rockstar Games", 
+    icon: "assets/platforms/rockstar.svg", 
+    color: "#f59e0b", 
+    glowColor: "rgba(245, 158, 11, 0.4)",
+    badge: "GTA & RDR",
+    count: "Clés & Comptes",
+    categoryFilter: "preorder"
+  },
+  { 
+    id: "roblox", 
+    name: "Roblox", 
+    icon: "assets/platforms/roblox.svg", 
+    color: "#f43f5e", 
+    glowColor: "rgba(244, 63, 94, 0.4)",
+    badge: "Robux VIP",
+    count: "Packs & Crédit",
+    categoryFilter: "giftcards"
+  },
+  { 
+    id: "ea", 
+    name: "EA Sports", 
+    icon: "assets/platforms/ea.svg", 
+    color: "#a855f7", 
+    glowColor: "rgba(168, 85, 247, 0.4)",
+    badge: "FC & Apex",
+    count: "EA App & Steam",
+    categoryFilter: "all"
+  },
+  { 
+    id: "epic", 
+    name: "Epic Games", 
+    icon: "assets/platforms/epic.svg", 
+    color: "#0ea5e9", 
+    glowColor: "rgba(14, 165, 233, 0.4)",
+    badge: "Fortnite & AAA",
+    count: "V-Bucks & Jeux",
+    categoryFilter: "all"
+  }
 ];
 
 const REVIEWS_DATA = [
@@ -867,6 +941,7 @@ const TUNISIA_PAYMENT_METHODS = [
     shortName: "D17 Poste",
     badge: "🇹🇳 Le Plus Populaire",
     color: "#f59e0b",
+    icon: "assets/payments/d17.svg",
     accountNumber: "27 031 500",
     accountName: "IONARA STORE TN",
     instructions: "Effectuez votre transfert via l'application D17 vers notre numéro officiel :",
@@ -878,6 +953,7 @@ const TUNISIA_PAYMENT_METHODS = [
     shortName: "Flouci",
     badge: "⚡ 0% Frais Instantané",
     color: "#a855f7",
+    icon: "assets/payments/flouci.svg",
     accountNumber: "27 031 500 (@ionara)",
     accountName: "IONARA GAMING",
     instructions: "Envoyez le montant exact sur notre compte Flouci ou via QR code :",
@@ -889,6 +965,7 @@ const TUNISIA_PAYMENT_METHODS = [
     shortName: "Virement / RIB",
     badge: "🏦 Toutes Banques TN",
     color: "#3b82f6",
+    icon: "assets/payments/virement.svg",
     accountNumber: "RIB : 08 015 0001234567890 42 (BIAT / Attijari)",
     accountName: "IONARA ENTERPRISE TN",
     instructions: "Effectuez un virement ou versement direct depuis votre banque :",
@@ -900,6 +977,7 @@ const TUNISIA_PAYMENT_METHODS = [
     shortName: "Izi Zitouna",
     badge: "🌙 Banque Zitouna",
     color: "#10b981",
+    icon: "assets/payments/izi.svg",
     accountNumber: "Numéro Izi : 27 031 500",
     accountName: "IONARA STORE",
     instructions: "Envoyez le montant directement via l'application Izi Zitouna :",
@@ -910,6 +988,7 @@ const TUNISIA_PAYMENT_METHODS = [
     name: "Wafacash Tunisie",
     badge: "🏢 Cash en Agence",
     color: "#ea580c",
+    icon: "assets/payments/wafacash.svg",
     accountNumber: "Bénéficiaire : Achour Yassine (IONARA)",
     accountName: "Agence : Tunis / N° Tél : 27 031 500",
     instructions: "Dépôt d'espèces sans carte dans n'importe quelle agence Wafacash en Tunisie :",

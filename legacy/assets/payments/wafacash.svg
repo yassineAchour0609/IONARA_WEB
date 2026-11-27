@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
+  <defs>
+    <linearGradient id="wafa-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3c1505" />
+      <stop offset="50%" stop-color="#5a2208" />
+      <stop offset="100%" stop-color="#1f0a02" />
+    </linearGradient>
+    <linearGradient id="wafa-orange" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fb923c" />
+      <stop offset="50%" stop-color="#ea580c" />
+      <stop offset="100%" stop-color="#c2410c" />
+    </linearGradient>
+  </defs>
+  <rect width="120" height="120" rx="28" fill="url(#wafa-bg)" stroke="#ea580c" stroke-width="2" stroke-opacity="0.6" />
+  <g transform="translate(18, 16)">
+    <!-- Wafacash Bold Arrows Box -->
+    <rect x="14" y="10" width="56" height="42" rx="12" fill="url(#wafa-orange)" />
+    <!-- Double arrows -->
+    <path d="M30 31 L42 22 L42 40 Z" fill="#ffffff" />
+    <path d="M54 31 L42 22 L42 40 Z" fill="#ffffff" opacity="0.6" />
+    <text x="42" y="74" font-family="system-ui, sans-serif" font-size="11" font-weight="900" fill="#ffffff" text-anchor="middle" letter-spacing="1">WAFACASH</text>
+  </g>
+</svg>
